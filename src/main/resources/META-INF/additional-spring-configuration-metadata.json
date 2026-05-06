@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "mybatis.config-location",
+      "type": "java.lang.String",
+      "description": "Location of the MyBatis XML config file."
+    },
+    {
+      "name": "mybatis.mapper-locations",
+      "type": "java.lang.String[]",
+      "description": "Locations of MyBatis mapper XML files."
+    }
+  ]
+}
