@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizteam3.server.post.dao.PostDao">
+    <insert id="insert" parameterType="com.bizteam3.server.post.entity.Post">
+        <selectKey keyProperty="postId" resultType="int" order="BEFORE">
+            SELECT seq_posts.NEXTVAL FROM dual
+        </selectKey>
+        BEGIN
+            INSERT INTO posts (
+                post_id,
+                user_id,
+                caption,
+                translated_caption,
+                created_at,
+                updated_at
+            ) VALUES (
+                #{postId},
+                #{userId},
+                #{caption, jdbcType=VARCHAR},
+                #{translatedCaption, jdbcType=VARCHAR},
+                SYSTIMESTAMP,
+                SYSTIMESTAMP
+            );
+
+            <if test="mediaList != null and mediaList.size > 0">
+                <foreach collection="mediaList" item="media">
+                    INSERT INTO post_media (
+                        media_id,
+                        post_id,
+                        media_type,
+                        media_url,
+                        sort_order,
+                        original_file_name,
+                        created_at
+                    ) VALUES (
+                        seq_post_media.NEXTVAL,
+                        #{postId},
+                        #{media.type, jdbcType=VARCHAR},
+                        #{media.url, jdbcType=VARCHAR},
+                        #{media.sortOrder, jdbcType=INTEGER},
+                        #{media.originalFileName, jdbcType=VARCHAR},
+                        SYSTIMESTAMP
+                    );
+                </foreach>
+            </if>
+        END;
+    </insert>
+</mapper>
