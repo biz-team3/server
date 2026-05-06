@@ -1,0 +1,24 @@
+services:
+  oracle:
+    image: gvenzl/oracle-free:23.26.1-slim
+    container_name: biz-team3-oracle
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      TZ: Asia/Seoul
+      ORACLE_PASSWORD: biz_team3
+      APP_USER: biz_team3
+      APP_USER_PASSWORD: biz_team3
+    volumes:
+      - biz-team3-oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 20s
+      timeout: 10s
+      retries: 15
+      start_period: 60s
+    restart: unless-stopped
+
+volumes:
+  biz-team3-oracle-data:

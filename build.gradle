@@ -1,0 +1,41 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "4.0.6"
+    id "io.spring.dependency-management" version "1.1.7"
+}
+
+group = "com.bizteam3"
+version = "0.0.1-SNAPSHOT"
+description = "biz-team3 Spring Boot API server"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+ext {
+    mybatisSpringBootVersion = "4.0.0"
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-webmvc"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringBootVersion}"
+
+    runtimeOnly "com.oracle.database.jdbc:ojdbc11"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${mybatisSpringBootVersion}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+
+    testCompileOnly "org.projectlombok:lombok"
+    testAnnotationProcessor "org.projectlombok:lombok"
+}
+
+tasks.named("test") {
+    useJUnitPlatform()
+}
