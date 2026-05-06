@@ -8,6 +8,7 @@ services:
     environment:
       TZ: Asia/Seoul
       ORACLE_PASSWORD: biz_team3
+      ORACLE_DATABASE: XEPDB1
       APP_USER: biz_team3
       APP_USER_PASSWORD: biz_team3
     volumes:
