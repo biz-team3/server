@@ -8,8 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface PostDao {
-    int insertPost(Post post);
-    int insertPostMedia(PostMedia postMedia);
-    // Optional: Batch insert for media
-    int insertPostMediaList(List<PostMedia> mediaList);
+    int insert(Post post);
 }

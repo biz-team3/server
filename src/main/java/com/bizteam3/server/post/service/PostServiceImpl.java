@@ -6,66 +6,59 @@ import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.post.dto.MediaRequest;
 import com.bizteam3.server.post.dto.PostCreateRequest;
 import com.bizteam3.server.post.entity.Media;
-import com.bizteam3.server.post.entity.Hashtag;
 import com.bizteam3.server.post.entity.Post;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.beans.Transient;
-import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
-    private final PostDao postDao;
-    private final MediaDao mediaDao;
+	private final PostDao postDao;
+	private final MediaDao mediaDao;
+	private final HashtagDao hashtagDao;
 
-    public PostServiceImpl(PostDao postDao, MediaDao mediaDao) {
-        this.postDao = postDao;
-        this.mediaDao = mediaDao;
-    private final HashtagDao hashtagDao;
+	@Transactional
+	public void createPost(PostCreateRequest request, Integer userId) {
+		Post post = new Post(
+			userId,
+			request.getCaption(),
+			request.getTranslatedCaption()
+		);
 
-    public PostServiceImpl(PostDao postDao, HashtagDao hashtagDao) {
-        this.postDao = postDao;
-        this.hashtagDao = hashtagDao;
-    }
+		postDao.insert(post);
 
-    @Transactional
-    @Override
-    @Transactional
-    public void CreatePost(PostCreateRequest request, Integer userId) {
-        Post post = new Post(
-                userId,
-                request.getCaption(),
-                request.getTranslatedCaption()
-        );
+		Integer postId = post.getPostId();
 
-        postDao.insert(post);
+		if (request.getMedia() != null) {
+			for (MediaRequest mediaRequest : request.getMedia()) {
+				Media media = new Media();
+				media.setPostId(postId);
+				media.setMediaType(mediaRequest.getMediaType());
+				media.setMediaUrl(mediaRequest.getMediaUrl());
+				media.setSortOrder(mediaRequest.getSortOrder());
+				media.setOriginalFileName(mediaRequest.getOriginalFileName());
 
-        Integer postId = post.getPostId();
+				mediaDao.insert(media);
+				int insertedCheck = postDao.insert(post);
 
-        if(request.getMedia() != null){
-            for(MediaRequest mediaRequest : request.getMedia()){
-                Media media = new Media();
-                media.setPostId(postId);
-                media.setMediaType(mediaRequest.getMediaType());
-                media.setMediaUrl(mediaRequest.getMediaUrl());
-                media.setSortOrder(mediaRequest.getSortOrder());
-                media.setOriginalFileName(mediaRequest.getOriginalFileName());
+				if (insertedCheck > 0) {
+					Set<String> hashtagSet = post.createHashtag();
 
-                mediaDao.insert(media);
-        int insertedCheck = postDao.insert(post);
+					if (!hashtagSet.isEmpty()) {
+						hashtagDao.insertHashtag(hashtagSet);
+						hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
+					}
+				}
+			}
 
-        if (insertedCheck > 0) {
-            Set<String> hashtagSet = post.createHashtag();
-
-            if (!hashtagSet.isEmpty()) {
-                hashtagDao.insertHashtag(hashtagSet);
-                hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
-            }
-        }
-    }
-
+		}
+	}
 }
+
+
+
