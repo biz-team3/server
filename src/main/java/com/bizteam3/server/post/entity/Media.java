@@ -16,8 +16,8 @@ public class Media {
     String mediaUrl;
     Integer sortOrder;
     String originalFilename;
-//    String contentType; //릴스, 스토리, 피드?
-    Integer fileSize;
+    String contentType; // Image/jpeg 같은 형식
+    Integer fileSize; //파일이 클 경우, Long 변경
     LocalDateTime createdAt;
 
     public Media(MediaType mediaType, String mediaUrl, Integer sortOrder, String originalFilename){
