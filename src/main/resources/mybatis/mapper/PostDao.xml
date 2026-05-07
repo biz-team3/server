@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bizteam3.server.post.dao.PostDao">
+    <insert id="insert" parameterType="com.bizteam3.server.post.entity.Post">
+        INSERT INTO posts (
+            user_id,
+            caption,
+            translated_caption,
+            created_at,
+            update_at
+        ) VALUES (
+            #{userId},
+            #{caption, jdbcType=CLOB},
+            #{translatedCaption, jdbcType=CLOB},
+            SYSTIMESTAMP,
+            SYSTIMESTAMP
+        )
+    </insert>
+</mapper>
