@@ -96,7 +96,7 @@ public class GlobalExceptionHandler {
 			ex.getClass().getSimpleName()
 		);
 	}
-
+	// 스프링에서 제공하는 에러코드 양식. 일단 이 방식으로 모든 예외처리
 	private ProblemDetail createProblemDetail(HttpStatus status, String code, String detail, String exceptionName) {
 		ProblemDetail problemDetail = ProblemDetail.forStatus(status);
 		problemDetail.setType(URI.create(ERROR_DOC_URI));

@@ -14,12 +14,6 @@ public enum ErrorCode {
 		"잘못된 요청입니다."
 	),
 
-	INVALID_PARAMETER(
-		HttpStatus.BAD_REQUEST,
-		"C002",
-		"잘못된 파라미터 형식입니다."
-	),
-
 	UNAUTHORIZED(
 		HttpStatus.UNAUTHORIZED,
 		"401",
@@ -48,6 +42,12 @@ public enum ErrorCode {
 		HttpStatus.INTERNAL_SERVER_ERROR,
 		"500",
 		"서버 오류가 발생했습니다."
+	),
+	
+		INVALID_PARAMETER(
+		HttpStatus.BAD_REQUEST,
+		"500",
+		"잘못된 파라미터 형식입니다."
 	),
 
 	DATABASE_ERROR(
