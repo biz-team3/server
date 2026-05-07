@@ -4,7 +4,7 @@ CREATE TABLE Media (
                        media_type VARCHAR2(20 CHAR) NOT NULL,
                        media_url VARCHAR2(1000 CHAR) NOT NULL,
                        sort_order NUMBER(19) NOT NULL,
-                       original_filename VARCHAR2(255 CHAR) NOT NULL,
+                       original_file_name VARCHAR2(255 CHAR) NOT NULL,
                        content_type VARCHAR2(100 CHAR),
                        file_size NUMBER(19),
                        created_at TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL,

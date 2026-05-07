@@ -4,7 +4,10 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bizteam3.server.post.dao.PostDao">
     <insert id="insert"
-            parameterType="com.bizteam3.server.post.entity.Post">
+            parameterType="com.bizteam3.server.post.entity.Post"
+            useGeneratedKeys="true"
+            keyProperty="postId"
+            keyColumn="POST_ID">
         INSERT INTO posts (
             user_id,
             caption,

@@ -4,15 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bizteam3.server.post.dao.MediaDao">
     <insert id="insert"
-            parameterType="com.bizteam3.server.post.entity.Media"
-            useGeneratedKeys="true"
-            keyProperty="mediaId">
+            parameterType="com.bizteam3.server.post.entity.Media">
         INSERT INTO Media (
             post_id,
             media_type,
             media_url,
             sort_order,
-            original_filename,
+            original_file_name,
             content_type,
             file_size,
             created_at
@@ -21,7 +19,7 @@
             #{mediaType},
             #{mediaUrl},
             #{sortOrder},
-            #{originalFilename},
+            #{originalFileName},
             #{contentType},
             #{fileSize},
             SYSTIMESTAMP
