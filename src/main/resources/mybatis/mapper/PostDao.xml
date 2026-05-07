@@ -7,7 +7,7 @@
             parameterType="com.bizteam3.server.post.entity.Post"
             useGeneratedKeys="true"
             keyProperty="postId"
-            keyColumn="POST_ID">
+            keyColumn="post_id">
         INSERT INTO posts (
             user_id,
             caption,

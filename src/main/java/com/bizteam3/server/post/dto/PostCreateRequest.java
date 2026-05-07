@@ -3,6 +3,7 @@ package com.bizteam3.server.post.dto;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class PostCreateRequest {
@@ -10,6 +11,4 @@ public class PostCreateRequest {
     Integer userId;
     String caption;
     String translatedCaption;
-//    List<HashTag> hashTags;.
-//    String isSuggested;
 }
