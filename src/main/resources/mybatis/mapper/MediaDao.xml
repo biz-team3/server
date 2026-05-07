@@ -8,14 +8,14 @@
             useGeneratedKeys="true"
             keyProperty="mediaId">
         INSERT INTO Media (
-            postId,
-            mediaType,
-            mediaUrl,
-            sortOrder,
-            originalFileName,
-            contentType,
-            fileSize,
-            createdAt
+            post_id,
+            media_type,
+            media_url,
+            sort_order,
+            original_filename,
+            content_type,
+            file_size,
+            created_at
         ) VALUES (
             #{postId},
             #{mediaType},

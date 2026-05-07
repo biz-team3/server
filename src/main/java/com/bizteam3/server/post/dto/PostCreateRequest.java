@@ -2,9 +2,11 @@ package com.bizteam3.server.post.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PostCreateRequest {
-//    List<Media> medias;
+    List<MediaRequest> media;
     Integer userId;
     String caption;
     String translatedCaption;

@@ -26,7 +26,7 @@ public class PostController {
         Integer userId = 1;
         postService.CreatePost(request, userId);
 
-        return "등록완료"; // wjdfl
+        return "등록완료";
     }
 
 }
