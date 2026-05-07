@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.user.dao.UserDao">
+
+    <!-- ResultMap: Oracle 컬럼 → User 엔티티 매핑 -->
+    <!-- mapUnderscoreToCamelCase=true 설정이 있으나, CLOB/ENUM 타입 명시를 위해 resultMap 사용 -->
+    <resultMap id="UserResultMap" type="com.bizteam3.server.user.entity.User">
+        <id     property="userId"     column="user_id"     jdbcType="NUMERIC"/>
+        <result property="username"   column="username"    jdbcType="VARCHAR"/>
+        <result property="password"   column="password"    jdbcType="VARCHAR"/>
+        <result property="name"       column="name"        jdbcType="VARCHAR"/>
+        <result property="bio"        column="bio"         jdbcType="CLOB"/>
+        <result property="website"    column="website"     jdbcType="VARCHAR"/>
+        <result property="profileImg" column="profile_img" jdbcType="VARCHAR"/>
+        <result property="accountVis" column="account_vis" jdbcType="VARCHAR"
+                typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result property="createdAt"  column="created_at"  jdbcType="TIMESTAMP"/>
+        <result property="updateAt"   column="update_at"   jdbcType="TIMESTAMP"/>
+        <result property="deleteAt"   column="delete_at"   jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 회원 등록 -->
+    <!-- Oracle IDENTITY 컬럼(user_id)은 INSERT 시 자동 생성되므로 제외 -->
+    <!-- useGeneratedKeys + keyProperty로 생성된 PK를 User.userId에 바인딩 -->
+    <insert id="insert"
+            parameterType="com.bizteam3.server.user.entity.User"
+            useGeneratedKeys="true"
+            keyProperty="userId"
+            keyColumn="user_id">
+        INSERT INTO users (
+        password,
+        name,
+        bio,
+        website,
+        profile_img,
+        account_vis
+        ) VALUES (
+        #{password,         jdbcType=VARCHAR},
+        #{name,             jdbcType=VARCHAR},
+        #{bio,              jdbcType=CLOB},
+        #{website,          jdbcType=VARCHAR},
+        #{profileImg,       jdbcType=VARCHAR},
+        #{accountVis,       jdbcType=VARCHAR,
+          typeHandler=org.apache.ibatis.type.EnumTypeHandler}
+        )
+    </insert>
+
+</mapper>
