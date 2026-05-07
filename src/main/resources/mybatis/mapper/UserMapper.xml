@@ -11,4 +11,42 @@
             (#{password}, #{name}, #{bio}, #{website}, #{profileImg}, #{accountVis})
     </insert>
 
+    <!-- 회원정보 수정 -->
+    <update id="update" parameterType="com.bizteam3.server.user.entity.User">
+        UPDATE users
+        <set>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="bio != null">
+                bio = #{bio},
+            </if>
+            <if test="website != null">
+                website = #{website},
+            </if>
+            <if test="profileImg != null">
+                profile_img = #{profileImg},
+            </if>
+            <if test="accountVis != null">
+                account_vis = #{accountVis},
+            </if>
+            update_at = SYSTIMESTAMP
+        </set>
+        WHERE user_id = #{userId}
+          AND delete_at IS NULL
+    </update>
+
+    <!-- 회원 탈퇴 -->
+    <update id="delete" parameterType="string">
+        UPDATE users
+        SET
+            delete_at = SYSTIMESTAMP,
+            update_at = SYSTIMESTAMP
+        WHERE user_id = #{userId}
+          AND delete_at IS NULL
+    </update>
+
 </mapper>
