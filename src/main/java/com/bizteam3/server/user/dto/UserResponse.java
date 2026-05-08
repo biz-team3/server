@@ -1,43 +1,43 @@
 package com.bizteam3.server.user.dto;
 
 import com.bizteam3.server.user.entity.AccountVisType;
+import com.bizteam3.server.user.entity.User;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+/**
+ * none password
+ * */
 @Data
+@Builder
 public class UserResponse {
-    private Integer userId;
-    private String username;
-    private String password;
-    private String name;
-    private String bio;
-    private String website;
-    private String profileImg;
-    private AccountVisType accountVis;
-    private LocalDateTime createdAt;
-    private LocalDateTime updateAt;
-    private LocalDateTime deleteAt;
+	private final Integer userId;
+	private final String username;
+	private final String name;
+	private final String bio;
+	private final String website;
+	private final String profileImg;
+	private final AccountVisType accountVis;
+	private final LocalDateTime createdAt;
+	private final LocalDateTime updateAt;
+	private final LocalDateTime deleteAt;
 
+	public static List<UserResponse> toFindDto(List<User> users) {
+		return users.stream()
+			.map(user -> UserResponse.builder()
+				.userId(user.getUserId())
+				.username(user.getUsername())
+				.name(user.getName())
+				.bio(user.getBio())
+				.website(user.getWebsite())
+				.profileImg(user.getProfileImg())
+				.accountVis(user.getAccountVis())
+				.build())
+			.toList();
+	}
 }
-
-//Integer userId;
-//String username;
-//String password;
-//String name;
-//String bio;
-//String website;
-//String profileImg;
-//AccountVisType accountVis;
-//LocalDateTime createdAt;
-//LocalDateTime updateAt;
-//LocalDateTime deleteAt;
-
-//response.setUserId(modifiedUser.getUserId());
-//response.setPassword(modifiedUser.getPassword());
-//response.setName(modifiedUser.getName());
-//response.setBio(modifiedUser.getBio());
-//response.setWebsite(modifiedUser.getWebsite());
-//response.setProfileImg(modifiedUser.getProfileImg());
-//response.setAccountVis(modifiedUser.getAccountVis());
-//response.setUpdateAt(modifiedUser.getUpdateAt());
