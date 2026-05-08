@@ -1,16 +1,10 @@
 package com.bizteam3.server.post.controller;
 
 import com.bizteam3.server.post.dto.PostCreateRequest;
-import com.bizteam3.server.post.entity.Post;
 import com.bizteam3.server.post.service.PostService;
-import lombok.extern.slf4j.XSlf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@XSlf4j
 @RequestMapping("/api/posts")
 public class PostController {
 
@@ -29,4 +23,13 @@ public class PostController {
         return "등록완료";
     }
 
+    @DeleteMapping("/{postId}")
+    public String deletePost(@PathVariable Integer postId){
+        boolean result = postService.deletePost(postId);
+        if(result){
+            return "삭제 성공";
+        }else{
+            return "삭제 실패";
+        }
+    }
 }
