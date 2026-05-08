@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.post.dao.CommentDao">
+
+    <insert id="insert"
+            parameterType="com.bizteam3.server.post.entity.Comment"
+            useGeneratedKeys="true"
+            keyProperty="commentId"
+            keyColumn="comment_id"
+    >
+        INSERT INTO comments (
+        post_id,
+        user_id,
+        text,
+        created_at,
+        updated_at
+        ) VALUES (
+        #{postId},
+        #{userId},
+        #{text},
+        SYSTIMESTAMP,
+        SYSTIMESTAMP
+        )
+    </insert>
+</mapper>
