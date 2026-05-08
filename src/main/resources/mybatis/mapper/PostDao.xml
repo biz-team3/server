@@ -43,4 +43,19 @@
         AND delete_at IS NULL
     </update>
 
+
+    <delete id="deleteMediasByPostId" parameterType="int">
+        DELETE FROM medias
+        WHERE post_id = #{postId}
+    </delete>
+
+    <delete id="deletePostHashtagsByPostId" parameterType="int">
+        DELETE FROM post_hashtags
+        WHERE post_id = #{postId}
+    </delete>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM posts
+        WHERE post_id = #{postId}
+    </delete>
 </mapper>

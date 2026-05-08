@@ -15,5 +15,7 @@ public interface UserDao {
 
     int delete(@Param("userId") String userId);
 
+    int countAll();
+
     List<User> selectPage(@Param("offset") int offset,@Param("size") int size);
 }

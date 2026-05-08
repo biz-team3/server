@@ -81,8 +81,17 @@ public class PostServiceImpl implements PostService {
 			hashtagDao.insertHashtag(hashtagSet);
 			hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
 		}
+  }
+    
+	@Override
+	public boolean deletePost(Integer postId) {
+		postDao.deleteMediasByPostId(postId);
+		postDao.deletePostHashtagsByPostId(postId);
+
+		int rows = postDao.delete(postId);
+		if(rows == 1) return true;
+		else return false;
 	}
+
 }
-
-
 

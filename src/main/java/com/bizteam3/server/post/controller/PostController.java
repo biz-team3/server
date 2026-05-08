@@ -4,11 +4,9 @@ import com.bizteam3.server.post.dto.PostCreateRequest;
 import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
 import com.bizteam3.server.post.entity.Post;
 import com.bizteam3.server.post.service.PostService;
-import lombok.extern.slf4j.XSlf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@XSlf4j
 @RequestMapping("/api/posts")
 public class PostController {
 
@@ -40,4 +38,13 @@ public class PostController {
     }
 
 
+    @DeleteMapping("/{postId}")
+    public String deletePost(@PathVariable Integer postId){
+        boolean result = postService.deletePost(postId);
+        if(result){
+            return "삭제 성공";
+        }else{
+            return "삭제 실패";
+        }
+    }
 }

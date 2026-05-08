@@ -10,4 +10,8 @@ public interface PostDao {
     int insert(Post post);
     int selectUserId(Integer postId);
     int updateCaption(Post post);
+
+    int deleteMediasByPostId(Integer postId);
+    int deletePostHashtagsByPostId(Integer postId);
+    int delete(Integer postId);
 }

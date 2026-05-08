@@ -1,0 +1,249 @@
+--  USER 더미
+INSERT INTO users (
+    user_id,
+    username,
+    password,
+    name,
+    bio,
+    website,
+    profile_img,
+    account_vis,
+    created_at,
+    update_at,
+    delete_at
+) VALUES
+      (1, 'user001', 'password', '김민준', '백엔드 개발자', 'user001@test.com', '/user001.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (2, 'user002', 'password', '이서준', '프론트엔드 개발자', 'user002@test.com', '/user002.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (3, 'user003', 'password', '박도윤', 'React 개발자', 'user003@test.com', '/user003.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (4, 'user004', 'password', '최하준', 'Spring 개발자', 'user004@test.com', '/user004.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (5, 'user005', 'password', '정지호', '풀스택 개발자', 'user005@test.com', '/user005.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (6, 'user006', 'password', '강지훈', 'Java 개발자', 'user006@test.com', '/user006.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (7, 'user007', 'password', '조현우', 'DB 설계 관심 있음', 'user007@test.com', '/user007.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (8, 'user008', 'password', '윤서연', 'UI 개발자', 'user008@test.com', '/user008.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (9, 'user009', 'password', '장하은', '알고리즘 공부 중', 'user009@test.com', '/user009.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (10, 'user010', 'password', '임수아', '서비스 개발자', 'user010@test.com', '/user010.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (11, 'user011', 'password', '한유진', 'API 개발자', 'user011@test.com', '/user011.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (12, 'user012', 'password', '오지우', 'MyBatis 사용 중', 'user012@test.com', '/user012.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (13, 'user013', 'password', '서윤재', 'Oracle DB 학습 중', 'user013@test.com', '/user013.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (14, 'user014', 'password', '신예준', 'Spring Boot 개발자', 'user014@test.com', '/user014.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (15, 'user015', 'password', '권도현', '게시판 기능 개발 중', 'user015@test.com', '/user015.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (16, 'user016', 'password', '문지민', '인스타그램 클론 개발', 'user016@test.com', '/user016.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (17, 'user017', 'password', '배서윤', '회원 기능 담당', 'user017@test.com', '/user017.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (18, 'user018', 'password', '남시우', '댓글 기능 개발', 'user018@test.com', '/user018.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (19, 'user019', 'password', '백민재', '좋아요 기능 개발', 'user019@test.com', '/user019.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (20, 'user020', 'password', '허준서', '팔로우 기능 개발', 'user020@test.com', '/user020.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (21, 'user021', 'password', '유하린', '사진 업로드 테스트', 'user021@test.com', '/user021.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (22, 'user022', 'password', '민서현', '프로필 수정 테스트', 'user022@test.com', '/user022.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (23, 'user023', 'password', '송지아', '피드 조회 테스트', 'user023@test.com', '/user023.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (24, 'user024', 'password', '홍다은', '검색 기능 테스트', 'user024@test.com', '/user024.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (25, 'user025', 'password', '전예린', '페이징 테스트 계정', 'user025@test.com', '/user025.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (26, 'user026', 'password', '고은우', '더미 사용자', 'user026@test.com', '/user026.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (27, 'user027', 'password', '양태민', '테스트 사용자', 'user027@test.com', '/user027.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (28, 'user028', 'password', '손예나', '개발 테스트용', 'user028@test.com', '/user028.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (29, 'user029', 'password', '노지훈', 'API 응답 확인용', 'user029@test.com', '/user029.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (30, 'user030', 'password', '하유나', '목록 조회 테스트', 'user030@test.com', '/user030.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (31, 'user031', 'password', '김서아', '비공개 계정 테스트', 'user031@test.com', '/user031.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (32, 'user032', 'password', '이도하', '공개 계정 테스트', 'user032@test.com', '/user032.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (33, 'user033', 'password', '박유준', '회원 조회 테스트', 'user033@test.com', '/user033.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (34, 'user034', 'password', '최아린', '회원 수정 테스트', 'user034@test.com', '/user034.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (35, 'user035', 'password', '정하율', '회원 삭제 테스트', 'user035@test.com', '/user035.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (36, 'user036', 'password', '강서진', 'MyBatis 테스트', 'user036@test.com', '/user036.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (37, 'user037', 'password', '조민서', 'Controller 테스트', 'user037@test.com', '/user037.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (38, 'user038', 'password', '윤지후', 'Service 테스트', 'user038@test.com', '/user038.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (39, 'user039', 'password', '장예준', 'DAO 테스트', 'user039@test.com', '/user039.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (40, 'user040', 'password', '임하윤', 'Mapper 테스트', 'user040@test.com', '/user040.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (41, 'user041', 'password', '한시윤', '프론트 연동 테스트', 'user041@test.com', '/user041.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (42, 'user042', 'password', '오은서', '로그인 테스트', 'user042@test.com', '/user042.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (43, 'user043', 'password', '서준영', '회원가입 테스트', 'user043@test.com', '/user043.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (44, 'user044', 'password', '신다현', '프로필 이미지 테스트', 'user044@test.com', '/user044.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (45, 'user045', 'password', '권민성', '계정 공개범위 테스트', 'user045@test.com', '/user045.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (46, 'user046', 'password', '문채원', 'React 연동 테스트', 'user046@test.com', '/user046.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (47, 'user047', 'password', '배현준', 'Oracle 테스트 계정', 'user047@test.com', '/user047.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (48, 'user048', 'password', '남유찬', '게시물 테스트 계정', 'user048@test.com', '/user048.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (49, 'user049', 'password', '백서현', '마지막 페이지 테스트', 'user049@test.com', '/user049.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
+      (50, 'user050', 'password', '허지안', '페이징 마지막 데이터', 'user050@test.com', '/user050.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL);
+
+COMMIT;
+
+-- POST 더미
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             1,
+             1,
+             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
+             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             2,
+             2,
+             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
+             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             3,
+             3,
+             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
+             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             4,
+             4,
+             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
+             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             5,
+             5,
+             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
+             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             6,
+             6,
+             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
+             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             7,
+             7,
+             '프로필 수정 기능 확인 #회원 #프로필 #수정',
+             '프로필 수정 기능 확인 #회원 #프로필 #수정',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             8,
+             8,
+             '피드 목록 조회 테스트 #피드 #페이징 #목록',
+             '피드 목록 조회 테스트 #피드 #페이징 #목록',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             9,
+             9,
+             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
+             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             10,
+             10,
+             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
+             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+COMMIT;
