@@ -20,6 +20,19 @@ public class User {
 	LocalDateTime updateAt;
 	LocalDateTime deleteAt;
 
+	public User(Integer userId,
+		String username,
+		String password,
+		String name,
+		String bio,
+		String website,
+		String profileImg,
+		AccountVisType accountVis
+	) {
+		this(username, password, name, bio, website,profileImg, accountVis);
+		this.accountVis = accountVis;
+	}
+
 	public User(String username,
 				String password,
 				String name,
