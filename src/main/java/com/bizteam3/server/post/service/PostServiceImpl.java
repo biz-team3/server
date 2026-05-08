@@ -30,32 +30,28 @@ public class PostServiceImpl implements PostService {
 			request.getTranslatedCaption()
 		);
 
-		postDao.insert(post);
+		int insertedCheck = postDao.insert(post);
 
-		Integer postId = post.getPostId();
+		if (insertedCheck > 0) {
+			Set<String> hashtagSet = post.createHashtag();
+
+			if (!hashtagSet.isEmpty()) {
+				hashtagDao.insertHashtag(hashtagSet);
+				hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
+			}
+		}
 
 		if (request.getMedia() != null) {
 			for (MediaRequest mediaRequest : request.getMedia()) {
-				Media media = new Media();
-				media.setPostId(postId);
-				media.setMediaType(mediaRequest.getMediaType());
-				media.setMediaUrl(mediaRequest.getMediaUrl());
-				media.setSortOrder(mediaRequest.getSortOrder());
-				media.setOriginalFileName(mediaRequest.getOriginalFileName());
-
+				Media media = new Media(
+					post.getPostId(),
+					mediaRequest.getMediaType(),
+					mediaRequest.getMediaUrl(),
+					mediaRequest.getSortOrder(),
+					mediaRequest.getOriginalFileName()
+				);
 				mediaDao.insert(media);
-				int insertedCheck = postDao.insert(post);
-
-				if (insertedCheck > 0) {
-					Set<String> hashtagSet = post.createHashtag();
-
-					if (!hashtagSet.isEmpty()) {
-						hashtagDao.insertHashtag(hashtagSet);
-						hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
-					}
-				}
 			}
-
 		}
 	}
 }

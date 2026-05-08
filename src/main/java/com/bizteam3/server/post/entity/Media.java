@@ -26,4 +26,15 @@ public class Media {
         this.sortOrder = sortOrder;
         this.originalFileName = originalFileName;
     }
+
+    public Media(
+        Integer postId,
+        MediaType mediaType,
+        String mediaUrl,
+        Integer sortOrder,
+        String originalFileName
+    ){
+        this(mediaType, mediaUrl, sortOrder, originalFileName);
+        this.postId = postId;
+    }
 }
