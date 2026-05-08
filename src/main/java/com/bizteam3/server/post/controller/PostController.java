@@ -24,7 +24,7 @@ public class PostController {
     public String createPost(@RequestBody PostCreateRequest request){
         //TODO: AUth 필수
         Integer userId = 1;
-        postService.CreatePost(request, userId);
+        postService.createPost(request, userId);
 
         return "등록완료";
     }
