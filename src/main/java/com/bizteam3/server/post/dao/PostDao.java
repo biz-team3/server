@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface PostDao {
     int insert(Post post);
+
+    int deleteMediasByPostId(Integer postId);
+    int deletePostHashtagsByPostId(Integer postId);
+    int delete(Integer postId);
 }

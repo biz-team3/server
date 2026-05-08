@@ -54,6 +54,16 @@ public class PostServiceImpl implements PostService {
 			}
 		}
 	}
+
+	@Override
+	public boolean deletePost(Integer postId) {
+		postDao.deleteMediasByPostId(postId);
+		postDao.deletePostHashtagsByPostId(postId);
+
+		int rows = postDao.delete(postId);
+		if(rows == 1) return true;
+		else return false;
+	}
 }
 
 

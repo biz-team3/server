@@ -5,7 +5,7 @@
 <mapper namespace="com.bizteam3.server.post.dao.MediaDao">
     <insert id="insert"
             parameterType="com.bizteam3.server.post.entity.Media">
-        INSERT INTO Media (
+        INSERT INTO medias (
             post_id,
             media_type,
             media_url,
