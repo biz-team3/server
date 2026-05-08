@@ -1,6 +1,8 @@
 package com.bizteam3.server.post.controller;
 
 import com.bizteam3.server.post.dto.PostCreateRequest;
+import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
+import com.bizteam3.server.post.entity.Post;
 import com.bizteam3.server.post.service.PostService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +24,19 @@ public class PostController {
 
         return "등록완료";
     }
+
+    @PatchMapping("/{postId}")
+    public String updatePost(
+            @PathVariable Integer postId,
+            @RequestBody PostUpdateCaptionRequest request){
+        Integer userId = 1;
+        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
+        Integer testPostId = 1;
+        postService.updateCaption(testPostId, request, userId);
+
+        return "수정완료";
+    }
+
 
     @DeleteMapping("/{postId}")
     public String deletePost(@PathVariable Integer postId){

@@ -28,6 +28,13 @@ public class Post {
 		this.translatedCaption = translatedCaption;
 	}
 
+	public Post(Integer postId, String caption, String translatedCaption, Integer userId) {
+		this.postId = postId;
+		this.caption = caption;
+		this.translatedCaption = translatedCaption;
+		this.userId = userId;
+	}
+
 	public Set<String> createHashtag() {
 		Set<String> hashtagSet = new HashSet<>();
 
