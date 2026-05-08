@@ -49,4 +49,23 @@
           AND delete_at IS NULL
     </update>
 
+    <select id="selectPage" resultType="com.bizteam3.server.user.entity.User">
+        SELECT
+            USER_ID,
+            PASSWORD,
+            NAME,
+            BIO,
+            WEBSITE,
+            PROFILE_IMG,
+            ACCOUNT_VIS,
+            CREATED_AT,
+            UPDATE_AT,
+            DELETE_AT
+        FROM users
+        WHERE DELETE_AT IS NULL
+        ORDER BY USER_ID
+            OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+
 </mapper>
