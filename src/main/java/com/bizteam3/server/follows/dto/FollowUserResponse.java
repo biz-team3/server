@@ -8,7 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * 팔로워/팔로잉 목록에서 사용하는 사용자 요약 응답 DTO입니다.
+ * 팔로워/팔로잉 목록에서 사용하는 사용자 요약 응답 DTO
  */
 @Data
 @Builder

@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * follows 테이블과 매핑되는 팔로우 관계 엔티티입니다.
+ * follows 테이블과 매핑되는 팔로우 관계 엔티티
  */
 @Data
 @NoArgsConstructor

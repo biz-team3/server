@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 팔로우 관계 생성/삭제와 팔로워/팔로잉 목록 조회 API입니다.
+ * 팔로우 관계 생성/삭제와 팔로워/팔로잉 목록 조회 API
  */
 @RestController
 @RequestMapping("/api/follows")

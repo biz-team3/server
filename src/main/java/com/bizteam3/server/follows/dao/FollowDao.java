@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * follows 테이블을 조회/변경하는 MyBatis DAO입니다.
+ * follows 테이블을 조회/변경하는 MyBatis DAO
  *
- * TODO: SQL은 기존 UserMapper/PostDao.xml 방식에 맞춰 XML 매퍼에서 작성합니다.
+ * TODO: SQL은 기존 UserMapper/PostDao.xml 방식에 맞춰 XML 매퍼에서 작성
  */
 @Mapper
 public interface FollowDao {
