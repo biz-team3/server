@@ -64,3 +64,186 @@ INSERT INTO users (
       (50, 'user050', 'password', '허지안', '페이징 마지막 데이터', 'user050@test.com', '/user050.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL);
 
 COMMIT;
+
+-- POST 더미
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             1,
+             1,
+             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
+             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             2,
+             2,
+             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
+             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             3,
+             3,
+             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
+             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             4,
+             4,
+             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
+             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             5,
+             5,
+             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
+             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             6,
+             6,
+             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
+             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             7,
+             7,
+             '프로필 수정 기능 확인 #회원 #프로필 #수정',
+             '프로필 수정 기능 확인 #회원 #프로필 #수정',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             8,
+             8,
+             '피드 목록 조회 테스트 #피드 #페이징 #목록',
+             '피드 목록 조회 테스트 #피드 #페이징 #목록',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             9,
+             9,
+             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
+             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+INSERT INTO posts (
+    post_id,
+    user_id,
+    caption,
+    translated_caption,
+    created_at,
+    update_at,
+    delete_at
+) VALUES (
+             10,
+             10,
+             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
+             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
+             SYSTIMESTAMP,
+             SYSTIMESTAMP,
+             NULL
+         );
+
+COMMIT;
