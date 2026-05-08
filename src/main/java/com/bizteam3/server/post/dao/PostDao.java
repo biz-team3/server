@@ -1,7 +1,6 @@
 package com.bizteam3.server.post.dao;
 
 import com.bizteam3.server.post.entity.Post;
-import com.bizteam3.server.post.entity.PostMedia;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
