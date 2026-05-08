@@ -8,9 +8,9 @@ import java.util.Set;
 @Mapper
 public interface HashtagDao {
     int insertHashtag(@Param("hashtagSet") Set<String> hashtagSet);
-
     int insertPostHashtag(
             @Param("postId") Integer postId,
             @Param("hashtagSet") Set<String> hashtagSet
     );
+    int deletePostHashtagByPostId(@Param("postId") Integer postId);
 }
