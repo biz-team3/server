@@ -3,11 +3,20 @@ package com.bizteam3.server.follows.service;
 import java.util.List;
 
 import com.bizteam3.server.follows.dao.FollowDao;
+import com.bizteam3.server.follows.dao.FollowRequestDao;
+import com.bizteam3.server.follows.dto.FollowRequestResponse;
 import com.bizteam3.server.follows.dto.FollowUserResponse;
 import com.bizteam3.server.follows.entity.Follow;
+import com.bizteam3.server.follows.entity.FollowRequest;
+import com.bizteam3.server.follows.entity.RequestStatus;
 import com.bizteam3.server.global.exception.common.BadRequestException;
+import com.bizteam3.server.global.exception.common.ConflictException;
 import com.bizteam3.server.global.exception.common.DatabaseException;
+import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.global.exception.common.NotFoundException;
+import com.bizteam3.server.user.dao.UserDao;
+import com.bizteam3.server.user.entity.AccountVisType;
+import com.bizteam3.server.user.entity.User;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,84 +24,185 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 /**
- * follows 테이블 기준의 기본 팔로우 관계를 처리
+ * follows / follow_requests 테이블을 통합 관리하는 서비스 구현체
+ *
+ * 팔로우 흐름:
+ *  - 공개 계정(PUBLIC)  → follows 테이블에 즉시 관계 삽입
+ *  - 비공개 계정(PRIVATE)→ follow_requests 테이블에 PENDING 요청 삽입
+ *
+ * TODO: 인증 기능 연동 후 loginUserId 를 SecurityContext에서 가져오도록 교체
  */
 @Service
 @RequiredArgsConstructor
 public class FollowServiceImpl implements FollowService {
-	private final FollowDao followDao;
 
-	/**
-	 * 공개 계정 팔로우처럼 즉시 관계가 생기는 기본 흐름
-	 */
-	@Transactional
-	public void follow(Integer followerUserId, Integer targetUserId) {
-		validateDifferentUser(followerUserId, targetUserId);
-		validateActiveUser(targetUserId);
+    private final FollowDao        followDao;
+    private final FollowRequestDao followRequestDao;
+    private final UserDao          userDao;
 
-		// 이미 팔로우 중이면 중복 생성 없이 성공 처리
-		// TODO: 팀 의사결정 필요 - 중복 팔로우 요청을 409 Conflict로 명확히 막을지,
-		//       멱등성(idempotency) 원칙에 따라 이미 원하는 상태이므로 성공 처리할지 결정 필요
-		// 멱등성 정리: 같은 요청이 여러 번 들어와도 최종 서버 상태가 같게 유지되는 성질임
-		// 필요한 이유: 사용자가 버튼을 빠르게 두 번 누르거나 네트워크 재시도로 같은 요청이 다시 들어올 수 있음
-		// 현재 docs 기준: "중복 요청/중복 팔로우는 멱등 처리"라고 되어 있어 성공 처리 방향으로 작성함
-		// TODO: 팀원들과 공유/스터디 후 최종 정책이 정해지면 이 설명 주석 정리 필요
-		if (followDao.countByUsers(followerUserId, targetUserId) > 0) {
-			return;
-		}
+    // ----------------------------------------------------------------
+    // 팔로우 (공개/비공개 분기)
+    // ----------------------------------------------------------------
 
-		int rows = followDao.insert(new Follow(followerUserId, targetUserId));
-		if (rows != 1) {
-			throw new DatabaseException("팔로우 처리에 실패하였습니다.");
-		}
-	}
+    /**
+     * 공개 계정: 즉시 follows 관계 생성 (멱등 처리)
+     * 비공개 계정: follow_requests 에 PENDING 요청 생성
+     */
+    @Transactional
+    @Override
+    public void follow(Integer followerUserId, Integer targetUserId) {
+        validateDifferentUser(followerUserId, targetUserId);
 
-	/**
-	 * 팔로우 관계를 삭제
-	 */
-	@Transactional
-	public void unfollow(Integer followerUserId, Integer targetUserId) {
-		validateDifferentUser(followerUserId, targetUserId);
-		validateActiveUser(targetUserId);
+        User target = getActiveUser(targetUserId);
 
-		followDao.deleteByUsers(followerUserId, targetUserId);
-	}
+        if (target.getAccountVis() == AccountVisType.PRIVATE) {
+            sendFollowRequest(followerUserId, targetUserId);
+        } else {
+            followDirectly(followerUserId, targetUserId);
+        }
+    }
 
-	public List<FollowUserResponse> findFollowers(Integer userId) {
-		validateActiveUser(userId);
-		return followDao.selectFollowers(userId);
-	}
+    /** 공개 계정 팔로우: follows 에 즉시 삽입 (멱등) */
+    private void followDirectly(Integer followerUserId, Integer followingUserId) {
+        if (followDao.countByUsers(followerUserId, followingUserId) > 0) {
+            return; // 이미 팔로우 중 → 멱등 처리
+        }
+        int rows = followDao.insert(new Follow(followerUserId, followingUserId));
+        if (rows != 1) {
+            throw new DatabaseException("팔로우 처리에 실패하였습니다.");
+        }
+    }
 
-	public List<FollowUserResponse> findFollowing(Integer userId) {
-		validateActiveUser(userId);
-		return followDao.selectFollowing(userId);
-	}
+    /** 비공개 계정 팔로우: follow_requests 에 PENDING 요청 삽입 */
+    private void sendFollowRequest(Integer requesterUserId, Integer receiverUserId) {
+        // 이미 팔로우 중인 경우 요청 불필요
+        if (followDao.countByUsers(requesterUserId, receiverUserId) > 0) {
+            return;
+        }
+        // 이미 PENDING 요청이 있으면 중복 요청 불가
+        if (followRequestDao.countPending(requesterUserId, receiverUserId) > 0) {
+            throw new ConflictException("이미 팔로우 요청을 보냈습니다.");
+        }
+        int rows = followRequestDao.insert(new FollowRequest(requesterUserId, receiverUserId));
+        if (rows != 1) {
+            throw new DatabaseException("팔로우 요청 처리에 실패하였습니다.");
+        }
+    }
 
-	/**
-	 * 로그인 사용자와 팔로우 대상 사용자가 서로 다른지 검증
-	 *
-	 * @param loginUserId 현재 로그인한 사용자 ID
-	 * @param targetUserId 팔로우 대상 사용자 ID
-	 * @throws BadRequestException 자기 자신을 팔로우하려는 경우
-	 */
-	private void validateDifferentUser(Integer loginUserId, Integer targetUserId) {
-		// 방어적 프로그래밍: 프론트에서 내 프로필에 팔로우 버튼을 숨겨도 서버 검증은 별도로 필요함
-		// 사용자가 브라우저 콘솔, Postman, curl 등으로 직접 자기 자신 팔로우 요청을 보낼 수 있음
-		// UI에서 안 보임과 서버에서 불가능함은 다르므로 데이터 정합성을 지키기 위한 최소 방어선임
-		if (loginUserId.equals(targetUserId)) {
-			throw new BadRequestException("자기 자신은 팔로우할 수 없습니다.");
-		}
-	}
+    // ----------------------------------------------------------------
+    // 언팔로우
+    // ----------------------------------------------------------------
 
-	/**
-	 * 삭제되지 않은 활성 사용자인지 검증
-	 *
-	 * @param userId 검증할 사용자 ID
-	 * @throws NotFoundException 사용자가 없거나 탈퇴 처리된 경우
-	 */
-	private void validateActiveUser(Integer userId) {
-		if (followDao.countActiveUser(userId) != 1) {
-			throw NotFoundException.of("User", userId);
-		}
-	}
+    @Transactional
+    @Override
+    public void unfollow(Integer followerUserId, Integer targetUserId) {
+        validateDifferentUser(followerUserId, targetUserId);
+        validateActiveUser(targetUserId);
+        followDao.deleteByUsers(followerUserId, targetUserId);
+    }
+
+    // ----------------------------------------------------------------
+    // 팔로워 / 팔로잉 목록
+    // ----------------------------------------------------------------
+
+    @Override
+    public List<FollowUserResponse> findFollowers(Integer userId) {
+        validateActiveUser(userId);
+        return followDao.selectFollowers(userId);
+    }
+
+    @Override
+    public List<FollowUserResponse> findFollowing(Integer userId) {
+        validateActiveUser(userId);
+        return followDao.selectFollowing(userId);
+    }
+
+    // ----------------------------------------------------------------
+    // 팔로우 요청 관리 (비공개 계정 수신자용)
+    // ----------------------------------------------------------------
+
+    @Override
+    public List<FollowRequestResponse> findPendingRequests(Integer receiverUserId) {
+        validateActiveUser(receiverUserId);
+        return followRequestDao.selectPendingByReceiver(receiverUserId);
+    }
+
+    /**
+     * 팔로우 요청 수락
+     * 1) 요청 존재 확인 + 소유권 검증 (내 요청인지)
+     * 2) status → ACCEPTED
+     * 3) follows 테이블에 실제 관계 생성
+     */
+    @Transactional
+    @Override
+    public void acceptRequest(Integer receiverUserId, Integer requestId) {
+        FollowRequest req = getRequestAndValidateOwner(requestId, receiverUserId);
+
+        int updated = followRequestDao.updateStatus(requestId, RequestStatus.ACCEPTED.name());
+        if (updated != 1) {
+            throw new DatabaseException("팔로우 요청 수락에 실패하였습니다.");
+        }
+
+        // follows 테이블에 실제 관계 생성 (requester → receiver 방향)
+        followDirectly(req.getRequesterUserId(), req.getReceiverUserId());
+    }
+
+    /**
+     * 팔로우 요청 거절
+     * 1) 요청 존재 확인 + 소유권 검증
+     * 2) status → REJECTED
+     */
+    @Transactional
+    @Override
+    public void rejectRequest(Integer receiverUserId, Integer requestId) {
+        getRequestAndValidateOwner(requestId, receiverUserId);
+
+        int updated = followRequestDao.updateStatus(requestId, RequestStatus.REJECTED.name());
+        if (updated != 1) {
+            throw new DatabaseException("팔로우 요청 거절에 실패하였습니다.");
+        }
+    }
+
+    // ----------------------------------------------------------------
+    // 내부 검증 유틸
+    // ----------------------------------------------------------------
+
+    /**
+     * 요청 단건 조회 + 수신자 소유권 검증
+     * - 요청이 없거나 PENDING 이 아니면 404
+     * - receiverUserId 가 요청의 수신자가 아니면 403
+     */
+    private FollowRequest getRequestAndValidateOwner(Integer requestId, Integer receiverUserId) {
+        FollowRequest req = followRequestDao.selectById(requestId);
+        if (req == null || req.getStatus() != RequestStatus.PENDING) {
+            throw NotFoundException.of("FollowRequest", requestId);
+        }
+        if (!req.getReceiverUserId().equals(receiverUserId)) {
+            throw new ForbiddenException("해당 팔로우 요청에 대한 권한이 없습니다.");
+        }
+        return req;
+    }
+
+    /** 자기 자신 팔로우 방지 */
+    private void validateDifferentUser(Integer loginUserId, Integer targetUserId) {
+        if (loginUserId.equals(targetUserId)) {
+            throw new BadRequestException("자기 자신은 팔로우할 수 없습니다.");
+        }
+    }
+
+    /** 활성 사용자 존재 여부 검증 */
+    private void validateActiveUser(Integer userId) {
+        if (followDao.countActiveUser(userId) != 1) {
+            throw NotFoundException.of("User", userId);
+        }
+    }
+
+    /** 활성 사용자 단건 조회 (계정 공개 여부 확인용) */
+    private User getActiveUser(Integer userId) {
+        User user = userDao.selectById(userId);
+        if (user == null || user.getDeleteAt() != null) {
+            throw NotFoundException.of("User", userId);
+        }
+        return user;
+    }
 }

@@ -67,5 +67,21 @@
             OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
 
+    <!-- 단건 조회 (탈퇴 여부 포함, 없으면 null) -->
+    <select id="selectById" resultType="com.bizteam3.server.user.entity.User">
+        SELECT
+            USER_ID,
+            PASSWORD,
+            NAME,
+            BIO,
+            WEBSITE,
+            PROFILE_IMG,
+            ACCOUNT_VIS,
+            CREATED_AT,
+            UPDATE_AT,
+            DELETE_AT
+        FROM users
+        WHERE user_id = #{userId}
+    </select>
 
 </mapper>
