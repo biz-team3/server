@@ -30,7 +30,21 @@ public interface FollowDao {
 
 	int countActiveUser(@Param("userId") Integer userId);
 
-	List<FollowUserResponse> selectFollowers(@Param("userId") Integer userId);
+	/** userId 를 팔로우하는 사용자 수 */
+	int countFollowers(@Param("userId") Integer userId);
 
-	List<FollowUserResponse> selectFollowing(@Param("userId") Integer userId);
+	/** userId 가 팔로우 중인 사용자 수 */
+	int countFollowing(@Param("userId") Integer userId);
+
+	List<FollowUserResponse> selectFollowers(
+		@Param("userId") Integer userId,
+		@Param("offset") int offset,
+		@Param("size") int size
+	);
+
+	List<FollowUserResponse> selectFollowing(
+		@Param("userId") Integer userId,
+		@Param("offset") int offset,
+		@Param("size") int size
+	);
 }

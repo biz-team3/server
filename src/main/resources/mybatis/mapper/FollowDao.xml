@@ -75,9 +75,36 @@
     </select>
 
     <!-- ================================================================
+         SELECT COUNT: 팔로워 목록 전체 개수
+         - PageResponse.hasNext 계산용
+         ================================================================ -->
+    <select id="countFollowers" resultType="int">
+        SELECT COUNT(1)
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.follower_user_id
+         AND u.delete_at IS NULL
+        WHERE f.following_user_id = #{userId}
+    </select>
+
+    <!-- ================================================================
+         SELECT COUNT: 팔로잉 목록 전체 개수
+         - PageResponse.hasNext 계산용
+         ================================================================ -->
+    <select id="countFollowing" resultType="int">
+        SELECT COUNT(1)
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.following_user_id
+         AND u.delete_at IS NULL
+        WHERE f.follower_user_id = #{userId}
+    </select>
+
+    <!-- ================================================================
          SELECT: userId 를 팔로우하는 사람 목록 (팔로워 목록)
          - follows.follower_user_id → users 조인
          - followed_at alias 로 FollowUserResponse.followedAt 에 매핑
+         - Oracle OFFSET/FETCH 로 page/size 페이징 처리
          ================================================================ -->
     <select id="selectFollowers" resultMap="followUserResultMap">
         SELECT
@@ -92,11 +119,13 @@
          AND u.delete_at IS NULL
         WHERE f.following_user_id = #{userId}
         ORDER BY f.created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
 
     <!-- ================================================================
          SELECT: userId 가 팔로우하는 사람 목록 (팔로잉 목록)
          - follows.following_user_id → users 조인
+         - Oracle OFFSET/FETCH 로 page/size 페이징 처리
          ================================================================ -->
     <select id="selectFollowing" resultMap="followUserResultMap">
         SELECT
@@ -111,6 +140,7 @@
          AND u.delete_at IS NULL
         WHERE f.follower_user_id = #{userId}
         ORDER BY f.created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
 
 </mapper>

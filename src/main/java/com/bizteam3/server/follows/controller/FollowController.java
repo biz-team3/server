@@ -2,10 +2,13 @@ package com.bizteam3.server.follows.controller;
 
 import java.util.List;
 
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.follows.dto.FollowRequestResponse;
 import com.bizteam3.server.follows.dto.FollowUserResponse;
 import com.bizteam3.server.follows.service.FollowService;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,16 +67,22 @@ public class FollowController {
     // 팔로워 / 팔로잉 목록 조회
     // ----------------------------------------------------------------
 
-    /** GET /api/follows/{userId}/followers - 팔로워 목록 */
+    /** GET /api/follows/{userId}/followers?page=0&size=20 - 팔로워 목록 */
     @GetMapping("/{userId}/followers")
-    public List<FollowUserResponse> getFollowers(@PathVariable("userId") Integer userId) {
-        return followService.findFollowers(userId);
+    public PageResponse<FollowUserResponse> getFollowers(
+        @PathVariable("userId") Integer userId,
+        @Valid PageRequest pageRequest
+    ) {
+        return followService.findFollowers(userId, pageRequest);
     }
 
-    /** GET /api/follows/{userId}/following - 팔로잉 목록 */
+    /** GET /api/follows/{userId}/following?page=0&size=20 - 팔로잉 목록 */
     @GetMapping("/{userId}/following")
-    public List<FollowUserResponse> getFollowing(@PathVariable("userId") Integer userId) {
-        return followService.findFollowing(userId);
+    public PageResponse<FollowUserResponse> getFollowing(
+        @PathVariable("userId") Integer userId,
+        @Valid PageRequest pageRequest
+    ) {
+        return followService.findFollowing(userId, pageRequest);
     }
 
     // ----------------------------------------------------------------

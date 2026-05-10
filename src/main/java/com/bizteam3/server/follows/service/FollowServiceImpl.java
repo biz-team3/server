@@ -2,6 +2,8 @@ package com.bizteam3.server.follows.service;
 
 import java.util.List;
 
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.follows.dao.FollowDao;
 import com.bizteam3.server.follows.dao.FollowRequestDao;
 import com.bizteam3.server.follows.dto.FollowRequestResponse;
@@ -105,16 +107,30 @@ public class FollowServiceImpl implements FollowService {
     // 팔로워 / 팔로잉 목록
     // ----------------------------------------------------------------
 
+    /** 팔로워 목록: UserService.findUsers 와 같은 PageResponse 구조 재사용 */
     @Override
-    public List<FollowUserResponse> findFollowers(Integer userId) {
+    public PageResponse<FollowUserResponse> findFollowers(Integer userId, PageRequest pageRequest) {
         validateActiveUser(userId);
-        return followDao.selectFollowers(userId);
+        List<FollowUserResponse> followers = followDao.selectFollowers(
+            userId,
+            pageRequest.getOffset(),
+            pageRequest.getSize()
+        );
+        int total = followDao.countFollowers(userId);
+        return new PageResponse<>(followers, pageRequest, total);
     }
 
+    /** 팔로잉 목록: page/size 로 일부만 조회하고 hasNext 계산 */
     @Override
-    public List<FollowUserResponse> findFollowing(Integer userId) {
+    public PageResponse<FollowUserResponse> findFollowing(Integer userId, PageRequest pageRequest) {
         validateActiveUser(userId);
-        return followDao.selectFollowing(userId);
+        List<FollowUserResponse> following = followDao.selectFollowing(
+            userId,
+            pageRequest.getOffset(),
+            pageRequest.getSize()
+        );
+        int total = followDao.countFollowing(userId);
+        return new PageResponse<>(following, pageRequest, total);
     }
 
     // ----------------------------------------------------------------
