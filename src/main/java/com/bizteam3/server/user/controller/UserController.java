@@ -10,17 +10,19 @@ import com.bizteam3.server.user.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostMapping("")
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping
     public String createUser(@RequestBody UserCreateRequest request) {
         userService.create(request);
         return "회원가입 성공";
@@ -32,12 +34,13 @@ public class UserController {
     }
 
     @PatchMapping("/{userId}")
-    public String modifyUser(@PathVariable("userId") Integer userId, @RequestBody UserUpdateRequest request) {
-        //TODO: jwt로 변환 필요
-        // 클라이언트가 보낸 JSON 데이터를 엔티티로 변환하여 받음
+    public String modifyUser(@PathVariable Integer userId, @RequestBody UserUpdateRequest request) {
         User user = new User();
         user.setUserId(userId);
-        user.setPassword(request.getPassword());
+        user.setUsername(request.getUsername());
+        if(request.getPassword() != null && !request.getPassword().isEmpty()){
+            user.setPassword(request.getPassword());
+        }
         user.setName(request.getName());
         user.setBio(request.getBio());
         user.setWebsite(request.getWebsite());
@@ -51,8 +54,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public String removeUser(@PathVariable("userId") String userId) {
-        //TODO: jwt로 변환 필요
+    public String removeUser(@PathVariable String userId) {
         userService.remove(userId);
         return "삭제 성공";
     }

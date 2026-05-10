@@ -22,4 +22,40 @@
             SYSTIMESTAMP
         )
     </insert>
+
+    <select id="selectUserId"
+            parameterType="int"
+            resultType="int">
+        SELECT user_id
+        FROM posts
+        WHERE post_id = #{postId}
+        AND delete_at IS NULL
+    </select>
+
+    <update id="updateCaption"
+            parameterType="com.bizteam3.server.post.entity.Post">
+        UPDATE posts
+        SET caption = #{caption, jdbcType=CLOB},
+        translated_caption = #{translatedCaption, jdbcType=CLOB},
+        update_at = SYSTIMESTAMP
+        WHERE post_id = #{postId}
+        AND user_id = #{userId}
+        AND delete_at IS NULL
+    </update>
+
+
+    <delete id="deleteMediasByPostId" parameterType="int">
+        DELETE FROM medias
+        WHERE post_id = #{postId}
+    </delete>
+
+    <delete id="deletePostHashtagsByPostId" parameterType="int">
+        DELETE FROM post_hashtags
+        WHERE post_id = #{postId}
+    </delete>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM posts
+        WHERE post_id = #{postId}
+    </delete>
 </mapper>

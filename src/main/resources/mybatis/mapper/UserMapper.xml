@@ -6,15 +6,18 @@
     <!-- 회원가입 -->
     <insert id="insert" parameterType="com.bizteam3.server.user.entity.User">
         INSERT INTO users
-            (password, name, bio, website, profile_img, account_vis)
+            (username, password, name, bio, website, profile_img, account_vis)
         VALUES
-            (#{password}, #{name}, #{bio}, #{website}, #{profileImg}, #{accountVis})
+            (#{username}, #{password}, #{name}, #{bio}, #{website}, #{profileImg}, #{accountVis})
     </insert>
 
     <!-- 회원정보 수정 -->
     <update id="update" parameterType="com.bizteam3.server.user.entity.User">
         UPDATE users
         <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
             <if test="password != null and password != ''">
                 password = #{password},
             </if>
@@ -49,9 +52,16 @@
           AND delete_at IS NULL
     </update>
 
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*)
+        FROM users
+        WHERE DELETE_AT IS NULL
+    </select>
+
     <select id="selectPage" resultType="com.bizteam3.server.user.entity.User">
         SELECT
             USER_ID,
+            USERNAME,
             PASSWORD,
             NAME,
             BIO,

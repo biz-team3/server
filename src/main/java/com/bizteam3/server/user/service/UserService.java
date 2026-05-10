@@ -27,10 +27,11 @@ public class UserService {
 
     public PageResponse<UserResponse> findUsers(PageRequest pageRequest) {
         List<User> users = userDao.selectPage(pageRequest.getOffset(), pageRequest.getSize());
+        int total = userDao.countAll();
         return new PageResponse<>(
             UserResponse.toFindDto(users),
             pageRequest,
-            users.size()
+            total
         );
     }
 
