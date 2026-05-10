@@ -58,4 +58,11 @@
         DELETE FROM posts
         WHERE post_id = #{postId}
     </delete>
+
+    <select id="countByPostId" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM posts
+        WHERE post_id = #{postId}
+        AND delete_at IS NULL
+    </select>
 </mapper>
