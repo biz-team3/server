@@ -29,4 +29,10 @@
         AND post_id = #{postId}
     </select>
 
+    <delete id="delete">
+        DELETE FROM likes
+        WHERE user_id = #{userId}
+        AND post_id = #{postId}
+    </delete>
+
 </mapper>
