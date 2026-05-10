@@ -58,4 +58,13 @@ public class PostController {
         Integer testPostId = 1;
         likeService.likePost(userId, testPostId);
     }
+
+    @DeleteMapping("/{postId}/like")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void unlikePost(@PathVariable Integer postId){
+        Integer userId = 1;
+        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
+        Integer testPostId = 1;
+        likeService.unlikePost(userId, testPostId);
+    }
 }
