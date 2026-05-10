@@ -17,19 +17,37 @@ public class LikeServiceImpl implements LikeService {
 
     @Transactional
     public void likePost(Integer userId, Integer postId) {
+        if (postDao.countByPostId(postId) == 0) {
+            throw new NotFoundException(ErrorCode.NOT_FOUND, "게시물을 찾을 수 없습니다.");
+        }
+
         Like like = new Like(
                 userId,
                 postId
         );
-
-        if (postDao.countByPostId(postId) == 0) {
-            throw new NotFoundException(ErrorCode.NOT_FOUND, "게시물을 찾을 수 없습니다.");
-        }
 
         if (likeDao.isLiked(userId, postId) > 0) {
             return;
         }
 
         likeDao.insert(like);
+    }
+
+    @Transactional
+    public void unlikePost(Integer userId, Integer postId) {
+        if (postDao.countByPostId(postId) == 0) {
+            throw new NotFoundException(ErrorCode.NOT_FOUND, "게시물을 찾을 수 없습니다.");
+        }
+
+        Like like = new Like(
+                userId,
+                postId
+        );
+
+        if (likeDao.isLiked(userId, postId) == 0) {
+            return;
+        }
+
+        likeDao.delete(like);
     }
 }
