@@ -9,6 +9,7 @@ import java.util.List;
 public interface PostDao {
     int insert(Post post);
     int selectUserId(Integer postId);
+    boolean existsByPostId(Integer postId);
     int updateCaption(Post post);
 
     int deleteMediasByPostId(Integer postId);
