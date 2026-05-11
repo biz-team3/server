@@ -18,11 +18,25 @@
             #{postId},
             #{mediaType},
             #{mediaUrl},
-            #{sortOrder},
+            NVL(
+                #{sortOrder, jdbcType=NUMERIC},
+                (
+                    SELECT NVL(MAX(sort_order) + 1, 0)
+                    FROM medias
+                    WHERE post_id = #{postId}
+                )
+            ),
             #{originalFileName},
             #{contentType},
             #{fileSize},
             SYSTIMESTAMP
         )
     </insert>
+
+    <delete id="deleteByPostId"
+            parameterType="int">
+        DELETE FROM medias
+        WHERE post_id = #{postId}
+    </delete>
+
 </mapper>
