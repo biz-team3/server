@@ -32,6 +32,19 @@
         AND delete_at IS NULL
     </select>
 
+    <select id="existsByPostId"
+            parameterType="int"
+            resultType="boolean">
+        SELECT CASE
+        WHEN COUNT(*) > 0 THEN 1
+        ELSE 0
+        END
+        FROM posts
+        WHERE post_id = #{postId}
+        AND delete_at IS NULL
+    </select>
+
+
     <update id="updateCaption"
             parameterType="com.bizteam3.server.post.entity.Post">
         UPDATE posts

@@ -25,4 +25,49 @@
         SYSTIMESTAMP
         )
     </insert>
+
+    <update id="update" parameterType="com.bizteam3.server.post.entity.Comment">
+        UPDATE comments
+        SET
+        text = #{text},
+        updated_at = SYSTIMESTAMP
+        WHERE comment_id = #{commentId}
+        AND deleted_at IS NULL
+    </update>
+
+
+    <update id="delete" parameterType="int">
+        UPDATE comments
+        SET
+        deleted_at = SYSTIMESTAMP,
+        updated_at = SYSTIMESTAMP
+        WHERE comment_id = #{commentId}
+        AND deleted_at IS NULL
+    </update>
+
+
+    <select id="selectPage" resultType="com.bizteam3.server.post.dao.row.CommentListRow">
+        SELECT
+        C.COMMENT_ID,
+        C.POST_ID,
+        C.USER_ID,
+        U.USERNAME USER_NAME,
+        C.TEXT,
+        C.CREATED_AT
+        FROM COMMENTS C
+        JOIN USERS U
+        ON C.USER_ID = U.USER_ID
+        WHERE C.POST_ID = #{postId}
+        AND C.DELETED_AT IS NULL
+        ORDER BY C.CREATED_AT, C.COMMENT_ID
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <select id="countAllByPostId" resultType="int">
+        SELECT COUNT(*)
+        FROM comments
+        WHERE post_id = #{postId}
+        AND DELETED_AT IS NULL
+    </select>
+
 </mapper>

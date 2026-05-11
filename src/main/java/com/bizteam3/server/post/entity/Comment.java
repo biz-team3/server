@@ -26,6 +26,13 @@ public class Comment {
 		this.text = text;
 	}
 
+	public Comment(Integer commentId, String text) {
+		validateText(text);
+
+		this.commentId = commentId;
+		this.text = text;
+	}
+
 	public void validateText(String text) {
 		if(text.length() > 255)
 			throw new InvalidParameterException("text는 255글자를 넘을 수 없습니다");
