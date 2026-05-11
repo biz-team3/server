@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.follows.dao.FollowDao">
+
+    <!--
+        FollowUserResponse resultMap
+        - mapUnderscoreToCamelCase=true 이므로 snake_case → camelCase 자동 변환됨
+        - 단, followedAt 은 SELECT 절에서 alias를 명시적으로 지정
+    -->
+    <resultMap id="followUserResultMap"
+               type="com.bizteam3.server.follows.dto.FollowUserResponse">
+        <constructor>
+            <idArg column="user_id"     javaType="Integer"/>
+            <arg   column="name"        javaType="String"/>
+            <arg   column="profile_img" javaType="String"/>
+            <arg   column="account_vis"
+                   javaType="com.bizteam3.server.user.entity.AccountVisType"/>
+            <arg   column="followed_at" javaType="java.time.LocalDateTime"/>
+        </constructor>
+    </resultMap>
+
+    <!-- ================================================================
+         INSERT: 팔로우 관계 생성
+         useGeneratedKeys + keyProperty로 DB 시퀀스 ID를 Follow 엔티티에 반영
+         ================================================================ -->
+    <insert id="insert"
+            parameterType="com.bizteam3.server.follows.entity.Follow"
+            useGeneratedKeys="true"
+            keyProperty="followId"
+            keyColumn="follow_id">
+        INSERT INTO follows (
+            follower_user_id,
+            following_user_id,
+            created_at
+        ) VALUES (
+            #{followerUserId},
+            #{followingUserId},
+            SYSTIMESTAMP
+        )
+    </insert>
+
+    <!-- ================================================================
+         DELETE: 팔로우 관계 삭제 (언팔로우)
+         - delete_at 소프트 삭제 없이 실제 행 삭제 (팔로우는 실제 삭제)
+         ================================================================ -->
+    <delete id="deleteByUsers">
+        DELETE FROM follows
+        WHERE follower_user_id  = #{followerUserId}
+          AND following_user_id = #{followingUserId}
+    </delete>
+
+    <!-- ================================================================
+         SELECT COUNT: 두 사용자 간 팔로우 관계 존재 여부 확인 (중복 방지)
+         ================================================================ -->
+    <select id="countByUsers" resultType="int">
+        SELECT COUNT(1)
+        FROM follows
+        WHERE follower_user_id  = #{followerUserId}
+          AND following_user_id = #{followingUserId}
+    </select>
+
+    <!-- ================================================================
+         SELECT COUNT: 활성 사용자 존재 여부 확인
+         - users 테이블에서 delete_at IS NULL 인 사용자만 카운트
+         - FollowServiceImpl.validateActiveUser() 에서 사용
+         ================================================================ -->
+    <select id="countActiveUser" resultType="int">
+        SELECT COUNT(1)
+        FROM users
+        WHERE user_id   = #{userId}
+          AND delete_at IS NULL
+    </select>
+
+    <!-- ================================================================
+         SELECT COUNT: 팔로워 목록 전체 개수
+         - PageResponse.hasNext 계산용
+         ================================================================ -->
+    <select id="countFollowers" resultType="int">
+        SELECT COUNT(1)
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.follower_user_id
+         AND u.delete_at IS NULL
+        WHERE f.following_user_id = #{userId}
+    </select>
+
+    <!-- ================================================================
+         SELECT COUNT: 팔로잉 목록 전체 개수
+         - PageResponse.hasNext 계산용
+         ================================================================ -->
+    <select id="countFollowing" resultType="int">
+        SELECT COUNT(1)
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.following_user_id
+         AND u.delete_at IS NULL
+        WHERE f.follower_user_id = #{userId}
+    </select>
+
+    <!-- ================================================================
+         SELECT: userId 를 팔로우하는 사람 목록 (팔로워 목록)
+         - follows.follower_user_id → users 조인
+         - followed_at alias 로 FollowUserResponse.followedAt 에 매핑
+         - Oracle OFFSET/FETCH 로 page/size 페이징 처리
+         ================================================================ -->
+    <select id="selectFollowers" resultMap="followUserResultMap">
+        SELECT
+            u.user_id,
+            u.name,
+            u.profile_img,
+            u.account_vis,
+            f.created_at AS followed_at
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.follower_user_id
+         AND u.delete_at IS NULL
+        WHERE f.following_user_id = #{userId}
+        ORDER BY f.created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <!-- ================================================================
+         SELECT: userId 가 팔로우하는 사람 목록 (팔로잉 목록)
+         - follows.following_user_id → users 조인
+         - Oracle OFFSET/FETCH 로 page/size 페이징 처리
+         ================================================================ -->
+    <select id="selectFollowing" resultMap="followUserResultMap">
+        SELECT
+            u.user_id,
+            u.name,
+            u.profile_img,
+            u.account_vis,
+            f.created_at AS followed_at
+        FROM follows f
+        JOIN users u
+          ON u.user_id   = f.following_user_id
+         AND u.delete_at IS NULL
+        WHERE f.follower_user_id = #{userId}
+        ORDER BY f.created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+</mapper>
