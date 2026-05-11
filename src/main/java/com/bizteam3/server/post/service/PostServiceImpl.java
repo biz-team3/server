@@ -54,7 +54,7 @@ public class PostServiceImpl implements PostService {
 					post.getPostId(),
 					mediaRequest.getMediaType(),
 					mediaRequest.getMediaUrl(),
-//					mediaRequest.getSortOrder(),
+					mediaRequest.getSortOrder(),
 					mediaRequest.getOriginalFileName()
 				);
 				mediaDao.insert(media);
@@ -106,7 +106,7 @@ public class PostServiceImpl implements PostService {
 					postId,
 					mediaRequest.getMediaType(),
 					mediaRequest.getMediaUrl(),
-//					null,
+					null,
 					mediaRequest.getOriginalFileName()
 			);
 			mediaDao.insert(media);

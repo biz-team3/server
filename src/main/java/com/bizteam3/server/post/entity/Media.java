@@ -20,10 +20,10 @@ public class Media {
     Integer fileSize; //파일이 클 경우, Long 변경
     LocalDateTime createdAt;
 
-    public Media(MediaType mediaType, String mediaUrl, /*Integer sortOrder,*/ String originalFileName){
+    public Media(MediaType mediaType, String mediaUrl, Integer sortOrder, String originalFileName){
         this.mediaType = mediaType;
         this.mediaUrl = mediaUrl;
-//        this.sortOrder = sortOrder;
+        this.sortOrder = sortOrder;
         this.originalFileName = originalFileName;
     }
 
@@ -31,10 +31,10 @@ public class Media {
         Integer postId,
         MediaType mediaType,
         String mediaUrl,
-//        Integer sortOrder,
+        Integer sortOrder,
         String originalFileName
     ){
-        this(mediaType, mediaUrl, /*sortOrder,*/ originalFileName);
+        this(mediaType, mediaUrl, sortOrder, originalFileName);
         this.postId = postId;
     }
 }

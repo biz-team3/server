@@ -11,6 +11,6 @@ public class MediaRequest {
     MediaType mediaType; //enum 2가지-img, video
     @JsonProperty("url")
     String mediaUrl;
-//    Integer sortOrder;
+    Integer sortOrder;
     String originalFileName;
 }
