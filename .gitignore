@@ -38,5 +38,9 @@ logs/
 # Runtime
 *.pid
 
+# files
+uploads/
+
 
 .profileconfig.json
+

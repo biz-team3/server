@@ -2,6 +2,7 @@ package com.bizteam3.server.user.controller;
 
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
+import com.bizteam3.server.user.dto.UploadUserProfileResponse;
 import com.bizteam3.server.user.dto.UserCreateRequest;
 import com.bizteam3.server.user.dto.UserResponse;
 import com.bizteam3.server.user.dto.UserUpdateRequest;
@@ -11,6 +12,7 @@ import com.bizteam3.server.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -26,6 +28,13 @@ public class UserController {
     public String createUser(@RequestBody UserCreateRequest request) {
         userService.create(request);
         return "회원가입 성공";
+    }
+
+    @PostMapping("/media/profile-images")
+    public UploadUserProfileResponse uploadUserProfile(
+        @RequestPart("file") MultipartFile file
+    ){
+        return userService.uploadUserProfile(file);
     }
 
     @GetMapping
