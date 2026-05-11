@@ -18,14 +18,7 @@
             #{postId},
             #{mediaType},
             #{mediaUrl},
-            NVL(
-                #{sortOrder, jdbcType=NUMERIC},
-                (
-                    SELECT NVL(MAX(sort_order) + 1, 0)
-                    FROM medias
-                    WHERE post_id = #{postId}
-                )
-            ),
+            #{sortOrder},
             #{originalFileName},
             #{contentType},
             #{fileSize},

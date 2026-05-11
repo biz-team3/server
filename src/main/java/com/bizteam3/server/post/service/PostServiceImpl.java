@@ -106,7 +106,7 @@ public class PostServiceImpl implements PostService {
 					postId,
 					mediaRequest.getMediaType(),
 					mediaRequest.getMediaUrl(),
-					null,
+					mediaRequest.getSortOrder(),
 					mediaRequest.getOriginalFileName()
 			);
 			mediaDao.insert(media);
