@@ -17,5 +17,8 @@ public interface UserDao {
 
     int countAll();
 
-    List<User> selectPage(@Param("offset") int offset,@Param("size") int size);
+    List<User> selectPage(@Param("offset") int offset, @Param("size") int size);
+
+    /** 단건 조회 - 탈퇴 여부 포함 전체 컬럼 반환, 없으면 null */
+    User selectById(@Param("userId") Integer userId);
 }

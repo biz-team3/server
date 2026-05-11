@@ -1,12 +1,18 @@
 package com.bizteam3.server.post.controller;
 
 import com.bizteam3.server.post.dto.MediaReplaceRequest;
+import java.util.List;
+
+import com.bizteam3.server.post.dto.MediaUploadResponse;
 import com.bizteam3.server.post.dto.PostCreateRequest;
 import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
 import com.bizteam3.server.post.service.LikeService;
+import com.bizteam3.server.post.service.MediaService;
 import com.bizteam3.server.post.service.PostService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -14,10 +20,12 @@ public class PostController {
 
     private final PostService postService;
     private final LikeService likeService;
+    private final MediaService mediaService;
 
-    public PostController(PostService postService, LikeService likeService) {
+    public PostController(PostService postService, LikeService likeService, MediaService mediaService) {
         this.postService = postService;
         this.likeService = likeService;
+		this.mediaService = mediaService;
     }
 
     @PostMapping
@@ -27,6 +35,13 @@ public class PostController {
         postService.createPost(request, userId);
 
         return "등록완료";
+    }
+
+    @PostMapping(value = "/media", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public MediaUploadResponse uploadPostImages(
+        @RequestPart("files") List<MultipartFile> files
+    ) {
+        return mediaService.uploadPostImages(files);
     }
 
     @PatchMapping("/{postId}")

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.follows.dao.FollowRequestDao">
+
+    <!--
+        FollowRequestResponse resultMap
+        - requester 정보는 users 테이블 JOIN으로 채움
+        - requested_at alias → requestedAt 매핑
+    -->
+    <resultMap id="followRequestResponseMap"
+               type="com.bizteam3.server.follows.dto.FollowRequestResponse">
+        <constructor>
+            <idArg column="request_id"            javaType="Integer"/>
+            <arg   column="requester_user_id"     javaType="Integer"/>
+            <arg   column="requester_name"        javaType="String"/>
+            <arg   column="requester_profile_img" javaType="String"/>
+            <arg   column="status"
+                   javaType="com.bizteam3.server.follows.entity.RequestStatus"/>
+            <arg   column="requested_at"          javaType="java.time.LocalDateTime"/>
+        </constructor>
+    </resultMap>
+
+    <!-- ================================================================
+         INSERT: 팔로우 요청 생성 (비공개 계정 대상, 초기 상태 PENDING)
+         ================================================================ -->
+    <insert id="insert"
+            parameterType="com.bizteam3.server.follows.entity.FollowRequest"
+            useGeneratedKeys="true"
+            keyProperty="requestId"
+            keyColumn="request_id">
+        INSERT INTO follow_requests (
+            requester_user_id,
+            receiver_user_id,
+            status,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{requesterUserId},
+            #{receiverUserId},
+            #{status},
+            SYSTIMESTAMP,
+            SYSTIMESTAMP
+        )
+    </insert>
+
+    <!-- ================================================================
+         UPDATE: 요청 상태 변경 (PENDING → ACCEPTED / REJECTED)
+         - updated_at 갱신 포함
+         ================================================================ -->
+    <update id="updateStatus">
+        UPDATE follow_requests
+        SET
+            status     = #{status},
+            updated_at = SYSTIMESTAMP
+        WHERE request_id = #{requestId}
+          AND status     = 'PENDING'
+    </update>
+
+    <!-- ================================================================
+         SELECT COUNT: 두 사용자 간 PENDING 요청 존재 여부 (중복 방지)
+         ================================================================ -->
+    <select id="countPending" resultType="int">
+        SELECT COUNT(1)
+        FROM follow_requests
+        WHERE requester_user_id = #{requesterUserId}
+          AND receiver_user_id  = #{receiverUserId}
+          AND status            = 'PENDING'
+    </select>
+
+    <!-- ================================================================
+         SELECT: 요청 단건 조회 (수락/거절 시 소유권 검증용)
+         ================================================================ -->
+    <select id="selectById"
+            resultType="com.bizteam3.server.follows.entity.FollowRequest">
+        SELECT
+            request_id,
+            requester_user_id,
+            receiver_user_id,
+            status,
+            created_at,
+            updated_at
+        FROM follow_requests
+        WHERE request_id = #{requestId}
+    </select>
+
+    <!-- ================================================================
+         SELECT: 나에게 온 PENDING 팔로우 요청 목록
+         - requester 사용자 정보 JOIN (탈퇴 사용자 제외)
+         - requested_at alias → FollowRequestResponse.requestedAt 매핑
+         ================================================================ -->
+    <select id="selectPendingByReceiver" resultMap="followRequestResponseMap">
+        SELECT
+            fr.request_id,
+            fr.requester_user_id,
+            u.name        AS requester_name,
+            u.profile_img AS requester_profile_img,
+            fr.status,
+            fr.created_at AS requested_at
+        FROM follow_requests fr
+        JOIN users u
+          ON u.user_id   = fr.requester_user_id
+         AND u.delete_at IS NULL
+        WHERE fr.receiver_user_id = #{receiverUserId}
+          AND fr.status           = 'PENDING'
+        ORDER BY fr.created_at DESC
+    </select>
+
+</mapper>
