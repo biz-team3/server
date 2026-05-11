@@ -1,5 +1,6 @@
 package com.bizteam3.server.post.controller;
 
+import com.bizteam3.server.post.dto.MediaReplaceRequest;
 import java.util.List;
 
 import com.bizteam3.server.post.dto.MediaUploadResponse;
@@ -53,6 +54,15 @@ public class PostController {
         postService.updateCaption(testPostId, request, userId);
 
         return "수정완료";
+    }
+
+    @PutMapping("/{postId}/media")
+    public String replaceMedia(
+            @PathVariable Integer postId,
+            @RequestBody MediaReplaceRequest request){
+        Integer userId = 1;
+        postService.replaceMedia(postId, request, userId);
+        return "미디어 교체 완료";
     }
 
     @DeleteMapping("/{postId}")
