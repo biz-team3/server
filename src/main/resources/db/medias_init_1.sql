@@ -13,5 +13,6 @@ CREATE TABLE medias (
                        CONSTRAINT fk_media_post FOREIGN KEY (post_id)
                            REFERENCES posts (post_id),
                        CONSTRAINT chk_media_type
-                           CHECK (media_type IN ('IMAGE', 'VIDEO'))
+                           CHECK (media_type IN ('IMAGE', 'VIDEO')),
+                       CONSTRAINT uk_media_post_sort UNIQUE (post_id, sort_order)
 );

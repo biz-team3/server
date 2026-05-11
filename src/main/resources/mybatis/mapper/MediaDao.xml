@@ -25,4 +25,11 @@
             SYSTIMESTAMP
         )
     </insert>
+
+    <delete id="deleteByPostId"
+            parameterType="int">
+        DELETE FROM medias
+        WHERE post_id = #{postId}
+    </delete>
+
 </mapper>
