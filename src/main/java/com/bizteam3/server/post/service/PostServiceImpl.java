@@ -1,10 +1,14 @@
 package com.bizteam3.server.post.service;
 
+import com.bizteam3.server.global.exception.BusinessException;
+import com.bizteam3.server.global.exception.ErrorCode;
+import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.post.dao.MediaDao;
 import com.bizteam3.server.post.dao.HashtagDao;
 import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.post.dto.MediaRequest;
 import com.bizteam3.server.post.dto.PostCreateRequest;
+import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
 import com.bizteam3.server.post.entity.Media;
 import com.bizteam3.server.post.entity.Post;
 
@@ -55,6 +59,30 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
+	@Transactional
+	public void updateCaption(Integer postId, PostUpdateCaptionRequest request, Integer userId){
+		Post post = new Post(
+				postId,
+				request.getCaption(),
+				request.getTranslatedCaption(),
+				userId
+		);
+
+
+		if(userId != postDao.selectUserId(postId)){
+			throw new ForbiddenException(ErrorCode.FORBIDDEN, "게시물 작성자만 수정할 수 있습니다.") {
+			};
+		}
+
+		postDao.updateCaption(post);
+		hashtagDao.deletePostHashtagByPostId(postId);
+		Set<String> hashtagSet = post.createHashtag();
+		if (!hashtagSet.isEmpty()) {
+			hashtagDao.insertHashtag(hashtagSet);
+			hashtagDao.insertPostHashtag(post.getPostId(), hashtagSet);
+		}
+  }
+    
 	@Override
 	public boolean deletePost(Integer postId) {
 		postDao.deleteMediasByPostId(postId);
@@ -64,7 +92,6 @@ public class PostServiceImpl implements PostService {
 		if(rows == 1) return true;
 		else return false;
 	}
+
 }
-
-
 
