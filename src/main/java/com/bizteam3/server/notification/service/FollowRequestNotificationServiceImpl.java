@@ -13,6 +13,18 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 팔로우 요청 알림 패널용 서비스 구현체
+ *
+ * 현재 단계에서는 별도 notifications 테이블이 아니라 follow_requests 테이블을 조회하므로
+ * FollowRequestDao, FollowDao, FollowService 를 재사용함.
+ *
+ * TODO: 일반 알림 API 구현 시 NotificationDao, NotificationDao.xml, Notification entity 분리 필요
+ * 대상 API: GET /api/notifications, GET /api/notifications/summary,
+ * PATCH /api/notifications/read
+ *
+ * @see com.bizteam3.server.notification.controller.FollowRequestNotificationController
+ */
 @Service
 @RequiredArgsConstructor
 public class FollowRequestNotificationServiceImpl implements FollowRequestNotificationService {
