@@ -42,14 +42,6 @@ public class FollowServiceImpl implements FollowService {
     private final FollowRequestDao followRequestDao;
     private final UserDao          userDao;
 
-    // ----------------------------------------------------------------
-    // 팔로우 (공개/비공개 분기)
-    // ----------------------------------------------------------------
-
-    /**
-     * 공개 계정: 즉시 follows 관계 생성 (멱등 처리)
-     * 비공개 계정: follow_requests 에 PENDING 요청 생성
-     */
     @Transactional
     @Override
     public void follow(Integer followerUserId, Integer targetUserId) {
@@ -64,7 +56,6 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
-    /** 공개 계정 팔로우: follows 에 즉시 삽입 (멱등) */
     private void followDirectly(Integer followerUserId, Integer followingUserId) {
         if (followDao.countByUsers(followerUserId, followingUserId) > 0) {
             return; // 이미 팔로우 중 → 멱등 처리
@@ -75,7 +66,6 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
-    /** 비공개 계정 팔로우: follow_requests 에 PENDING 요청 삽입 */
     private void sendFollowRequest(Integer requesterUserId, Integer receiverUserId) {
         // 이미 팔로우 중인 경우 요청 불필요
         if (followDao.countByUsers(requesterUserId, receiverUserId) > 0) {
@@ -91,10 +81,6 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
-    // ----------------------------------------------------------------
-    // 언팔로우
-    // ----------------------------------------------------------------
-
     @Transactional
     @Override
     public void unfollow(Integer followerUserId, Integer targetUserId) {
@@ -102,10 +88,6 @@ public class FollowServiceImpl implements FollowService {
         validateActiveUser(targetUserId);
         followDao.deleteByUsers(followerUserId, targetUserId);
     }
-
-    // ----------------------------------------------------------------
-    // 팔로워 / 팔로잉 목록
-    // ----------------------------------------------------------------
 
     /** 팔로워 목록: UserService.findUsers 와 같은 PageResponse 구조 재사용 */
     @Override
@@ -120,7 +102,6 @@ public class FollowServiceImpl implements FollowService {
         return new PageResponse<>(followers, pageRequest, total);
     }
 
-    /** 팔로잉 목록: page/size 로 일부만 조회하고 hasNext 계산 */
     @Override
     public PageResponse<FollowUserResponse> findFollowing(Integer userId, PageRequest pageRequest) {
         validateActiveUser(userId);
@@ -132,10 +113,6 @@ public class FollowServiceImpl implements FollowService {
         int total = followDao.countFollowing(userId);
         return new PageResponse<>(following, pageRequest, total);
     }
-
-    // ----------------------------------------------------------------
-    // 팔로우 요청 관리 (비공개 계정 수신자용)
-    // ----------------------------------------------------------------
 
     @Override
     public List<FollowRequestResponse> findPendingRequests(Integer receiverUserId) {

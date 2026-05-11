@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 팔로우 관계 생성/삭제, 팔로워/팔로잉 목록 조회,
- * 비공개 계정 팔로우 요청 수락/거절 API
- *
  * TODO: 인증 기능 연동 후 loginUserId 를 SecurityContext 에서 가져오도록 교체 필요
  */
 @RestController
@@ -34,14 +31,8 @@ public class FollowController {
         this.followService = followService;
     }
 
-    // ----------------------------------------------------------------
-    // 팔로우 / 언팔로우
-    // ----------------------------------------------------------------
-
     /**
      * POST /api/follows/{targetUserId}
-     * - 공개 계정: 즉시 팔로우 관계 생성 → 204
-     * - 비공개 계정: 팔로우 요청 생성(PENDING) → 204
      */
     @PostMapping("/{targetUserId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -53,7 +44,6 @@ public class FollowController {
 
     /**
      * DELETE /api/follows/{targetUserId}
-     * 팔로우 관계 삭제 (언팔로우) → 204
      */
     @DeleteMapping("/{targetUserId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -63,11 +53,7 @@ public class FollowController {
         followService.unfollow(loginUserId, targetUserId);
     }
 
-    // ----------------------------------------------------------------
-    // 팔로워 / 팔로잉 목록 조회
-    // ----------------------------------------------------------------
-
-    /** GET /api/follows/{userId}/followers?page=0&size=20 - 팔로워 목록 */
+    /** GET /api/follows/{userId}/followers?page=0&size=20 - 팔로워 목록 & 페이지네이션 */
     @GetMapping("/{userId}/followers")
     public PageResponse<FollowUserResponse> getFollowers(
         @PathVariable("userId") Integer userId,
@@ -76,7 +62,7 @@ public class FollowController {
         return followService.findFollowers(userId, pageRequest);
     }
 
-    /** GET /api/follows/{userId}/following?page=0&size=20 - 팔로잉 목록 */
+    /** GET /api/follows/{userId}/following?page=0&size=20 - 팔로잉 목록 & 페이지네이션 */
     @GetMapping("/{userId}/following")
     public PageResponse<FollowUserResponse> getFollowing(
         @PathVariable("userId") Integer userId,
@@ -84,10 +70,6 @@ public class FollowController {
     ) {
         return followService.findFollowing(userId, pageRequest);
     }
-
-    // ----------------------------------------------------------------
-    // 팔로우 요청 관리 (비공개 계정 전용)
-    // ----------------------------------------------------------------
 
     /**
      * GET /api/follows/requests
@@ -103,7 +85,6 @@ public class FollowController {
 
     /**
      * POST /api/follows/requests/{requestId}/accept
-     * 팔로우 요청 수락 → ACCEPTED + follows 관계 생성 → 204
      */
     @PostMapping("/requests/{requestId}/accept")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -115,7 +96,6 @@ public class FollowController {
 
     /**
      * POST /api/follows/requests/{requestId}/reject
-     * 팔로우 요청 거절 → REJECTED → 204
      */
     @PostMapping("/requests/{requestId}/reject")
     @ResponseStatus(HttpStatus.NO_CONTENT)

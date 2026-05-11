@@ -9,14 +9,8 @@ import com.bizteam3.server.follows.dto.FollowUserResponse;
 
 public interface FollowService {
 
-    /**
-     * 팔로우 요청
-     * - 공개 계정: follows 테이블에 즉시 관계 생성
-     * - 비공개 계정: follow_requests 테이블에 PENDING 요청 생성
-     */
     void follow(Integer followerUserId, Integer targetUserId);
 
-    /** 팔로우 관계 삭제 (언팔로우) */
     void unfollow(Integer followerUserId, Integer targetUserId);
 
     /**
