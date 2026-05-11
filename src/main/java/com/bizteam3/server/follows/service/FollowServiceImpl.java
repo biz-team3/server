@@ -120,12 +120,6 @@ public class FollowServiceImpl implements FollowService {
         return followRequestDao.selectPendingByReceiver(receiverUserId);
     }
 
-    /**
-     * 팔로우 요청 수락
-     * 1) 요청 존재 확인 + 소유권 검증 (내 요청인지)
-     * 2) status → ACCEPTED
-     * 3) follows 테이블에 실제 관계 생성
-     */
     @Transactional
     @Override
     public void acceptRequest(Integer receiverUserId, Integer requestId) {
@@ -140,11 +134,6 @@ public class FollowServiceImpl implements FollowService {
         followDirectly(req.getRequesterUserId(), req.getReceiverUserId());
     }
 
-    /**
-     * 팔로우 요청 거절
-     * 1) 요청 존재 확인 + 소유권 검증
-     * 2) status → REJECTED
-     */
     @Transactional
     @Override
     public void rejectRequest(Integer receiverUserId, Integer requestId) {
@@ -155,11 +144,7 @@ public class FollowServiceImpl implements FollowService {
             throw new DatabaseException("팔로우 요청 거절에 실패하였습니다.");
         }
     }
-
-    // ----------------------------------------------------------------
-    // 내부 검증 유틸
-    // ----------------------------------------------------------------
-
+    
     /**
      * 요청 단건 조회 + 수신자 소유권 검증
      * - 요청이 없거나 PENDING 이 아니면 404
