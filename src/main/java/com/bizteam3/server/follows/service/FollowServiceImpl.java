@@ -91,9 +91,10 @@ public class FollowServiceImpl implements FollowService {
 
     /** 팔로워 목록: UserService.findUsers 와 같은 PageResponse 구조 재사용 */
     @Override
-    public PageResponse<FollowUserResponse> findFollowers(Integer userId, PageRequest pageRequest) {
+    public PageResponse<FollowUserResponse> findFollowers(Integer viewerUserId, Integer userId, PageRequest pageRequest) {
         validateActiveUser(userId);
         List<FollowUserResponse> followers = followDao.selectFollowers(
+            viewerUserId,
             userId,
             pageRequest.getOffset(),
             pageRequest.getSize()
@@ -103,9 +104,10 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public PageResponse<FollowUserResponse> findFollowing(Integer userId, PageRequest pageRequest) {
+    public PageResponse<FollowUserResponse> findFollowing(Integer viewerUserId, Integer userId, PageRequest pageRequest) {
         validateActiveUser(userId);
         List<FollowUserResponse> following = followDao.selectFollowing(
+            viewerUserId,
             userId,
             pageRequest.getOffset(),
             pageRequest.getSize()
