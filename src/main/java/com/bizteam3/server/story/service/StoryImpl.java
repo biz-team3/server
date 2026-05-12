@@ -70,7 +70,7 @@ public class StoryImpl implements StoryService {
 	@Transactional(readOnly = true)
 	public StoryGroupResponse getFeeds(Integer userId) {
 		//TODO: 페이징 형태로 변경 고민 - Feeds
-		List<FollowUserResponse> followUserResponses = followDao.selectFollowing(userId, 0, 20);
+		List<FollowUserResponse> followUserResponses = followDao.selectFollowing(userId, userId, 0, 20);
 
 		return StoryGroupResponse.toDto(
 			followUserResponses.stream()
