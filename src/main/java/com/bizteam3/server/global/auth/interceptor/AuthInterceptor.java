@@ -4,6 +4,8 @@ import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.global.auth.jwt.JwtService;
 import com.bizteam3.server.global.exception.ErrorCode;
 import com.bizteam3.server.global.exception.common.UnauthorizedException;
+import com.bizteam3.server.user.auth.dao.TokenBlacklistDao;
+import com.bizteam3.server.user.auth.service.TokenBlacklistService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @RequiredArgsConstructor
 public class AuthInterceptor implements HandlerInterceptor {
     private final JwtService jwtService;
+    private final TokenBlacklistService tokenBlacklistService;
 
     private String extractToken(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
@@ -63,6 +66,16 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
 
         jwtService.validateJwt(token);
+
+        String jti = jwtService.getJti(token);
+
+        if (tokenBlacklistService.isBlacklisted(jti)) {
+            throw new UnauthorizedException(
+                    ErrorCode.UNAUTHORIZED,
+                    "로그아웃된 토큰입니다."
+            );
+        }
+
 
         request.setAttribute("userId", jwtService.getUserId(token));
         request.setAttribute("username", jwtService.username(token));

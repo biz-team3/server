@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserDao {
 
+    User findByUsername(@Param("username") String username);
+
     int insert(User user);
 
     int update(User user);
@@ -21,4 +23,6 @@ public interface UserDao {
 
     /** 단건 조회 - 탈퇴 여부 포함 전체 컬럼 반환, 없으면 null */
     User selectById(@Param("userId") Integer userId);
+
+    User selectMeById(@Param("userId") Integer userId);
 }

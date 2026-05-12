@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.user.auth.dao.TokenBlacklistDao">
+
+    <insert id="insert"
+            parameterType="com.bizteam3.server.user.auth.entity.TokenBlacklist">
+        INSERT INTO token_blacklist (
+        jti,
+        user_id,
+        expires_at,
+        created_at
+        ) VALUES (
+        #{jti},
+        #{userId},
+        #{expiresAt},
+        SYSTIMESTAMP
+        )
+    </insert>
+
+    <select id="existsActiveByJti"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM token_blacklist
+        WHERE jti = #{jti}
+        AND expires_at > SYSTIMESTAMP
+    </select>
+
+    <delete id="deleteExpired">
+        DELETE FROM token_blacklist
+        WHERE expires_at <![CDATA[<=]]> SYSTIMESTAMP
+    </delete>
+
+</mapper>

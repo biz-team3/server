@@ -94,4 +94,26 @@
         WHERE user_id = #{userId}
     </select>
 
+    <select id="findByUsername" resultType="com.bizteam3.server.user.entity.User">
+        SELECT
+            USER_ID,
+            USERNAME,
+            PASSWORD,
+            NAME
+        FROM users
+        WHERE username = #{username}
+          AND delete_at IS NULL
+    </select>
+
+    <select id="selectMeById" resultType="com.bizteam3.server.user.entity.User">
+        SELECT
+            USER_ID,
+            USERNAME,
+            NAME,
+            PROFILE_IMG
+        FROM users
+        WHERE user_id = #{userId}
+            AND delete_at IS NULL
+    </select>
+
 </mapper>
