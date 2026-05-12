@@ -48,4 +48,12 @@ public class User {
 		this.profileImg = profileImg;
 		this.accountVis = accountVis;
 	}
+
+	public User(Integer userId, String username, String password, String name) {
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+	}
+
 }
