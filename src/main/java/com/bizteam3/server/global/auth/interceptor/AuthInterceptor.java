@@ -4,11 +4,12 @@ import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.global.auth.jwt.JwtService;
 import com.bizteam3.server.global.exception.ErrorCode;
 import com.bizteam3.server.global.exception.common.UnauthorizedException;
-import com.bizteam3.server.user.auth.dao.TokenBlacklistDao;
 import com.bizteam3.server.user.auth.service.TokenBlacklistService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -41,9 +42,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Object handler
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull Object handler
     ) {
         if (!(handler instanceof HandlerMethod handlerMethod)) {
             return true;

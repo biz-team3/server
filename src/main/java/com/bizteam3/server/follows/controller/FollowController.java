@@ -7,7 +7,9 @@ import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.follows.dto.FollowRequestResponse;
 import com.bizteam3.server.follows.dto.FollowUserResponse;
 import com.bizteam3.server.follows.service.FollowService;
+import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * TODO: 인증 기능 연동 후 loginUserId 를 SecurityContext 에서 가져오도록 교체 필요
- */
 @RestController
 @RequestMapping("/api/follows")
 public class FollowController {
@@ -36,9 +35,12 @@ public class FollowController {
      */
     @PostMapping("/{targetUserId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void follow(@PathVariable("targetUserId") Integer targetUserId) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+    @AccessTokenCheck
+    public void follow(
+        @PathVariable Integer targetUserId,
+        HttpServletRequest request
+    ) {
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         followService.follow(loginUserId, targetUserId);
     }
 
@@ -47,31 +49,36 @@ public class FollowController {
      */
     @DeleteMapping("/{targetUserId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void unfollow(@PathVariable("targetUserId") Integer targetUserId) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+    @AccessTokenCheck
+    public void unfollow(
+        @PathVariable Integer targetUserId,
+        HttpServletRequest request
+    ) {
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         followService.unfollow(loginUserId, targetUserId);
     }
 
     /** GET /api/follows/{userId}/followers?page=0&size=20 - 팔로워 목록 & 페이지네이션 */
     @GetMapping("/{userId}/followers")
+    @AccessTokenCheck
     public PageResponse<FollowUserResponse> getFollowers(
-        @PathVariable("userId") Integer userId,
-        @Valid PageRequest pageRequest
+		@PathVariable Integer userId,
+        @Valid PageRequest pageRequest,
+        HttpServletRequest request
     ) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         return followService.findFollowers(loginUserId, userId, pageRequest);
     }
 
     /** GET /api/follows/{userId}/following?page=0&size=20 - 팔로잉 목록 & 페이지네이션 */
     @GetMapping("/{userId}/following")
+    @AccessTokenCheck
     public PageResponse<FollowUserResponse> getFollowing(
-        @PathVariable("userId") Integer userId,
-        @Valid PageRequest pageRequest
+		@PathVariable Integer userId,
+        @Valid PageRequest pageRequest,
+        HttpServletRequest request
     ) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         return followService.findFollowing(loginUserId, userId, pageRequest);
     }
 
@@ -81,9 +88,11 @@ public class FollowController {
      * (비공개 계정 본인만 의미 있는 데이터를 볼 수 있음)
      */
     @GetMapping("/requests")
-    public List<FollowRequestResponse> getPendingRequests() {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+    @AccessTokenCheck
+    public List<FollowRequestResponse> getPendingRequests(
+        HttpServletRequest request
+    ) {
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         return followService.findPendingRequests(loginUserId);
     }
 
@@ -92,9 +101,12 @@ public class FollowController {
      */
     @PostMapping("/requests/{requestId}/accept")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void acceptRequest(@PathVariable("requestId") Integer requestId) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+    @AccessTokenCheck
+    public void acceptRequest(
+        @PathVariable Integer requestId,
+        HttpServletRequest request
+    ) {
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         followService.acceptRequest(loginUserId, requestId);
     }
 
@@ -103,9 +115,11 @@ public class FollowController {
      */
     @PostMapping("/requests/{requestId}/reject")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void rejectRequest(@PathVariable("requestId") Integer requestId) {
-        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 1;
+    @AccessTokenCheck
+    public void rejectRequest(
+        @PathVariable Integer requestId,
+        HttpServletRequest request) {
+        Integer loginUserId = (Integer) request.getAttribute("userId");
         followService.rejectRequest(loginUserId, requestId);
     }
 }

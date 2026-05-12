@@ -2,6 +2,7 @@ package com.bizteam3.server.post.controller;
 
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
+import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.post.dto.*;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 import com.bizteam3.server.post.service.LikeService;
 import com.bizteam3.server.post.service.MediaService;
 import com.bizteam3.server.post.service.PostService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,9 +33,12 @@ public class PostController {
     }
 
     @PostMapping
-    public String createPost(@RequestBody PostCreateRequest request){
-        //TODO: AUth 필수
-        Integer userId = 1;
+    @AccessTokenCheck
+    public String createPost(
+        @RequestBody PostCreateRequest request,
+        HttpServletRequest httpServletRequest
+    ){
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
         postService.createPost(request, userId);
 
         return "등록완료";
@@ -46,22 +52,26 @@ public class PostController {
     }
 
     @PatchMapping("/{postId}")
+    @AccessTokenCheck
     public String updatePost(
             @PathVariable Integer postId,
-            @RequestBody PostUpdateCaptionRequest request){
-        Integer userId = 1;
-        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
-        Integer testPostId = 1;
-        postService.updateCaption(testPostId, request, userId);
+            @RequestBody PostUpdateCaptionRequest request,
+            HttpServletRequest httpServletRequest
+    ){
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+        postService.updateCaption(postId, request, userId);
 
         return "수정완료";
     }
 
     @PutMapping("/{postId}/media")
+    @AccessTokenCheck
     public String replaceMedia(
-            @PathVariable Integer postId,
-            @RequestBody MediaReplaceRequest request){
-        Integer userId = 1;
+		@PathVariable Integer postId,
+		@RequestBody MediaReplaceRequest request,
+        HttpServletRequest httpServletRequest
+    ){
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
         postService.replaceMedia(postId, request, userId);
         return "미디어 교체 완료";
     }
@@ -78,27 +88,33 @@ public class PostController {
 
     @PostMapping("/{postId}/like")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void likePost(@PathVariable Integer postId){
-        Integer userId = 1;
-        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
-        Integer testPostId = 1;
-        likeService.likePost(userId, testPostId);
+    @AccessTokenCheck
+    public void likePost(
+        @PathVariable Integer postId,
+        HttpServletRequest httpServletRequest
+    ){
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+        likeService.likePost(userId, postId);
     }
 
     @DeleteMapping("/{postId}/like")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void unlikePost(@PathVariable Integer postId){
-        Integer userId = 1;
-        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
-        Integer testPostId = 1;
-        likeService.unlikePost(userId, testPostId);
+    @AccessTokenCheck
+    public void unlikePost(
+        @PathVariable Integer postId,
+        HttpServletRequest httpServletRequest
+    ){
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+        likeService.unlikePost(userId, postId);
     }
 
     @GetMapping("/feed")
-    public PageResponse<FeedPostResponse> getFeedPosts(@Valid PageRequest request
+    @AccessTokenCheck
+    public PageResponse<FeedPostResponse> getFeedPosts(
+        @Valid PageRequest request,
+        HttpServletRequest httpServletRequest
         ){
-        Integer userId = 1;
-        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
         return postService.getFeedPosts(request, userId);
     }
 }
