@@ -1,249 +1,818 @@
---  USER 더미
-INSERT INTO users (
-    user_id,
-    username,
-    password,
-    name,
-    bio,
-    website,
-    profile_img,
-    account_vis,
-    created_at,
-    update_at,
-    delete_at
-) VALUES
-      (1, 'user001', 'password', '김민준', '백엔드 개발자', 'user001@test.com', '/user001.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (2, 'user002', 'password', '이서준', '프론트엔드 개발자', 'user002@test.com', '/user002.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (3, 'user003', 'password', '박도윤', 'React 개발자', 'user003@test.com', '/user003.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (4, 'user004', 'password', '최하준', 'Spring 개발자', 'user004@test.com', '/user004.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (5, 'user005', 'password', '정지호', '풀스택 개발자', 'user005@test.com', '/user005.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (6, 'user006', 'password', '강지훈', 'Java 개발자', 'user006@test.com', '/user006.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (7, 'user007', 'password', '조현우', 'DB 설계 관심 있음', 'user007@test.com', '/user007.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (8, 'user008', 'password', '윤서연', 'UI 개발자', 'user008@test.com', '/user008.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (9, 'user009', 'password', '장하은', '알고리즘 공부 중', 'user009@test.com', '/user009.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (10, 'user010', 'password', '임수아', '서비스 개발자', 'user010@test.com', '/user010.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (11, 'user011', 'password', '한유진', 'API 개발자', 'user011@test.com', '/user011.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (12, 'user012', 'password', '오지우', 'MyBatis 사용 중', 'user012@test.com', '/user012.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (13, 'user013', 'password', '서윤재', 'Oracle DB 학습 중', 'user013@test.com', '/user013.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (14, 'user014', 'password', '신예준', 'Spring Boot 개발자', 'user014@test.com', '/user014.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (15, 'user015', 'password', '권도현', '게시판 기능 개발 중', 'user015@test.com', '/user015.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (16, 'user016', 'password', '문지민', '인스타그램 클론 개발', 'user016@test.com', '/user016.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (17, 'user017', 'password', '배서윤', '회원 기능 담당', 'user017@test.com', '/user017.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (18, 'user018', 'password', '남시우', '댓글 기능 개발', 'user018@test.com', '/user018.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (19, 'user019', 'password', '백민재', '좋아요 기능 개발', 'user019@test.com', '/user019.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (20, 'user020', 'password', '허준서', '팔로우 기능 개발', 'user020@test.com', '/user020.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (21, 'user021', 'password', '유하린', '사진 업로드 테스트', 'user021@test.com', '/user021.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (22, 'user022', 'password', '민서현', '프로필 수정 테스트', 'user022@test.com', '/user022.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (23, 'user023', 'password', '송지아', '피드 조회 테스트', 'user023@test.com', '/user023.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (24, 'user024', 'password', '홍다은', '검색 기능 테스트', 'user024@test.com', '/user024.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (25, 'user025', 'password', '전예린', '페이징 테스트 계정', 'user025@test.com', '/user025.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (26, 'user026', 'password', '고은우', '더미 사용자', 'user026@test.com', '/user026.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (27, 'user027', 'password', '양태민', '테스트 사용자', 'user027@test.com', '/user027.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (28, 'user028', 'password', '손예나', '개발 테스트용', 'user028@test.com', '/user028.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (29, 'user029', 'password', '노지훈', 'API 응답 확인용', 'user029@test.com', '/user029.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (30, 'user030', 'password', '하유나', '목록 조회 테스트', 'user030@test.com', '/user030.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (31, 'user031', 'password', '김서아', '비공개 계정 테스트', 'user031@test.com', '/user031.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (32, 'user032', 'password', '이도하', '공개 계정 테스트', 'user032@test.com', '/user032.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (33, 'user033', 'password', '박유준', '회원 조회 테스트', 'user033@test.com', '/user033.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (34, 'user034', 'password', '최아린', '회원 수정 테스트', 'user034@test.com', '/user034.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (35, 'user035', 'password', '정하율', '회원 삭제 테스트', 'user035@test.com', '/user035.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (36, 'user036', 'password', '강서진', 'MyBatis 테스트', 'user036@test.com', '/user036.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (37, 'user037', 'password', '조민서', 'Controller 테스트', 'user037@test.com', '/user037.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (38, 'user038', 'password', '윤지후', 'Service 테스트', 'user038@test.com', '/user038.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (39, 'user039', 'password', '장예준', 'DAO 테스트', 'user039@test.com', '/user039.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (40, 'user040', 'password', '임하윤', 'Mapper 테스트', 'user040@test.com', '/user040.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (41, 'user041', 'password', '한시윤', '프론트 연동 테스트', 'user041@test.com', '/user041.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (42, 'user042', 'password', '오은서', '로그인 테스트', 'user042@test.com', '/user042.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (43, 'user043', 'password', '서준영', '회원가입 테스트', 'user043@test.com', '/user043.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (44, 'user044', 'password', '신다현', '프로필 이미지 테스트', 'user044@test.com', '/user044.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (45, 'user045', 'password', '권민성', '계정 공개범위 테스트', 'user045@test.com', '/user045.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (46, 'user046', 'password', '문채원', 'React 연동 테스트', 'user046@test.com', '/user046.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (47, 'user047', 'password', '배현준', 'Oracle 테스트 계정', 'user047@test.com', '/user047.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (48, 'user048', 'password', '남유찬', '게시물 테스트 계정', 'user048@test.com', '/user048.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (49, 'user049', 'password', '백서현', '마지막 페이지 테스트', 'user049@test.com', '/user049.jpg', 'PUBLIC', SYSTIMESTAMP, SYSTIMESTAMP, NULL),
-      (50, 'user050', 'password', '허지안', '페이징 마지막 데이터', 'user050@test.com', '/user050.jpg', 'PRIVATE', SYSTIMESTAMP, SYSTIMESTAMP, NULL);
+-- Backend upload-path seed data
+-- 기존 mock init.sql은 전면 교체되며, 모든 이미지 URL은 /uploads/{domain}/2026/05 경로를 사용한다.
 
+-- USERS
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('oosu.hada', 'password', 'oosu', '리액트 개발자 | 맛집 탐방과 일상 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000001.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '1' MINUTE, SYSTIMESTAMP - INTERVAL '1' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mijinseooo', 'password', '이미진', '행복한 일상과 작은 여행 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000002.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '2' MINUTE, SYSTIMESTAMP - INTERVAL '2' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('seoul.soul_mate', 'password', '서울소울', '서울의 카페와 골목을 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000003.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '3' MINUTE, SYSTIMESTAMP - INTERVAL '3' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('nature_walker', 'password', '산책자', '매일 아침 숲길 산책', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000004.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '4' MINUTE, SYSTIMESTAMP - INTERVAL '4' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('urban.devlog', 'password', 'Urban Developer', 'Building small products with care', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000005.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '5' MINUTE, SYSTIMESTAMP - INTERVAL '5' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('kid.stonee', 'password', 'Kid Stone', 'Fashion and streetwear notes', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000006.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '6' MINUTE, SYSTIMESTAMP - INTERVAL '6' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('art.gallery.kr', 'password', 'Modern Art', '전시와 작업실의 순간들', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000007.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '7' MINUTE, SYSTIMESTAMP - INTERVAL '7' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('coffee.vibes', 'password', 'Coffee Lover', 'Life begins after coffee', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000008.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '8' MINUTE, SYSTIMESTAMP - INTERVAL '8' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('foodie.gram', 'password', 'Foodie', 'Eating my way through the city', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000009.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '9' MINUTE, SYSTIMESTAMP - INTERVAL '9' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('travel.mood', 'password', 'Travel Mood', '작은 여행과 느린 풍경', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000010.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '10' MINUTE, SYSTIMESTAMP - INTERVAL '10' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('daily.min', 'password', 'Daily Min', '오늘의 순간을 남겨요', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000011.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '11' MINUTE, SYSTIMESTAMP - INTERVAL '11' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('film.by.june', 'password', 'June Film', '필름 사진과 산책', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000012.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '12' MINUTE, SYSTIMESTAMP - INTERVAL '12' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('slow.morning', 'password', 'Slow Morning', '느린 아침과 커피', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000013.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '13' MINUTE, SYSTIMESTAMP - INTERVAL '13' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('studio.haneul', 'password', '하늘', '디자인과 일상의 색감', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000014.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '14' MINUTE, SYSTIMESTAMP - INTERVAL '14' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('night.archive', 'password', 'Night Archive', '밤 산책 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000015.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '15' MINUTE, SYSTIMESTAMP - INTERVAL '15' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('green.table', 'password', 'Green Table', '채소와 건강한 식탁', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000016.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '16' MINUTE, SYSTIMESTAMP - INTERVAL '16' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('bookish.day', 'password', 'Bookish Day', '읽고 쓰는 사람', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000017.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '17' MINUTE, SYSTIMESTAMP - INTERVAL '17' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('city.runner', 'password', 'City Runner', '퇴근 후 러닝', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000018.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '18' MINUTE, SYSTIMESTAMP - INTERVAL '18' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('home.cinema', 'password', 'Home Cinema', '영화와 사운드', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000019.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '19' MINUTE, SYSTIMESTAMP - INTERVAL '19' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('plant.room', 'password', 'Plant Room', '식물과 방 정리', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000020.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '20' MINUTE, SYSTIMESTAMP - INTERVAL '20' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sunny.frame_38', 'password', '나리', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000021.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '21' MINUTE, SYSTIMESTAMP - INTERVAL '21' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('page.urban_39', 'password', '유나', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000022.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '22' MINUTE, SYSTIMESTAMP - INTERVAL '22' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('local.nari_40', 'password', '하연', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000023.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '23' MINUTE, SYSTIMESTAMP - INTERVAL '23' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('diary.minu_41', 'password', '소라', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000024.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '24' MINUTE, SYSTIMESTAMP - INTERVAL '24' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('forest.record_42', 'password', '다미', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000025.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '25' MINUTE, SYSTIMESTAMP - INTERVAL '25' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('cloud.vintage_43', 'password', '아린', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000026.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '26' MINUTE, SYSTIMESTAMP - INTERVAL '26' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('nari.local_44', 'password', '진', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000027.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '27' MINUTE, SYSTIMESTAMP - INTERVAL '27' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sora.street_45', 'password', '민우', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000028.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '28' MINUTE, SYSTIMESTAMP - INTERVAL '28' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('jin.hayeon_46', 'password', '도하', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000029.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '29' MINUTE, SYSTIMESTAMP - INTERVAL '29' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('river.river_47', 'password', 'River', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000030.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '30' MINUTE, SYSTIMESTAMP - INTERVAL '30' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('picnic.studio_48', 'password', 'Mood', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000031.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '31' MINUTE, SYSTIMESTAMP - INTERVAL '31' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('moment.dawn_49', 'password', 'Atelier', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000032.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '32' MINUTE, SYSTIMESTAMP - INTERVAL '32' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('letter.table_50', 'password', 'Picnic', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000033.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '33' MINUTE, SYSTIMESTAMP - INTERVAL '33' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('vintage.cloud_51', 'password', 'Recipe', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000034.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '34' MINUTE, SYSTIMESTAMP - INTERVAL '34' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mono.dami_52', 'password', 'Record', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000035.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '35' MINUTE, SYSTIMESTAMP - INTERVAL '35' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('route.atelier_53', 'password', 'Moment', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000036.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '36' MINUTE, SYSTIMESTAMP - INTERVAL '36' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('table.letter_54', 'password', 'Studio', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000037.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '37' MINUTE, SYSTIMESTAMP - INTERVAL '37' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('urban.page_55', 'password', 'Garden', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000038.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '38' MINUTE, SYSTIMESTAMP - INTERVAL '38' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('wave.slow_56', 'password', 'Letter', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000039.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '39' MINUTE, SYSTIMESTAMP - INTERVAL '39' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('luna.luna_57', 'password', '루나', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000040.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '40' MINUTE, SYSTIMESTAMP - INTERVAL '40' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('hayeon.jin_58', 'password', '나리', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000041.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '41' MINUTE, SYSTIMESTAMP - INTERVAL '41' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('arin.recipe_59', 'password', '유나', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000042.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '42' MINUTE, SYSTIMESTAMP - INTERVAL '42' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('doha.canvas_60', 'password', '하연', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000043.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '43' MINUTE, SYSTIMESTAMP - INTERVAL '43' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('atelier.route_61', 'password', '소라', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000044.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '44' MINUTE, SYSTIMESTAMP - INTERVAL '44' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('record.forest_62', 'password', '다미', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000045.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '45' MINUTE, SYSTIMESTAMP - INTERVAL '45' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('garden.yuna_63', 'password', '아린', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000046.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '46' MINUTE, SYSTIMESTAMP - INTERVAL '46' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('canvas.doha_64', 'password', '진', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000047.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '47' MINUTE, SYSTIMESTAMP - INTERVAL '47' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('dawn.moment_65', 'password', '민우', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000048.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '48' MINUTE, SYSTIMESTAMP - INTERVAL '48' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('frame.sunny_66', 'password', '도하', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000049.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '49' MINUTE, SYSTIMESTAMP - INTERVAL '49' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('season.season_67', 'password', 'River', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000050.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '50' MINUTE, SYSTIMESTAMP - INTERVAL '50' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('slow.wave_68', 'password', 'Mood', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000051.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '51' MINUTE, SYSTIMESTAMP - INTERVAL '51' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('street.sora_69', 'password', 'Atelier', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000052.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '52' MINUTE, SYSTIMESTAMP - INTERVAL '52' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('film.mood_70', 'password', 'Picnic', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000053.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '53' MINUTE, SYSTIMESTAMP - INTERVAL '53' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('yuna.garden_71', 'password', 'Recipe', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000054.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '54' MINUTE, SYSTIMESTAMP - INTERVAL '54' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('dami.mono_72', 'password', 'Record', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000055.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '55' MINUTE, SYSTIMESTAMP - INTERVAL '55' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('minu.diary_73', 'password', 'Moment', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000056.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '56' MINUTE, SYSTIMESTAMP - INTERVAL '56' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mood.film_74', 'password', 'Studio', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000057.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '57' MINUTE, SYSTIMESTAMP - INTERVAL '57' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('recipe.arin_75', 'password', 'Garden', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000058.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '58' MINUTE, SYSTIMESTAMP - INTERVAL '58' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('studio.picnic_76', 'password', 'Letter', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000059.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '59' MINUTE, SYSTIMESTAMP - INTERVAL '59' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('orbit.orbit_77', 'password', '루나', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000060.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '60' MINUTE, SYSTIMESTAMP - INTERVAL '60' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sunny.frame_78', 'password', '나리', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000061.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '61' MINUTE, SYSTIMESTAMP - INTERVAL '61' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('page.urban_79', 'password', '유나', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000062.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '62' MINUTE, SYSTIMESTAMP - INTERVAL '62' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('local.nari_80', 'password', '하연', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000063.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '63' MINUTE, SYSTIMESTAMP - INTERVAL '63' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('diary.minu_81', 'password', '소라', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000064.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '64' MINUTE, SYSTIMESTAMP - INTERVAL '64' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('forest.record_82', 'password', '다미', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000065.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '65' MINUTE, SYSTIMESTAMP - INTERVAL '65' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('cloud.vintage_83', 'password', '아린', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000066.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '66' MINUTE, SYSTIMESTAMP - INTERVAL '66' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('nari.local_84', 'password', '진', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000067.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '67' MINUTE, SYSTIMESTAMP - INTERVAL '67' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sora.street_85', 'password', '민우', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000068.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '68' MINUTE, SYSTIMESTAMP - INTERVAL '68' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('jin.hayeon_86', 'password', '도하', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000069.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '69' MINUTE, SYSTIMESTAMP - INTERVAL '69' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('river.river_87', 'password', 'River', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000070.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '70' MINUTE, SYSTIMESTAMP - INTERVAL '70' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('picnic.studio_88', 'password', 'Mood', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000071.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '71' MINUTE, SYSTIMESTAMP - INTERVAL '71' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('moment.dawn_89', 'password', 'Atelier', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000072.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '72' MINUTE, SYSTIMESTAMP - INTERVAL '72' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('letter.table_90', 'password', 'Picnic', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000073.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '73' MINUTE, SYSTIMESTAMP - INTERVAL '73' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('vintage.cloud_91', 'password', 'Recipe', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000074.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '74' MINUTE, SYSTIMESTAMP - INTERVAL '74' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mono.dami_92', 'password', 'Record', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000075.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '75' MINUTE, SYSTIMESTAMP - INTERVAL '75' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('route.atelier_93', 'password', 'Moment', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000076.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '76' MINUTE, SYSTIMESTAMP - INTERVAL '76' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('table.letter_94', 'password', 'Studio', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000077.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '77' MINUTE, SYSTIMESTAMP - INTERVAL '77' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('urban.page_95', 'password', 'Garden', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000078.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '78' MINUTE, SYSTIMESTAMP - INTERVAL '78' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('wave.slow_96', 'password', 'Letter', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000079.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '79' MINUTE, SYSTIMESTAMP - INTERVAL '79' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('luna.luna_97', 'password', '루나', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000080.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '80' MINUTE, SYSTIMESTAMP - INTERVAL '80' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('hayeon.jin_98', 'password', '나리', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000081.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '81' MINUTE, SYSTIMESTAMP - INTERVAL '81' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('arin.recipe_99', 'password', '유나', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000082.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '82' MINUTE, SYSTIMESTAMP - INTERVAL '82' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('doha.canvas_100', 'password', '하연', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000083.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '83' MINUTE, SYSTIMESTAMP - INTERVAL '83' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('atelier.route_101', 'password', '소라', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000084.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '84' MINUTE, SYSTIMESTAMP - INTERVAL '84' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('record.forest_102', 'password', '다미', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000085.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '85' MINUTE, SYSTIMESTAMP - INTERVAL '85' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('garden.yuna_103', 'password', '아린', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000086.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '86' MINUTE, SYSTIMESTAMP - INTERVAL '86' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('canvas.doha_104', 'password', '진', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000087.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '87' MINUTE, SYSTIMESTAMP - INTERVAL '87' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('dawn.moment_105', 'password', '민우', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000088.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '88' MINUTE, SYSTIMESTAMP - INTERVAL '88' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('frame.sunny_106', 'password', '도하', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000089.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '89' MINUTE, SYSTIMESTAMP - INTERVAL '89' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('season.season_107', 'password', 'River', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000090.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '90' MINUTE, SYSTIMESTAMP - INTERVAL '90' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('slow.wave_108', 'password', 'Mood', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000091.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '91' MINUTE, SYSTIMESTAMP - INTERVAL '91' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('street.sora_109', 'password', 'Atelier', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000092.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '92' MINUTE, SYSTIMESTAMP - INTERVAL '92' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('film.mood_110', 'password', 'Picnic', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000093.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '93' MINUTE, SYSTIMESTAMP - INTERVAL '93' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('yuna.garden_111', 'password', 'Recipe', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000094.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '94' MINUTE, SYSTIMESTAMP - INTERVAL '94' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('dami.mono_112', 'password', 'Record', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000095.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '95' MINUTE, SYSTIMESTAMP - INTERVAL '95' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('minu.diary_113', 'password', 'Moment', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000096.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '96' MINUTE, SYSTIMESTAMP - INTERVAL '96' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mood.film_114', 'password', 'Studio', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000097.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '97' MINUTE, SYSTIMESTAMP - INTERVAL '97' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('recipe.arin_115', 'password', 'Garden', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000098.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '98' MINUTE, SYSTIMESTAMP - INTERVAL '98' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('studio.picnic_116', 'password', 'Letter', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000099.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '99' MINUTE, SYSTIMESTAMP - INTERVAL '99' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('orbit.orbit_117', 'password', '루나', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000100.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '100' MINUTE, SYSTIMESTAMP - INTERVAL '100' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sunny.frame_118', 'password', '나리', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000101.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '101' MINUTE, SYSTIMESTAMP - INTERVAL '101' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('page.urban_119', 'password', '유나', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000102.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '102' MINUTE, SYSTIMESTAMP - INTERVAL '102' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('local.nari_120', 'password', '하연', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000103.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '103' MINUTE, SYSTIMESTAMP - INTERVAL '103' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('diary.minu_121', 'password', '소라', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000104.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '104' MINUTE, SYSTIMESTAMP - INTERVAL '104' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('forest.record_122', 'password', '다미', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000105.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '105' MINUTE, SYSTIMESTAMP - INTERVAL '105' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('cloud.vintage_123', 'password', '아린', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000106.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '106' MINUTE, SYSTIMESTAMP - INTERVAL '106' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('nari.local_124', 'password', '진', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000107.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '107' MINUTE, SYSTIMESTAMP - INTERVAL '107' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('sora.street_125', 'password', '민우', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000108.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '108' MINUTE, SYSTIMESTAMP - INTERVAL '108' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('jin.hayeon_126', 'password', '도하', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000109.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '109' MINUTE, SYSTIMESTAMP - INTERVAL '109' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('river.river_127', 'password', 'River', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000110.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '110' MINUTE, SYSTIMESTAMP - INTERVAL '110' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('picnic.studio_128', 'password', 'Mood', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000111.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '111' MINUTE, SYSTIMESTAMP - INTERVAL '111' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('moment.dawn_129', 'password', 'Atelier', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000112.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '112' MINUTE, SYSTIMESTAMP - INTERVAL '112' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('letter.table_130', 'password', 'Picnic', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000113.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '113' MINUTE, SYSTIMESTAMP - INTERVAL '113' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('vintage.cloud_131', 'password', 'Recipe', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000114.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '114' MINUTE, SYSTIMESTAMP - INTERVAL '114' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('mono.dami_132', 'password', 'Record', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000115.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '115' MINUTE, SYSTIMESTAMP - INTERVAL '115' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('route.atelier_133', 'password', 'Moment', '사진과 문장 사이', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000116.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '116' MINUTE, SYSTIMESTAMP - INTERVAL '116' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('table.letter_134', 'password', 'Studio', '작은 취향의 아카이브', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000117.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '117' MINUTE, SYSTIMESTAMP - INTERVAL '117' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('urban.page_135', 'password', 'Garden', '오늘의 분위기 저장소', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000118.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '118' MINUTE, SYSTIMESTAMP - INTERVAL '118' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('wave.slow_136', 'password', 'Letter', '커피와 산책, 그리고 기록', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000119.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '119' MINUTE, SYSTIMESTAMP - INTERVAL '119' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('luna.luna_137', 'password', '루나', '일상의 장면을 모읍니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000120.jpg', 'PRIVATE', SYSTIMESTAMP - INTERVAL '120' MINUTE, SYSTIMESTAMP - INTERVAL '120' MINUTE, NULL);
+INSERT INTO users (username, password, name, bio, website, profile_img, account_vis, created_at, update_at, delete_at) VALUES ('hayeon.jin_138', 'password', '나리', '좋아하는 것을 천천히 기록합니다', NULL, '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000121.jpg', 'PUBLIC', SYSTIMESTAMP - INTERVAL '121' MINUTE, SYSTIMESTAMP - INTERVAL '121' MINUTE, NULL);
 COMMIT;
 
--- POST 더미
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             1,
-             1,
-             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
-             '제주도 바다 다녀왔습니다 #여행 #제주도 #바다',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- FOLLOWS
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 2, SYSTIMESTAMP - INTERVAL '1' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 3, SYSTIMESTAMP - INTERVAL '2' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 4, SYSTIMESTAMP - INTERVAL '3' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 5, SYSTIMESTAMP - INTERVAL '4' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 6, SYSTIMESTAMP - INTERVAL '5' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 7, SYSTIMESTAMP - INTERVAL '6' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 8, SYSTIMESTAMP - INTERVAL '7' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 9, SYSTIMESTAMP - INTERVAL '8' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 10, SYSTIMESTAMP - INTERVAL '9' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 11, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 12, SYSTIMESTAMP - INTERVAL '11' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 13, SYSTIMESTAMP - INTERVAL '12' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 14, SYSTIMESTAMP - INTERVAL '13' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 15, SYSTIMESTAMP - INTERVAL '14' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 16, SYSTIMESTAMP - INTERVAL '15' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 17, SYSTIMESTAMP - INTERVAL '16' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 18, SYSTIMESTAMP - INTERVAL '17' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 19, SYSTIMESTAMP - INTERVAL '18' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 20, SYSTIMESTAMP - INTERVAL '19' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 21, SYSTIMESTAMP - INTERVAL '20' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 22, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 23, SYSTIMESTAMP - INTERVAL '22' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 24, SYSTIMESTAMP - INTERVAL '23' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 25, SYSTIMESTAMP - INTERVAL '24' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 26, SYSTIMESTAMP - INTERVAL '25' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 27, SYSTIMESTAMP - INTERVAL '26' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 28, SYSTIMESTAMP - INTERVAL '27' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 29, SYSTIMESTAMP - INTERVAL '28' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 30, SYSTIMESTAMP - INTERVAL '29' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 31, SYSTIMESTAMP - INTERVAL '30' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 32, SYSTIMESTAMP - INTERVAL '31' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 33, SYSTIMESTAMP - INTERVAL '32' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 34, SYSTIMESTAMP - INTERVAL '33' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 35, SYSTIMESTAMP - INTERVAL '34' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 36, SYSTIMESTAMP - INTERVAL '35' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 37, SYSTIMESTAMP - INTERVAL '36' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 38, SYSTIMESTAMP - INTERVAL '37' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 39, SYSTIMESTAMP - INTERVAL '38' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 40, SYSTIMESTAMP - INTERVAL '39' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 41, SYSTIMESTAMP - INTERVAL '40' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 42, SYSTIMESTAMP - INTERVAL '41' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 43, SYSTIMESTAMP - INTERVAL '42' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 44, SYSTIMESTAMP - INTERVAL '43' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 45, SYSTIMESTAMP - INTERVAL '44' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 46, SYSTIMESTAMP - INTERVAL '45' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 47, SYSTIMESTAMP - INTERVAL '46' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 48, SYSTIMESTAMP - INTERVAL '47' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 49, SYSTIMESTAMP - INTERVAL '48' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 50, SYSTIMESTAMP - INTERVAL '49' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 51, SYSTIMESTAMP - INTERVAL '50' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 52, SYSTIMESTAMP - INTERVAL '51' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 53, SYSTIMESTAMP - INTERVAL '52' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 54, SYSTIMESTAMP - INTERVAL '53' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 55, SYSTIMESTAMP - INTERVAL '54' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 56, SYSTIMESTAMP - INTERVAL '55' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 57, SYSTIMESTAMP - INTERVAL '56' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 58, SYSTIMESTAMP - INTERVAL '57' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 59, SYSTIMESTAMP - INTERVAL '58' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 60, SYSTIMESTAMP - INTERVAL '59' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (1, 61, SYSTIMESTAMP - INTERVAL '60' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (2, 1, SYSTIMESTAMP - INTERVAL '82' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (3, 1, SYSTIMESTAMP - INTERVAL '83' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (4, 1, SYSTIMESTAMP - INTERVAL '84' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (5, 1, SYSTIMESTAMP - INTERVAL '85' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (6, 1, SYSTIMESTAMP - INTERVAL '86' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (7, 1, SYSTIMESTAMP - INTERVAL '87' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (8, 1, SYSTIMESTAMP - INTERVAL '88' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (9, 1, SYSTIMESTAMP - INTERVAL '89' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (10, 1, SYSTIMESTAMP - INTERVAL '90' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (11, 1, SYSTIMESTAMP - INTERVAL '91' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (12, 1, SYSTIMESTAMP - INTERVAL '92' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (13, 1, SYSTIMESTAMP - INTERVAL '93' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (14, 1, SYSTIMESTAMP - INTERVAL '94' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (15, 1, SYSTIMESTAMP - INTERVAL '95' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (16, 1, SYSTIMESTAMP - INTERVAL '96' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (17, 1, SYSTIMESTAMP - INTERVAL '97' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (18, 1, SYSTIMESTAMP - INTERVAL '98' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (19, 1, SYSTIMESTAMP - INTERVAL '99' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (20, 1, SYSTIMESTAMP - INTERVAL '100' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (21, 1, SYSTIMESTAMP - INTERVAL '101' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (22, 1, SYSTIMESTAMP - INTERVAL '102' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (23, 1, SYSTIMESTAMP - INTERVAL '103' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (24, 1, SYSTIMESTAMP - INTERVAL '104' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (25, 1, SYSTIMESTAMP - INTERVAL '105' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (26, 1, SYSTIMESTAMP - INTERVAL '106' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (27, 1, SYSTIMESTAMP - INTERVAL '107' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (28, 1, SYSTIMESTAMP - INTERVAL '108' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (29, 1, SYSTIMESTAMP - INTERVAL '109' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (30, 1, SYSTIMESTAMP - INTERVAL '110' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (31, 1, SYSTIMESTAMP - INTERVAL '111' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (32, 1, SYSTIMESTAMP - INTERVAL '112' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (33, 1, SYSTIMESTAMP - INTERVAL '113' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (34, 1, SYSTIMESTAMP - INTERVAL '114' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (35, 1, SYSTIMESTAMP - INTERVAL '115' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (36, 1, SYSTIMESTAMP - INTERVAL '116' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (37, 1, SYSTIMESTAMP - INTERVAL '117' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (38, 1, SYSTIMESTAMP - INTERVAL '118' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (39, 1, SYSTIMESTAMP - INTERVAL '119' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (40, 1, SYSTIMESTAMP - INTERVAL '120' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (41, 1, SYSTIMESTAMP - INTERVAL '121' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (62, 1, SYSTIMESTAMP - INTERVAL '182' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (63, 1, SYSTIMESTAMP - INTERVAL '183' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (64, 1, SYSTIMESTAMP - INTERVAL '184' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (65, 1, SYSTIMESTAMP - INTERVAL '185' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (66, 1, SYSTIMESTAMP - INTERVAL '186' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (67, 1, SYSTIMESTAMP - INTERVAL '187' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (68, 1, SYSTIMESTAMP - INTERVAL '188' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (69, 1, SYSTIMESTAMP - INTERVAL '189' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (70, 1, SYSTIMESTAMP - INTERVAL '190' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (71, 1, SYSTIMESTAMP - INTERVAL '191' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (72, 1, SYSTIMESTAMP - INTERVAL '192' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (73, 1, SYSTIMESTAMP - INTERVAL '193' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (74, 1, SYSTIMESTAMP - INTERVAL '194' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (75, 1, SYSTIMESTAMP - INTERVAL '195' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (76, 1, SYSTIMESTAMP - INTERVAL '196' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (77, 1, SYSTIMESTAMP - INTERVAL '197' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (78, 1, SYSTIMESTAMP - INTERVAL '198' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (79, 1, SYSTIMESTAMP - INTERVAL '199' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (80, 1, SYSTIMESTAMP - INTERVAL '200' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (81, 1, SYSTIMESTAMP - INTERVAL '201' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (2, 4, SYSTIMESTAMP - INTERVAL '222' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (3, 5, SYSTIMESTAMP - INTERVAL '223' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (4, 6, SYSTIMESTAMP - INTERVAL '224' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (5, 7, SYSTIMESTAMP - INTERVAL '225' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (6, 8, SYSTIMESTAMP - INTERVAL '226' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (7, 9, SYSTIMESTAMP - INTERVAL '227' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (8, 10, SYSTIMESTAMP - INTERVAL '228' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (9, 11, SYSTIMESTAMP - INTERVAL '229' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (10, 12, SYSTIMESTAMP - INTERVAL '230' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (11, 13, SYSTIMESTAMP - INTERVAL '231' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (12, 14, SYSTIMESTAMP - INTERVAL '232' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (13, 15, SYSTIMESTAMP - INTERVAL '233' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (14, 16, SYSTIMESTAMP - INTERVAL '234' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (15, 17, SYSTIMESTAMP - INTERVAL '235' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (16, 18, SYSTIMESTAMP - INTERVAL '236' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (17, 19, SYSTIMESTAMP - INTERVAL '237' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (18, 20, SYSTIMESTAMP - INTERVAL '238' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (19, 21, SYSTIMESTAMP - INTERVAL '239' MINUTE);
+INSERT INTO follows (follower_user_id, following_user_id, created_at) VALUES (20, 22, SYSTIMESTAMP - INTERVAL '240' MINUTE);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             2,
-             2,
-             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
-             '오늘은 리액트 화면 작업 중 #React #프론트엔드 #개발',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- FOLLOW REQUESTS
+INSERT INTO follow_requests (requester_user_id, receiver_user_id, status, created_at, updated_at) VALUES (82, 1, 'PENDING', SYSTIMESTAMP - INTERVAL '2' HOUR, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO follow_requests (requester_user_id, receiver_user_id, status, created_at, updated_at) VALUES (83, 1, 'PENDING', SYSTIMESTAMP - INTERVAL '3' HOUR, SYSTIMESTAMP - INTERVAL '3' HOUR);
+INSERT INTO follow_requests (requester_user_id, receiver_user_id, status, created_at, updated_at) VALUES (84, 1, 'PENDING', SYSTIMESTAMP - INTERVAL '4' HOUR, SYSTIMESTAMP - INTERVAL '4' HOUR);
+INSERT INTO follow_requests (requester_user_id, receiver_user_id, status, created_at, updated_at) VALUES (85, 1, 'PENDING', SYSTIMESTAMP - INTERVAL '5' HOUR, SYSTIMESTAMP - INTERVAL '5' HOUR);
+INSERT INTO follow_requests (requester_user_id, receiver_user_id, status, created_at, updated_at) VALUES (86, 1, 'PENDING', SYSTIMESTAMP - INTERVAL '6' HOUR, SYSTIMESTAMP - INTERVAL '6' HOUR);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             3,
-             3,
-             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
-             'Spring Boot API 테스트 완료 #Spring #백엔드 #API',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- POSTS
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '오늘은 홈 피드에서 수정과 삭제 흐름을 확인하는 날. 내 게시물에만 메뉴가 보여야 합니다. #개발 #React #일상', 'Checking edit and delete flows from the home feed.', SYSTIMESTAMP - INTERVAL '10' MINUTE, SYSTIMESTAMP - INTERVAL '10' MINUTE, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (3, '서울의 골목을 걷다 만난 오후의 빛. 이번 주말엔 천천히 걸어보세요. #서울 #산책 #일상', 'Afternoon light found while walking through Seoul.', SYSTIMESTAMP - INTERVAL '2' HOUR, SYSTIMESTAMP - INTERVAL '2' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (2, '파도 소리만 들어도 마음이 느려지는 바다. 여름 기록을 꺼내봅니다. #여행 #바다 #힐링', 'The ocean makes everything slow down.', SYSTIMESTAMP - INTERVAL '3' HOUR, SYSTIMESTAMP - INTERVAL '3' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (6, '새 컬렉션 촬영이 끝났습니다. 이번 시즌은 색감이 포인트예요. #Fashion #Lookbook #Style', 'New lookbook shoot wrapped.', SYSTIMESTAMP - INTERVAL '4' HOUR, SYSTIMESTAMP - INTERVAL '4' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (4, '고요한 숲길을 걷는 시간. 나무 냄새가 하루를 정리해줍니다. #자연 #숲 #산책', 'A quiet forest walk to close the day.', SYSTIMESTAMP - INTERVAL '5' HOUR, SYSTIMESTAMP - INTERVAL '5' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (5, '생산적인 하루. 다음 기능을 작은 단위로 쪼개서 천천히 붙이는 중입니다. #DevLife #Work #Setup', 'A productive day building the next feature.', SYSTIMESTAMP - INTERVAL '6' HOUR, SYSTIMESTAMP - INTERVAL '6' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (7, '전시장 조명이 작품의 결을 바꿔놓는 순간. 직접 보면 더 좋습니다. #Art #Gallery #Exhibition', 'Gallery lights changing the texture of the work.', SYSTIMESTAMP - INTERVAL '7' HOUR, SYSTIMESTAMP - INTERVAL '7' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (8, '비 오는 날에는 진한 라떼와 책 한 권이면 충분합니다. #Coffee #Cafe #Cozy', 'Rainy day needs a latte and a book.', SYSTIMESTAMP - INTERVAL '8' HOUR, SYSTIMESTAMP - INTERVAL '8' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (9, '오늘 저녁은 화덕 피자. 바삭한 도우와 치즈 조합은 늘 옳아요. #맛집 #피자 #저녁', 'Wood-fired pizza for dinner tonight.', SYSTIMESTAMP - INTERVAL '9' HOUR, SYSTIMESTAMP - INTERVAL '9' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (13, '골목 끝에서 만난 작은 카페. 오래 머물고 싶어진 공간. #카페 #서울 #골목', 'A small cafe at the end of an alley.', SYSTIMESTAMP - INTERVAL '10' HOUR, SYSTIMESTAMP - INTERVAL '10' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (14, '하늘이 다 한 산책길. 천천히 걷기 좋은 날이었습니다. #산책 #자연 #하늘', 'The sky did all the work on today''s walk.', SYSTIMESTAMP - INTERVAL '11' HOUR, SYSTIMESTAMP - INTERVAL '11' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '오늘의 작업 로그. 무한 스크롤과 PageResponse를 맞추는 중입니다. #React #Frontend #작업기록', 'Work log: aligning infinite scroll with PageResponse.', SYSTIMESTAMP - INTERVAL '12' HOUR, SYSTIMESTAMP - INTERVAL '12' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '오늘은 홈 피드에서 수정과 삭제 흐름을 확인하는 날. 내 게시물에만 메뉴가 보여야 합니다. #개발 #React #일상', 'Checking edit and delete flows from the home feed.', SYSTIMESTAMP - INTERVAL '13' HOUR, SYSTIMESTAMP - INTERVAL '13' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (3, '서울의 골목을 걷다 만난 오후의 빛. 이번 주말엔 천천히 걸어보세요. #서울 #산책 #일상', 'Afternoon light found while walking through Seoul.', SYSTIMESTAMP - INTERVAL '14' HOUR, SYSTIMESTAMP - INTERVAL '14' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (2, '파도 소리만 들어도 마음이 느려지는 바다. 여름 기록을 꺼내봅니다. #여행 #바다 #힐링', 'The ocean makes everything slow down.', SYSTIMESTAMP - INTERVAL '15' HOUR, SYSTIMESTAMP - INTERVAL '15' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (6, '새 컬렉션 촬영이 끝났습니다. 이번 시즌은 색감이 포인트예요. #Fashion #Lookbook #Style', 'New lookbook shoot wrapped.', SYSTIMESTAMP - INTERVAL '16' HOUR, SYSTIMESTAMP - INTERVAL '16' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (4, '고요한 숲길을 걷는 시간. 나무 냄새가 하루를 정리해줍니다. #자연 #숲 #산책', 'A quiet forest walk to close the day.', SYSTIMESTAMP - INTERVAL '17' HOUR, SYSTIMESTAMP - INTERVAL '17' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (5, '생산적인 하루. 다음 기능을 작은 단위로 쪼개서 천천히 붙이는 중입니다. #DevLife #Work #Setup', 'A productive day building the next feature.', SYSTIMESTAMP - INTERVAL '18' HOUR, SYSTIMESTAMP - INTERVAL '18' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (7, '전시장 조명이 작품의 결을 바꿔놓는 순간. 직접 보면 더 좋습니다. #Art #Gallery #Exhibition', 'Gallery lights changing the texture of the work.', SYSTIMESTAMP - INTERVAL '19' HOUR, SYSTIMESTAMP - INTERVAL '19' HOUR, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (8, '비 오는 날에는 진한 라떼와 책 한 권이면 충분합니다. #Coffee #Cafe #Cozy', 'Rainy day needs a latte and a book.', SYSTIMESTAMP - INTERVAL '2' DAY, SYSTIMESTAMP - INTERVAL '2' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 1. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 1.', SYSTIMESTAMP - INTERVAL '3' DAY, SYSTIMESTAMP - INTERVAL '3' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 2. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 2.', SYSTIMESTAMP - INTERVAL '4' DAY, SYSTIMESTAMP - INTERVAL '4' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 3. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 3.', SYSTIMESTAMP - INTERVAL '5' DAY, SYSTIMESTAMP - INTERVAL '5' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 4. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 4.', SYSTIMESTAMP - INTERVAL '6' DAY, SYSTIMESTAMP - INTERVAL '6' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 5. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 5.', SYSTIMESTAMP - INTERVAL '7' DAY, SYSTIMESTAMP - INTERVAL '7' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 6. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 6.', SYSTIMESTAMP - INTERVAL '8' DAY, SYSTIMESTAMP - INTERVAL '8' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 7. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 7.', SYSTIMESTAMP - INTERVAL '9' DAY, SYSTIMESTAMP - INTERVAL '9' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 8. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 8.', SYSTIMESTAMP - INTERVAL '10' DAY, SYSTIMESTAMP - INTERVAL '10' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 9. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 9.', SYSTIMESTAMP - INTERVAL '11' DAY, SYSTIMESTAMP - INTERVAL '11' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 10. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 10.', SYSTIMESTAMP - INTERVAL '12' DAY, SYSTIMESTAMP - INTERVAL '12' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 11. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 11.', SYSTIMESTAMP - INTERVAL '13' DAY, SYSTIMESTAMP - INTERVAL '13' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 12. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 12.', SYSTIMESTAMP - INTERVAL '14' DAY, SYSTIMESTAMP - INTERVAL '14' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 13. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 13.', SYSTIMESTAMP - INTERVAL '15' DAY, SYSTIMESTAMP - INTERVAL '15' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 14. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 14.', SYSTIMESTAMP - INTERVAL '16' DAY, SYSTIMESTAMP - INTERVAL '16' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 15. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 15.', SYSTIMESTAMP - INTERVAL '17' DAY, SYSTIMESTAMP - INTERVAL '17' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 16. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 16.', SYSTIMESTAMP - INTERVAL '18' DAY, SYSTIMESTAMP - INTERVAL '18' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 17. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 17.', SYSTIMESTAMP - INTERVAL '19' DAY, SYSTIMESTAMP - INTERVAL '19' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 18. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 18.', SYSTIMESTAMP - INTERVAL '20' DAY, SYSTIMESTAMP - INTERVAL '20' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 19. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 19.', SYSTIMESTAMP - INTERVAL '21' DAY, SYSTIMESTAMP - INTERVAL '21' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 20. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 20.', SYSTIMESTAMP - INTERVAL '22' DAY, SYSTIMESTAMP - INTERVAL '22' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 21. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 21.', SYSTIMESTAMP - INTERVAL '23' DAY, SYSTIMESTAMP - INTERVAL '23' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 22. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 22.', SYSTIMESTAMP - INTERVAL '24' DAY, SYSTIMESTAMP - INTERVAL '24' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 23. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 23.', SYSTIMESTAMP - INTERVAL '25' DAY, SYSTIMESTAMP - INTERVAL '25' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 24. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 24.', SYSTIMESTAMP - INTERVAL '26' DAY, SYSTIMESTAMP - INTERVAL '26' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 25. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 25.', SYSTIMESTAMP - INTERVAL '27' DAY, SYSTIMESTAMP - INTERVAL '27' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 26. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 26.', SYSTIMESTAMP - INTERVAL '28' DAY, SYSTIMESTAMP - INTERVAL '28' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 27. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 27.', SYSTIMESTAMP - INTERVAL '29' DAY, SYSTIMESTAMP - INTERVAL '29' DAY, NULL);
+INSERT INTO posts (user_id, caption, translated_caption, created_at, update_at, delete_at) VALUES (1, '프로필 게시물 페이지네이션 확인용 기록 28. 12개 단위로 이어지는지 확인합니다. #Profile #Pagination #MVP', 'Profile pagination seed post 28.', SYSTIMESTAMP - INTERVAL '30' DAY, SYSTIMESTAMP - INTERVAL '30' DAY, NULL);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             4,
-             4,
-             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
-             '오라클 MyBatis 매퍼 작성 중 #Oracle #MyBatis #SQL',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- MEDIAS
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (1, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000001.jpg', 0, 'post-001.jpg', 'image/jpeg', 133220, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (1, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000002.jpg', 1, 'post-002.jpg', 'image/jpeg', 177941, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (2, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000003.jpg', 0, 'post-003.jpg', 'image/jpeg', 244604, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (3, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, 'post-004.jpg', 'image/jpeg', 149853, SYSTIMESTAMP - INTERVAL '3' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (4, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000005.jpg', 0, 'post-005.jpg', 'image/jpeg', 231053, SYSTIMESTAMP - INTERVAL '4' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (5, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 0, 'post-006.jpg', 'image/jpeg', 6355, SYSTIMESTAMP - INTERVAL '5' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (6, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000007.jpg', 0, 'post-007.jpg', 'image/jpeg', 340020, SYSTIMESTAMP - INTERVAL '6' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (6, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000008.jpg', 1, 'post-008.jpg', 'image/jpeg', 154956, SYSTIMESTAMP - INTERVAL '6' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (7, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000009.jpg', 0, 'post-009.jpg', 'image/jpeg', 530025, SYSTIMESTAMP - INTERVAL '7' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (8, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000010.jpg', 0, 'post-010.jpg', 'image/jpeg', 134193, SYSTIMESTAMP - INTERVAL '8' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (9, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000011.jpg', 0, 'post-011.jpg', 'image/jpeg', 471889, SYSTIMESTAMP - INTERVAL '9' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (10, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000012.jpg', 0, 'post-012.jpg', 'image/jpeg', 516267, SYSTIMESTAMP - INTERVAL '10' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (11, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000013.jpg', 0, 'post-013.jpg', 'image/jpeg', 113750, SYSTIMESTAMP - INTERVAL '11' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (11, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000014.jpg', 1, 'post-014.jpg', 'image/jpeg', 338885, SYSTIMESTAMP - INTERVAL '11' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (12, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000015.jpg', 0, 'post-015.jpg', 'image/jpeg', 304698, SYSTIMESTAMP - INTERVAL '12' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (13, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000016.jpg', 0, 'post-016.jpg', 'image/jpeg', 398009, SYSTIMESTAMP - INTERVAL '13' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (14, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000017.jpg', 0, 'post-017.jpg', 'image/jpeg', 379346, SYSTIMESTAMP - INTERVAL '14' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (15, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000018.jpg', 0, 'post-018.jpg', 'image/jpeg', 148223, SYSTIMESTAMP - INTERVAL '15' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (16, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000019.jpg', 0, 'post-019.jpg', 'image/jpeg', 209815, SYSTIMESTAMP - INTERVAL '16' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (16, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000020.jpg', 1, 'post-020.jpg', 'image/jpeg', 124143, SYSTIMESTAMP - INTERVAL '16' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (17, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000021.jpg', 0, 'post-021.jpg', 'image/jpeg', 151006, SYSTIMESTAMP - INTERVAL '17' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (18, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000022.jpg', 0, 'post-022.jpg', 'image/jpeg', 548579, SYSTIMESTAMP - INTERVAL '18' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (19, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000023.jpg', 0, 'post-023.jpg', 'image/jpeg', 180833, SYSTIMESTAMP - INTERVAL '19' HOUR);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (20, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000024.jpg', 0, 'post-024.jpg', 'image/jpeg', 104065, SYSTIMESTAMP - INTERVAL '2' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (21, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000025.jpg', 0, 'post-025.jpg', 'image/jpeg', 447089, SYSTIMESTAMP - INTERVAL '3' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (21, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000026.jpg', 1, 'post-026.jpg', 'image/jpeg', 161608, SYSTIMESTAMP - INTERVAL '3' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (22, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000027.jpg', 0, 'post-027.jpg', 'image/jpeg', 133220, SYSTIMESTAMP - INTERVAL '4' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (23, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000028.jpg', 0, 'post-028.jpg', 'image/jpeg', 177941, SYSTIMESTAMP - INTERVAL '5' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (24, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000029.jpg', 0, 'post-029.jpg', 'image/jpeg', 244604, SYSTIMESTAMP - INTERVAL '6' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (25, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000030.jpg', 0, 'post-030.jpg', 'image/jpeg', 149853, SYSTIMESTAMP - INTERVAL '7' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (26, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000031.jpg', 0, 'post-031.jpg', 'image/jpeg', 231053, SYSTIMESTAMP - INTERVAL '8' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (26, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000032.jpg', 1, 'post-032.jpg', 'image/jpeg', 6355, SYSTIMESTAMP - INTERVAL '8' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (27, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000033.jpg', 0, 'post-033.jpg', 'image/jpeg', 340020, SYSTIMESTAMP - INTERVAL '9' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (28, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000034.jpg', 0, 'post-034.jpg', 'image/jpeg', 154956, SYSTIMESTAMP - INTERVAL '10' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (29, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000035.jpg', 0, 'post-035.jpg', 'image/jpeg', 530025, SYSTIMESTAMP - INTERVAL '11' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (30, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000036.jpg', 0, 'post-036.jpg', 'image/jpeg', 134193, SYSTIMESTAMP - INTERVAL '12' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (31, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000037.jpg', 0, 'post-037.jpg', 'image/jpeg', 471889, SYSTIMESTAMP - INTERVAL '13' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (31, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000038.jpg', 1, 'post-038.jpg', 'image/jpeg', 516267, SYSTIMESTAMP - INTERVAL '13' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (32, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000039.jpg', 0, 'post-039.jpg', 'image/jpeg', 113750, SYSTIMESTAMP - INTERVAL '14' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (33, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000040.jpg', 0, 'post-040.jpg', 'image/jpeg', 338885, SYSTIMESTAMP - INTERVAL '15' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (34, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000041.jpg', 0, 'post-041.jpg', 'image/jpeg', 304698, SYSTIMESTAMP - INTERVAL '16' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (35, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000042.jpg', 0, 'post-042.jpg', 'image/jpeg', 398009, SYSTIMESTAMP - INTERVAL '17' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (36, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000043.jpg', 0, 'post-043.jpg', 'image/jpeg', 379346, SYSTIMESTAMP - INTERVAL '18' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (36, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000044.jpg', 1, 'post-044.jpg', 'image/jpeg', 148223, SYSTIMESTAMP - INTERVAL '18' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (37, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000045.jpg', 0, 'post-045.jpg', 'image/jpeg', 209815, SYSTIMESTAMP - INTERVAL '19' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (38, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000046.jpg', 0, 'post-046.jpg', 'image/jpeg', 124143, SYSTIMESTAMP - INTERVAL '20' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (39, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000047.jpg', 0, 'post-047.jpg', 'image/jpeg', 151006, SYSTIMESTAMP - INTERVAL '21' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (40, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000048.jpg', 0, 'post-048.jpg', 'image/jpeg', 548579, SYSTIMESTAMP - INTERVAL '22' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (41, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000049.jpg', 0, 'post-049.jpg', 'image/jpeg', 180833, SYSTIMESTAMP - INTERVAL '23' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (41, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000050.jpg', 1, 'post-050.jpg', 'image/jpeg', 104065, SYSTIMESTAMP - INTERVAL '23' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (42, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000051.jpg', 0, 'post-051.jpg', 'image/jpeg', 447089, SYSTIMESTAMP - INTERVAL '24' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (43, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000052.jpg', 0, 'post-052.jpg', 'image/jpeg', 161608, SYSTIMESTAMP - INTERVAL '25' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (44, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000053.jpg', 0, 'post-053.jpg', 'image/jpeg', 133220, SYSTIMESTAMP - INTERVAL '26' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (45, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000054.jpg', 0, 'post-054.jpg', 'image/jpeg', 177941, SYSTIMESTAMP - INTERVAL '27' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (46, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000055.jpg', 0, 'post-055.jpg', 'image/jpeg', 244604, SYSTIMESTAMP - INTERVAL '28' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (46, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000056.jpg', 1, 'post-056.jpg', 'image/jpeg', 149853, SYSTIMESTAMP - INTERVAL '28' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (47, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000057.jpg', 0, 'post-057.jpg', 'image/jpeg', 231053, SYSTIMESTAMP - INTERVAL '29' DAY);
+INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_name, content_type, file_size, created_at) VALUES (48, 'IMAGE', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000058.jpg', 0, 'post-058.jpg', 'image/jpeg', 6355, SYSTIMESTAMP - INTERVAL '30' DAY);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             5,
-             5,
-             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
-             '게시물 상세 모달 테스트 #게시물 #댓글 #테스트',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- HASHTAGS
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (1, 'Art', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (2, 'Cafe', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (3, 'Coffee', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (4, 'Cozy', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (5, 'DevLife', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (6, 'Exhibition', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (7, 'Fashion', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (8, 'Frontend', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (9, 'Gallery', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (10, 'Lookbook', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (11, 'MVP', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (12, 'Pagination', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (13, 'Profile', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (14, 'React', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (15, 'Setup', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (16, 'Style', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (17, 'Work', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (18, '개발', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (19, '골목', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (20, '맛집', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (21, '바다', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (22, '산책', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (23, '서울', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (24, '숲', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (25, '여행', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (26, '일상', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (27, '자연', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (28, '작업기록', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (29, '저녁', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (30, '카페', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (31, '피자', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (32, '하늘', SYSTIMESTAMP);
+INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (33, '힐링', SYSTIMESTAMP);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             6,
-             6,
-             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
-             '오늘의 개발 기록 #개발일지 #Java #SpringBoot',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- POST_HASHTAGS
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 18, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 14, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 26, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 23, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 22, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 26, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 25, SYSTIMESTAMP - INTERVAL '3' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 21, SYSTIMESTAMP - INTERVAL '3' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 33, SYSTIMESTAMP - INTERVAL '3' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 7, SYSTIMESTAMP - INTERVAL '4' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 10, SYSTIMESTAMP - INTERVAL '4' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 16, SYSTIMESTAMP - INTERVAL '4' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 27, SYSTIMESTAMP - INTERVAL '5' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 24, SYSTIMESTAMP - INTERVAL '5' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 22, SYSTIMESTAMP - INTERVAL '5' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 5, SYSTIMESTAMP - INTERVAL '6' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 17, SYSTIMESTAMP - INTERVAL '6' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 15, SYSTIMESTAMP - INTERVAL '6' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 1, SYSTIMESTAMP - INTERVAL '7' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 9, SYSTIMESTAMP - INTERVAL '7' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 6, SYSTIMESTAMP - INTERVAL '7' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 3, SYSTIMESTAMP - INTERVAL '8' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 2, SYSTIMESTAMP - INTERVAL '8' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 4, SYSTIMESTAMP - INTERVAL '8' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 20, SYSTIMESTAMP - INTERVAL '9' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 31, SYSTIMESTAMP - INTERVAL '9' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 29, SYSTIMESTAMP - INTERVAL '9' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 30, SYSTIMESTAMP - INTERVAL '10' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 23, SYSTIMESTAMP - INTERVAL '10' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 19, SYSTIMESTAMP - INTERVAL '10' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 22, SYSTIMESTAMP - INTERVAL '11' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 27, SYSTIMESTAMP - INTERVAL '11' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 32, SYSTIMESTAMP - INTERVAL '11' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 14, SYSTIMESTAMP - INTERVAL '12' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 8, SYSTIMESTAMP - INTERVAL '12' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 28, SYSTIMESTAMP - INTERVAL '12' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 18, SYSTIMESTAMP - INTERVAL '13' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 14, SYSTIMESTAMP - INTERVAL '13' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 26, SYSTIMESTAMP - INTERVAL '13' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 23, SYSTIMESTAMP - INTERVAL '14' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 22, SYSTIMESTAMP - INTERVAL '14' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 26, SYSTIMESTAMP - INTERVAL '14' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 25, SYSTIMESTAMP - INTERVAL '15' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 21, SYSTIMESTAMP - INTERVAL '15' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 33, SYSTIMESTAMP - INTERVAL '15' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 7, SYSTIMESTAMP - INTERVAL '16' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 10, SYSTIMESTAMP - INTERVAL '16' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 16, SYSTIMESTAMP - INTERVAL '16' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 27, SYSTIMESTAMP - INTERVAL '17' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 24, SYSTIMESTAMP - INTERVAL '17' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 22, SYSTIMESTAMP - INTERVAL '17' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 5, SYSTIMESTAMP - INTERVAL '18' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 17, SYSTIMESTAMP - INTERVAL '18' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 15, SYSTIMESTAMP - INTERVAL '18' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 1, SYSTIMESTAMP - INTERVAL '19' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 9, SYSTIMESTAMP - INTERVAL '19' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 6, SYSTIMESTAMP - INTERVAL '19' HOUR);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 3, SYSTIMESTAMP - INTERVAL '2' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 2, SYSTIMESTAMP - INTERVAL '2' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 4, SYSTIMESTAMP - INTERVAL '2' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 13, SYSTIMESTAMP - INTERVAL '3' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 12, SYSTIMESTAMP - INTERVAL '3' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 11, SYSTIMESTAMP - INTERVAL '3' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 13, SYSTIMESTAMP - INTERVAL '4' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 12, SYSTIMESTAMP - INTERVAL '4' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 11, SYSTIMESTAMP - INTERVAL '4' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 13, SYSTIMESTAMP - INTERVAL '5' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 12, SYSTIMESTAMP - INTERVAL '5' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 11, SYSTIMESTAMP - INTERVAL '5' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 13, SYSTIMESTAMP - INTERVAL '6' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 12, SYSTIMESTAMP - INTERVAL '6' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 11, SYSTIMESTAMP - INTERVAL '6' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 13, SYSTIMESTAMP - INTERVAL '7' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 12, SYSTIMESTAMP - INTERVAL '7' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 11, SYSTIMESTAMP - INTERVAL '7' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 13, SYSTIMESTAMP - INTERVAL '8' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 12, SYSTIMESTAMP - INTERVAL '8' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 11, SYSTIMESTAMP - INTERVAL '8' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 13, SYSTIMESTAMP - INTERVAL '9' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 12, SYSTIMESTAMP - INTERVAL '9' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 11, SYSTIMESTAMP - INTERVAL '9' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 13, SYSTIMESTAMP - INTERVAL '10' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 12, SYSTIMESTAMP - INTERVAL '10' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 11, SYSTIMESTAMP - INTERVAL '10' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 13, SYSTIMESTAMP - INTERVAL '11' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 12, SYSTIMESTAMP - INTERVAL '11' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 11, SYSTIMESTAMP - INTERVAL '11' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 13, SYSTIMESTAMP - INTERVAL '12' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 12, SYSTIMESTAMP - INTERVAL '12' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 11, SYSTIMESTAMP - INTERVAL '12' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 13, SYSTIMESTAMP - INTERVAL '13' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 12, SYSTIMESTAMP - INTERVAL '13' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 11, SYSTIMESTAMP - INTERVAL '13' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 13, SYSTIMESTAMP - INTERVAL '14' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 12, SYSTIMESTAMP - INTERVAL '14' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 11, SYSTIMESTAMP - INTERVAL '14' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 13, SYSTIMESTAMP - INTERVAL '15' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 12, SYSTIMESTAMP - INTERVAL '15' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 11, SYSTIMESTAMP - INTERVAL '15' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 13, SYSTIMESTAMP - INTERVAL '16' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 12, SYSTIMESTAMP - INTERVAL '16' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 11, SYSTIMESTAMP - INTERVAL '16' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 13, SYSTIMESTAMP - INTERVAL '17' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 12, SYSTIMESTAMP - INTERVAL '17' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 11, SYSTIMESTAMP - INTERVAL '17' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 13, SYSTIMESTAMP - INTERVAL '18' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 12, SYSTIMESTAMP - INTERVAL '18' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 11, SYSTIMESTAMP - INTERVAL '18' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 13, SYSTIMESTAMP - INTERVAL '19' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 12, SYSTIMESTAMP - INTERVAL '19' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 11, SYSTIMESTAMP - INTERVAL '19' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 13, SYSTIMESTAMP - INTERVAL '20' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 12, SYSTIMESTAMP - INTERVAL '20' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 11, SYSTIMESTAMP - INTERVAL '20' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 13, SYSTIMESTAMP - INTERVAL '21' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 12, SYSTIMESTAMP - INTERVAL '21' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 11, SYSTIMESTAMP - INTERVAL '21' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 13, SYSTIMESTAMP - INTERVAL '22' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 12, SYSTIMESTAMP - INTERVAL '22' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 11, SYSTIMESTAMP - INTERVAL '22' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 13, SYSTIMESTAMP - INTERVAL '23' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 12, SYSTIMESTAMP - INTERVAL '23' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 11, SYSTIMESTAMP - INTERVAL '23' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 13, SYSTIMESTAMP - INTERVAL '24' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 12, SYSTIMESTAMP - INTERVAL '24' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 11, SYSTIMESTAMP - INTERVAL '24' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 13, SYSTIMESTAMP - INTERVAL '25' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 12, SYSTIMESTAMP - INTERVAL '25' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 11, SYSTIMESTAMP - INTERVAL '25' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 13, SYSTIMESTAMP - INTERVAL '26' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 12, SYSTIMESTAMP - INTERVAL '26' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 11, SYSTIMESTAMP - INTERVAL '26' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 13, SYSTIMESTAMP - INTERVAL '27' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 12, SYSTIMESTAMP - INTERVAL '27' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 11, SYSTIMESTAMP - INTERVAL '27' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 13, SYSTIMESTAMP - INTERVAL '28' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 12, SYSTIMESTAMP - INTERVAL '28' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 11, SYSTIMESTAMP - INTERVAL '28' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 13, SYSTIMESTAMP - INTERVAL '29' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 12, SYSTIMESTAMP - INTERVAL '29' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 11, SYSTIMESTAMP - INTERVAL '29' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 13, SYSTIMESTAMP - INTERVAL '30' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 12, SYSTIMESTAMP - INTERVAL '30' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 11, SYSTIMESTAMP - INTERVAL '30' DAY);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             7,
-             7,
-             '프로필 수정 기능 확인 #회원 #프로필 #수정',
-             '프로필 수정 기능 확인 #회원 #프로필 #수정',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- LIKES
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 1, SYSTIMESTAMP - INTERVAL '4' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (10, 1, SYSTIMESTAMP - INTERVAL '11' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (4, 2, SYSTIMESTAMP - INTERVAL '6' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (11, 2, SYSTIMESTAMP - INTERVAL '13' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 3, SYSTIMESTAMP - INTERVAL '4' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 3, SYSTIMESTAMP - INTERVAL '6' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (5, 3, SYSTIMESTAMP - INTERVAL '8' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (12, 3, SYSTIMESTAMP - INTERVAL '15' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 4, SYSTIMESTAMP - INTERVAL '5' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (13, 4, SYSTIMESTAMP - INTERVAL '17' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (7, 5, SYSTIMESTAMP - INTERVAL '12' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (14, 5, SYSTIMESTAMP - INTERVAL '19' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 6, SYSTIMESTAMP - INTERVAL '7' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 6, SYSTIMESTAMP - INTERVAL '8' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 6, SYSTIMESTAMP - INTERVAL '9' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (8, 6, SYSTIMESTAMP - INTERVAL '14' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (15, 6, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (9, 7, SYSTIMESTAMP - INTERVAL '16' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (16, 7, SYSTIMESTAMP - INTERVAL '23' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 8, SYSTIMESTAMP - INTERVAL '9' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (10, 8, SYSTIMESTAMP - INTERVAL '18' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (17, 8, SYSTIMESTAMP - INTERVAL '25' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 9, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 9, SYSTIMESTAMP - INTERVAL '11' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 9, SYSTIMESTAMP - INTERVAL '12' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (11, 9, SYSTIMESTAMP - INTERVAL '20' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (18, 9, SYSTIMESTAMP - INTERVAL '27' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (12, 10, SYSTIMESTAMP - INTERVAL '22' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (19, 10, SYSTIMESTAMP - INTERVAL '29' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (13, 11, SYSTIMESTAMP - INTERVAL '24' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (20, 11, SYSTIMESTAMP - INTERVAL '31' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 12, SYSTIMESTAMP - INTERVAL '14' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 12, SYSTIMESTAMP - INTERVAL '15' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (14, 12, SYSTIMESTAMP - INTERVAL '26' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (21, 12, SYSTIMESTAMP - INTERVAL '33' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (15, 13, SYSTIMESTAMP - INTERVAL '28' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (22, 13, SYSTIMESTAMP - INTERVAL '35' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (16, 14, SYSTIMESTAMP - INTERVAL '30' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (23, 14, SYSTIMESTAMP - INTERVAL '37' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 15, SYSTIMESTAMP - INTERVAL '16' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 15, SYSTIMESTAMP - INTERVAL '18' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (17, 15, SYSTIMESTAMP - INTERVAL '32' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (24, 15, SYSTIMESTAMP - INTERVAL '39' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 16, SYSTIMESTAMP - INTERVAL '17' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (18, 16, SYSTIMESTAMP - INTERVAL '34' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (25, 16, SYSTIMESTAMP - INTERVAL '41' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (19, 17, SYSTIMESTAMP - INTERVAL '36' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (26, 17, SYSTIMESTAMP - INTERVAL '43' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 18, SYSTIMESTAMP - INTERVAL '19' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 18, SYSTIMESTAMP - INTERVAL '20' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 18, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (20, 18, SYSTIMESTAMP - INTERVAL '38' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (27, 18, SYSTIMESTAMP - INTERVAL '45' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (21, 19, SYSTIMESTAMP - INTERVAL '40' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (28, 19, SYSTIMESTAMP - INTERVAL '47' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (1, 20, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (22, 20, SYSTIMESTAMP - INTERVAL '42' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (29, 20, SYSTIMESTAMP - INTERVAL '49' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 21, SYSTIMESTAMP - INTERVAL '23' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 21, SYSTIMESTAMP - INTERVAL '24' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (23, 21, SYSTIMESTAMP - INTERVAL '44' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (30, 21, SYSTIMESTAMP - INTERVAL '51' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (24, 22, SYSTIMESTAMP - INTERVAL '46' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (31, 22, SYSTIMESTAMP - INTERVAL '53' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (25, 23, SYSTIMESTAMP - INTERVAL '48' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (32, 23, SYSTIMESTAMP - INTERVAL '55' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 24, SYSTIMESTAMP - INTERVAL '26' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 24, SYSTIMESTAMP - INTERVAL '27' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (26, 24, SYSTIMESTAMP - INTERVAL '50' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (33, 24, SYSTIMESTAMP - INTERVAL '57' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (27, 25, SYSTIMESTAMP - INTERVAL '52' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (34, 25, SYSTIMESTAMP - INTERVAL '59' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (28, 26, SYSTIMESTAMP - INTERVAL '54' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (35, 26, SYSTIMESTAMP - INTERVAL '61' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 27, SYSTIMESTAMP - INTERVAL '29' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 27, SYSTIMESTAMP - INTERVAL '30' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (29, 27, SYSTIMESTAMP - INTERVAL '56' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (36, 27, SYSTIMESTAMP - INTERVAL '63' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (30, 28, SYSTIMESTAMP - INTERVAL '58' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (37, 28, SYSTIMESTAMP - INTERVAL '65' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (31, 29, SYSTIMESTAMP - INTERVAL '60' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (38, 29, SYSTIMESTAMP - INTERVAL '67' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 30, SYSTIMESTAMP - INTERVAL '32' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 30, SYSTIMESTAMP - INTERVAL '33' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (32, 30, SYSTIMESTAMP - INTERVAL '62' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (39, 30, SYSTIMESTAMP - INTERVAL '69' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (33, 31, SYSTIMESTAMP - INTERVAL '64' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (40, 31, SYSTIMESTAMP - INTERVAL '71' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (34, 32, SYSTIMESTAMP - INTERVAL '66' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (41, 32, SYSTIMESTAMP - INTERVAL '73' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 33, SYSTIMESTAMP - INTERVAL '35' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 33, SYSTIMESTAMP - INTERVAL '36' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (35, 33, SYSTIMESTAMP - INTERVAL '68' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (42, 33, SYSTIMESTAMP - INTERVAL '75' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (36, 34, SYSTIMESTAMP - INTERVAL '70' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (43, 34, SYSTIMESTAMP - INTERVAL '77' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (37, 35, SYSTIMESTAMP - INTERVAL '72' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (44, 35, SYSTIMESTAMP - INTERVAL '79' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 36, SYSTIMESTAMP - INTERVAL '38' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 36, SYSTIMESTAMP - INTERVAL '39' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (38, 36, SYSTIMESTAMP - INTERVAL '74' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (45, 36, SYSTIMESTAMP - INTERVAL '81' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (39, 37, SYSTIMESTAMP - INTERVAL '76' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (46, 37, SYSTIMESTAMP - INTERVAL '83' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (40, 38, SYSTIMESTAMP - INTERVAL '78' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (47, 38, SYSTIMESTAMP - INTERVAL '85' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 39, SYSTIMESTAMP - INTERVAL '41' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 39, SYSTIMESTAMP - INTERVAL '42' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (41, 39, SYSTIMESTAMP - INTERVAL '80' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (48, 39, SYSTIMESTAMP - INTERVAL '87' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (42, 40, SYSTIMESTAMP - INTERVAL '82' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (49, 40, SYSTIMESTAMP - INTERVAL '89' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (43, 41, SYSTIMESTAMP - INTERVAL '84' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (50, 41, SYSTIMESTAMP - INTERVAL '91' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 42, SYSTIMESTAMP - INTERVAL '44' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 42, SYSTIMESTAMP - INTERVAL '45' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (44, 42, SYSTIMESTAMP - INTERVAL '86' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (51, 42, SYSTIMESTAMP - INTERVAL '93' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (45, 43, SYSTIMESTAMP - INTERVAL '88' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (52, 43, SYSTIMESTAMP - INTERVAL '95' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (46, 44, SYSTIMESTAMP - INTERVAL '90' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (53, 44, SYSTIMESTAMP - INTERVAL '97' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 45, SYSTIMESTAMP - INTERVAL '47' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 45, SYSTIMESTAMP - INTERVAL '48' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (47, 45, SYSTIMESTAMP - INTERVAL '92' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (54, 45, SYSTIMESTAMP - INTERVAL '99' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (48, 46, SYSTIMESTAMP - INTERVAL '94' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (55, 46, SYSTIMESTAMP - INTERVAL '101' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (49, 47, SYSTIMESTAMP - INTERVAL '96' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (56, 47, SYSTIMESTAMP - INTERVAL '103' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (2, 48, SYSTIMESTAMP - INTERVAL '50' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (3, 48, SYSTIMESTAMP - INTERVAL '51' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (50, 48, SYSTIMESTAMP - INTERVAL '98' MINUTE);
+INSERT INTO likes (user_id, post_id, created_at) VALUES (57, 48, SYSTIMESTAMP - INTERVAL '105' MINUTE);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             8,
-             8,
-             '피드 목록 조회 테스트 #피드 #페이징 #목록',
-             '피드 목록 조회 테스트 #피드 #페이징 #목록',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- SAVES
+INSERT INTO saves (user_id, post_id, created_at) VALUES (1, 5, SYSTIMESTAMP - INTERVAL '6' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 5, SYSTIMESTAMP - INTERVAL '7' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 5, SYSTIMESTAMP - INTERVAL '8' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 7, SYSTIMESTAMP - INTERVAL '9' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 7, SYSTIMESTAMP - INTERVAL '10' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (1, 10, SYSTIMESTAMP - INTERVAL '11' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 10, SYSTIMESTAMP - INTERVAL '12' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 10, SYSTIMESTAMP - INTERVAL '13' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 14, SYSTIMESTAMP - INTERVAL '16' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (1, 15, SYSTIMESTAMP - INTERVAL '16' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 15, SYSTIMESTAMP - INTERVAL '18' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (1, 20, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 20, SYSTIMESTAMP - INTERVAL '22' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 20, SYSTIMESTAMP - INTERVAL '23' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 21, SYSTIMESTAMP - INTERVAL '23' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 21, SYSTIMESTAMP - INTERVAL '24' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 25, SYSTIMESTAMP - INTERVAL '27' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 25, SYSTIMESTAMP - INTERVAL '28' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 28, SYSTIMESTAMP - INTERVAL '30' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 28, SYSTIMESTAMP - INTERVAL '31' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 30, SYSTIMESTAMP - INTERVAL '32' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 30, SYSTIMESTAMP - INTERVAL '33' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 35, SYSTIMESTAMP - INTERVAL '37' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 35, SYSTIMESTAMP - INTERVAL '38' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 40, SYSTIMESTAMP - INTERVAL '42' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 40, SYSTIMESTAMP - INTERVAL '43' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 42, SYSTIMESTAMP - INTERVAL '44' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 42, SYSTIMESTAMP - INTERVAL '45' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 45, SYSTIMESTAMP - INTERVAL '47' MINUTE);
+INSERT INTO saves (user_id, post_id, created_at) VALUES (3, 45, SYSTIMESTAMP - INTERVAL '48' MINUTE);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             9,
-             9,
-             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
-             '사진 업로드 기능 연결 중 #이미지 #업로드 #media',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
+-- COMMENTS
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 3, '이제 메뉴 확인하기 딱 좋네요. 내 게시물일 때만 더보기 메뉴가 열리는지 볼 수 있어요.', SYSTIMESTAMP - INTERVAL '30' MINUTE, SYSTIMESTAMP - INTERVAL '30' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 4, '사진이 여러 장일 때 넘기는 버튼이 자연스럽게 보이는지도 같이 확인하면 좋겠습니다.', SYSTIMESTAMP - INTERVAL '29' MINUTE, SYSTIMESTAMP - INTERVAL '29' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 5, '댓글 예시가 길어졌을 때 오른쪽 영역 스크롤과 하단 입력창 고정이 중요해 보여요.', SYSTIMESTAMP - INTERVAL '28' MINUTE, SYSTIMESTAMP - INTERVAL '28' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 6, '해시태그가 긴 문장 뒤에 붙어도 줄이 자연스럽게 내려가는지 확인할 수 있겠네요.', SYSTIMESTAMP - INTERVAL '27' MINUTE, SYSTIMESTAMP - INTERVAL '27' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 7, '이 댓글은 현재 로그인한 사용자가 쓴 예시입니다. 수정과 삭제 테스트에 사용합니다.', SYSTIMESTAMP - INTERVAL '26' MINUTE, SYSTIMESTAMP - INTERVAL '26' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 1, '두 번째 페이지가 붙었을 때 중복 댓글이 생기지 않아야 합니다.', SYSTIMESTAMP - INTERVAL '25' MINUTE, SYSTIMESTAMP - INTERVAL '25' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 9, '무한 스크롤 기준이라면 다음 데이터가 없을 때 요청이 멈춰야 해요.', SYSTIMESTAMP - INTERVAL '24' MINUTE, SYSTIMESTAMP - INTERVAL '24' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 10, '모바일에서 줄 높이와 간격이 답답하지 않은지도 같이 봐야겠습니다.', SYSTIMESTAMP - INTERVAL '23' MINUTE, SYSTIMESTAMP - INTERVAL '23' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 11, '실제 백엔드 연동 시 createdAt 정렬만 맞으면 자연스럽게 붙을 것 같아요.', SYSTIMESTAMP - INTERVAL '22' MINUTE, SYSTIMESTAMP - INTERVAL '22' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 12, '마지막 근처까지 내려왔을 때 hasNext가 정확한지 확인하기 좋은 데이터입니다.', SYSTIMESTAMP - INTERVAL '21' MINUTE, SYSTIMESTAMP - INTERVAL '21' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 13, '이제 메뉴 확인하기 딱 좋네요. 내 게시물일 때만 더보기 메뉴가 열리는지 볼 수 있어요.', SYSTIMESTAMP - INTERVAL '20' MINUTE, SYSTIMESTAMP - INTERVAL '20' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 1, '사진이 여러 장일 때 넘기는 버튼이 자연스럽게 보이는지도 같이 확인하면 좋겠습니다.', SYSTIMESTAMP - INTERVAL '19' MINUTE, SYSTIMESTAMP - INTERVAL '19' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 3, '댓글 예시가 길어졌을 때 오른쪽 영역 스크롤과 하단 입력창 고정이 중요해 보여요.', SYSTIMESTAMP - INTERVAL '18' MINUTE, SYSTIMESTAMP - INTERVAL '18' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 4, '해시태그가 긴 문장 뒤에 붙어도 줄이 자연스럽게 내려가는지 확인할 수 있겠네요.', SYSTIMESTAMP - INTERVAL '17' MINUTE, SYSTIMESTAMP - INTERVAL '17' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 5, '이 댓글은 현재 로그인한 사용자가 쓴 예시입니다. 수정과 삭제 테스트에 사용합니다.', SYSTIMESTAMP - INTERVAL '16' MINUTE, SYSTIMESTAMP - INTERVAL '16' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 6, '두 번째 페이지가 붙었을 때 중복 댓글이 생기지 않아야 합니다.', SYSTIMESTAMP - INTERVAL '15' MINUTE, SYSTIMESTAMP - INTERVAL '15' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 7, '무한 스크롤 기준이라면 다음 데이터가 없을 때 요청이 멈춰야 해요.', SYSTIMESTAMP - INTERVAL '14' MINUTE, SYSTIMESTAMP - INTERVAL '14' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 1, '모바일에서 줄 높이와 간격이 답답하지 않은지도 같이 봐야겠습니다.', SYSTIMESTAMP - INTERVAL '13' MINUTE, SYSTIMESTAMP - INTERVAL '13' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 9, '실제 백엔드 연동 시 createdAt 정렬만 맞으면 자연스럽게 붙을 것 같아요.', SYSTIMESTAMP - INTERVAL '12' MINUTE, SYSTIMESTAMP - INTERVAL '12' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 10, '마지막 근처까지 내려왔을 때 hasNext가 정확한지 확인하기 좋은 데이터입니다.', SYSTIMESTAMP - INTERVAL '11' MINUTE, SYSTIMESTAMP - INTERVAL '11' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 11, '이제 메뉴 확인하기 딱 좋네요. 내 게시물일 때만 더보기 메뉴가 열리는지 볼 수 있어요.', SYSTIMESTAMP - INTERVAL '10' MINUTE, SYSTIMESTAMP - INTERVAL '10' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 12, '사진이 여러 장일 때 넘기는 버튼이 자연스럽게 보이는지도 같이 확인하면 좋겠습니다.', SYSTIMESTAMP - INTERVAL '9' MINUTE, SYSTIMESTAMP - INTERVAL '9' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 13, '댓글 예시가 길어졌을 때 오른쪽 영역 스크롤과 하단 입력창 고정이 중요해 보여요.', SYSTIMESTAMP - INTERVAL '8' MINUTE, SYSTIMESTAMP - INTERVAL '8' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 1, '해시태그가 긴 문장 뒤에 붙어도 줄이 자연스럽게 내려가는지 확인할 수 있겠네요.', SYSTIMESTAMP - INTERVAL '7' MINUTE, SYSTIMESTAMP - INTERVAL '7' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 3, '이 댓글은 현재 로그인한 사용자가 쓴 예시입니다. 수정과 삭제 테스트에 사용합니다.', SYSTIMESTAMP - INTERVAL '6' MINUTE, SYSTIMESTAMP - INTERVAL '6' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 4, '두 번째 페이지가 붙었을 때 중복 댓글이 생기지 않아야 합니다.', SYSTIMESTAMP - INTERVAL '5' MINUTE, SYSTIMESTAMP - INTERVAL '5' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 5, '무한 스크롤 기준이라면 다음 데이터가 없을 때 요청이 멈춰야 해요.', SYSTIMESTAMP - INTERVAL '4' MINUTE, SYSTIMESTAMP - INTERVAL '4' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 6, '모바일에서 줄 높이와 간격이 답답하지 않은지도 같이 봐야겠습니다.', SYSTIMESTAMP - INTERVAL '3' MINUTE, SYSTIMESTAMP - INTERVAL '3' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 7, '실제 백엔드 연동 시 createdAt 정렬만 맞으면 자연스럽게 붙을 것 같아요.', SYSTIMESTAMP - INTERVAL '2' MINUTE, SYSTIMESTAMP - INTERVAL '2' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (1, 1, '마지막 근처까지 내려왔을 때 hasNext가 정확한지 확인하기 좋은 데이터입니다.', SYSTIMESTAMP - INTERVAL '1' MINUTE, SYSTIMESTAMP - INTERVAL '1' MINUTE, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (3, 12, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '6' HOUR, SYSTIMESTAMP - INTERVAL '6' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (4, 13, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '7' HOUR, SYSTIMESTAMP - INTERVAL '7' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (5, 14, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '8' HOUR, SYSTIMESTAMP - INTERVAL '8' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (6, 15, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '9' HOUR, SYSTIMESTAMP - INTERVAL '9' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (7, 16, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '10' HOUR, SYSTIMESTAMP - INTERVAL '10' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (8, 17, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '11' HOUR, SYSTIMESTAMP - INTERVAL '11' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (9, 18, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '12' HOUR, SYSTIMESTAMP - INTERVAL '12' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (10, 19, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '13' HOUR, SYSTIMESTAMP - INTERVAL '13' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (11, 20, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '14' HOUR, SYSTIMESTAMP - INTERVAL '14' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (12, 1, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '15' HOUR, SYSTIMESTAMP - INTERVAL '15' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (13, 2, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '16' HOUR, SYSTIMESTAMP - INTERVAL '16' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (2, 3, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '17' HOUR, SYSTIMESTAMP - INTERVAL '17' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (3, 4, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '18' HOUR, SYSTIMESTAMP - INTERVAL '18' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (4, 5, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '19' HOUR, SYSTIMESTAMP - INTERVAL '19' HOUR, NULL);
+INSERT INTO comments (post_id, user_id, text, created_at, updated_at, deleted_at) VALUES (5, 6, '멋진 기록이에요. 사진 분위기가 정말 좋습니다.', SYSTIMESTAMP - INTERVAL '20' HOUR, SYSTIMESTAMP - INTERVAL '20' HOUR, NULL);
+COMMIT;
 
-INSERT INTO posts (
-    post_id,
-    user_id,
-    caption,
-    translated_caption,
-    created_at,
-    update_at,
-    delete_at
-) VALUES (
-             10,
-             10,
-             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
-             '상세 페이지에서 댓글 생성 테스트 #댓글 #상세모달 #테스트',
-             SYSTIMESTAMP,
-             SYSTIMESTAMP,
-             NULL
-         );
-
+-- STORIES
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (1, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000001.jpg', SYSTIMESTAMP - INTERVAL '30' MINUTE, SYSTIMESTAMP + INTERVAL '1410' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (1, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000002.jpg', SYSTIMESTAMP - INTERVAL '22' MINUTE, SYSTIMESTAMP + INTERVAL '1418' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (1, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000003.jpg', SYSTIMESTAMP - INTERVAL '9' MINUTE, SYSTIMESTAMP + INTERVAL '1431' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (1, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000004.jpg', SYSTIMESTAMP - INTERVAL '26' HOUR, SYSTIMESTAMP - INTERVAL '120' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (2, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000005.jpg', SYSTIMESTAMP - INTERVAL '12' MINUTE, SYSTIMESTAMP + INTERVAL '1428' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (2, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000006.jpg', SYSTIMESTAMP - INTERVAL '8' MINUTE, SYSTIMESTAMP + INTERVAL '1432' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (3, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000007.jpg', SYSTIMESTAMP - INTERVAL '5' HOUR, SYSTIMESTAMP + INTERVAL '1140' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (4, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000008.jpg', SYSTIMESTAMP - INTERVAL '2' HOUR, SYSTIMESTAMP + INTERVAL '1320' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (5, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000009.jpg', SYSTIMESTAMP - INTERVAL '1' HOUR, SYSTIMESTAMP + INTERVAL '1380' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (6, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000010.jpg', SYSTIMESTAMP - INTERVAL '4' HOUR, SYSTIMESTAMP + INTERVAL '1200' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (7, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000011.jpg', SYSTIMESTAMP - INTERVAL '55' MINUTE, SYSTIMESTAMP + INTERVAL '1385' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (8, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000012.jpg', SYSTIMESTAMP - INTERVAL '35' MINUTE, SYSTIMESTAMP + INTERVAL '1405' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (9, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000013.jpg', SYSTIMESTAMP - INTERVAL '42' MINUTE, SYSTIMESTAMP + INTERVAL '1398' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (13, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000014.jpg', SYSTIMESTAMP - INTERVAL '28' MINUTE, SYSTIMESTAMP + INTERVAL '1412' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (14, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000015.jpg', SYSTIMESTAMP - INTERVAL '25' MINUTE, SYSTIMESTAMP + INTERVAL '1415' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (15, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000016.jpg', SYSTIMESTAMP - INTERVAL '16' MINUTE, SYSTIMESTAMP + INTERVAL '1424' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (16, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000017.jpg', SYSTIMESTAMP - INTERVAL '11' MINUTE, SYSTIMESTAMP + INTERVAL '1429' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (17, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000018.jpg', SYSTIMESTAMP - INTERVAL '6' HOUR, SYSTIMESTAMP + INTERVAL '1080' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (18, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000019.jpg', SYSTIMESTAMP - INTERVAL '3' HOUR, SYSTIMESTAMP + INTERVAL '1260' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (19, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000020.jpg', SYSTIMESTAMP - INTERVAL '13' MINUTE, SYSTIMESTAMP + INTERVAL '1427' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (20, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000021.jpg', SYSTIMESTAMP - INTERVAL '18' MINUTE, SYSTIMESTAMP + INTERVAL '1422' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (21, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000022.jpg', SYSTIMESTAMP - INTERVAL '21' MINUTE, SYSTIMESTAMP + INTERVAL '1419' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (22, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000023.jpg', SYSTIMESTAMP - INTERVAL '7' HOUR, SYSTIMESTAMP + INTERVAL '1020' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (23, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000024.jpg', SYSTIMESTAMP - INTERVAL '10' HOUR, SYSTIMESTAMP + INTERVAL '840' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (24, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000025.jpg', SYSTIMESTAMP - INTERVAL '15' HOUR, SYSTIMESTAMP + INTERVAL '540' MINUTE, NULL);
+INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (25, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000026.jpg', SYSTIMESTAMP - INTERVAL '20' HOUR, SYSTIMESTAMP + INTERVAL '240' MINUTE, NULL);
 COMMIT;
