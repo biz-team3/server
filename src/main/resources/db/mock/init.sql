@@ -388,186 +388,618 @@ INSERT INTO medias (post_id, media_type, media_url, sort_order, original_file_na
 COMMIT;
 
 -- HASHTAGS
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (1, 'Art', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (2, 'Cafe', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (3, 'Coffee', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (4, 'Cozy', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (5, 'DevLife', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (6, 'Exhibition', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (7, 'Fashion', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (8, 'Frontend', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (9, 'Gallery', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (10, 'Lookbook', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (11, 'MVP', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (12, 'Pagination', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (13, 'Profile', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (14, 'React', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (15, 'Setup', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (16, 'Style', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (17, 'Work', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (18, '개발', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (19, '골목', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (20, '맛집', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (21, '바다', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (22, '산책', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (23, '서울', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (24, '숲', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (25, '여행', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (26, '일상', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (27, '자연', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (28, '작업기록', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (29, '저녁', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (30, '카페', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (31, '피자', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (32, '하늘', SYSTIMESTAMP);
-INSERT INTO hashtags (hashtag_id, tag_name, created_at) VALUES (33, '힐링', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Art', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Cafe', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Coffee', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Cozy', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('DevLife', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Exhibition', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Fashion', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Frontend', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Gallery', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Lookbook', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('MVP', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Pagination', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Profile', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('React', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Setup', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Style', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('Work', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('개발', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('골목', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('맛집', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('바다', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('산책', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('서울', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('숲', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('여행', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('일상', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('자연', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('작업기록', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('저녁', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('카페', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('피자', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('하늘', SYSTIMESTAMP);
+INSERT INTO hashtags (tag_name, created_at) VALUES ('힐링', SYSTIMESTAMP);
 COMMIT;
 
 -- POST_HASHTAGS
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 18, SYSTIMESTAMP - INTERVAL '10' MINUTE);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 14, SYSTIMESTAMP - INTERVAL '10' MINUTE);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (1, 26, SYSTIMESTAMP - INTERVAL '10' MINUTE);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 23, SYSTIMESTAMP - INTERVAL '2' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 22, SYSTIMESTAMP - INTERVAL '2' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (2, 26, SYSTIMESTAMP - INTERVAL '2' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 25, SYSTIMESTAMP - INTERVAL '3' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 21, SYSTIMESTAMP - INTERVAL '3' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (3, 33, SYSTIMESTAMP - INTERVAL '3' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 7, SYSTIMESTAMP - INTERVAL '4' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 10, SYSTIMESTAMP - INTERVAL '4' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (4, 16, SYSTIMESTAMP - INTERVAL '4' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 27, SYSTIMESTAMP - INTERVAL '5' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 24, SYSTIMESTAMP - INTERVAL '5' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (5, 22, SYSTIMESTAMP - INTERVAL '5' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 5, SYSTIMESTAMP - INTERVAL '6' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 17, SYSTIMESTAMP - INTERVAL '6' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (6, 15, SYSTIMESTAMP - INTERVAL '6' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 1, SYSTIMESTAMP - INTERVAL '7' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 9, SYSTIMESTAMP - INTERVAL '7' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (7, 6, SYSTIMESTAMP - INTERVAL '7' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 3, SYSTIMESTAMP - INTERVAL '8' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 2, SYSTIMESTAMP - INTERVAL '8' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (8, 4, SYSTIMESTAMP - INTERVAL '8' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 20, SYSTIMESTAMP - INTERVAL '9' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 31, SYSTIMESTAMP - INTERVAL '9' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (9, 29, SYSTIMESTAMP - INTERVAL '9' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 30, SYSTIMESTAMP - INTERVAL '10' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 23, SYSTIMESTAMP - INTERVAL '10' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (10, 19, SYSTIMESTAMP - INTERVAL '10' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 22, SYSTIMESTAMP - INTERVAL '11' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 27, SYSTIMESTAMP - INTERVAL '11' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (11, 32, SYSTIMESTAMP - INTERVAL '11' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 14, SYSTIMESTAMP - INTERVAL '12' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 8, SYSTIMESTAMP - INTERVAL '12' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (12, 28, SYSTIMESTAMP - INTERVAL '12' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 18, SYSTIMESTAMP - INTERVAL '13' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 14, SYSTIMESTAMP - INTERVAL '13' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (13, 26, SYSTIMESTAMP - INTERVAL '13' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 23, SYSTIMESTAMP - INTERVAL '14' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 22, SYSTIMESTAMP - INTERVAL '14' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (14, 26, SYSTIMESTAMP - INTERVAL '14' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 25, SYSTIMESTAMP - INTERVAL '15' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 21, SYSTIMESTAMP - INTERVAL '15' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (15, 33, SYSTIMESTAMP - INTERVAL '15' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 7, SYSTIMESTAMP - INTERVAL '16' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 10, SYSTIMESTAMP - INTERVAL '16' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (16, 16, SYSTIMESTAMP - INTERVAL '16' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 27, SYSTIMESTAMP - INTERVAL '17' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 24, SYSTIMESTAMP - INTERVAL '17' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (17, 22, SYSTIMESTAMP - INTERVAL '17' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 5, SYSTIMESTAMP - INTERVAL '18' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 17, SYSTIMESTAMP - INTERVAL '18' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (18, 15, SYSTIMESTAMP - INTERVAL '18' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 1, SYSTIMESTAMP - INTERVAL '19' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 9, SYSTIMESTAMP - INTERVAL '19' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (19, 6, SYSTIMESTAMP - INTERVAL '19' HOUR);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 3, SYSTIMESTAMP - INTERVAL '2' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 2, SYSTIMESTAMP - INTERVAL '2' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (20, 4, SYSTIMESTAMP - INTERVAL '2' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 13, SYSTIMESTAMP - INTERVAL '3' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 12, SYSTIMESTAMP - INTERVAL '3' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (21, 11, SYSTIMESTAMP - INTERVAL '3' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 13, SYSTIMESTAMP - INTERVAL '4' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 12, SYSTIMESTAMP - INTERVAL '4' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (22, 11, SYSTIMESTAMP - INTERVAL '4' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 13, SYSTIMESTAMP - INTERVAL '5' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 12, SYSTIMESTAMP - INTERVAL '5' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (23, 11, SYSTIMESTAMP - INTERVAL '5' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 13, SYSTIMESTAMP - INTERVAL '6' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 12, SYSTIMESTAMP - INTERVAL '6' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (24, 11, SYSTIMESTAMP - INTERVAL '6' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 13, SYSTIMESTAMP - INTERVAL '7' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 12, SYSTIMESTAMP - INTERVAL '7' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (25, 11, SYSTIMESTAMP - INTERVAL '7' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 13, SYSTIMESTAMP - INTERVAL '8' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 12, SYSTIMESTAMP - INTERVAL '8' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (26, 11, SYSTIMESTAMP - INTERVAL '8' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 13, SYSTIMESTAMP - INTERVAL '9' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 12, SYSTIMESTAMP - INTERVAL '9' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (27, 11, SYSTIMESTAMP - INTERVAL '9' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 13, SYSTIMESTAMP - INTERVAL '10' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 12, SYSTIMESTAMP - INTERVAL '10' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (28, 11, SYSTIMESTAMP - INTERVAL '10' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 13, SYSTIMESTAMP - INTERVAL '11' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 12, SYSTIMESTAMP - INTERVAL '11' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (29, 11, SYSTIMESTAMP - INTERVAL '11' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 13, SYSTIMESTAMP - INTERVAL '12' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 12, SYSTIMESTAMP - INTERVAL '12' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (30, 11, SYSTIMESTAMP - INTERVAL '12' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 13, SYSTIMESTAMP - INTERVAL '13' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 12, SYSTIMESTAMP - INTERVAL '13' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (31, 11, SYSTIMESTAMP - INTERVAL '13' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 13, SYSTIMESTAMP - INTERVAL '14' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 12, SYSTIMESTAMP - INTERVAL '14' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (32, 11, SYSTIMESTAMP - INTERVAL '14' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 13, SYSTIMESTAMP - INTERVAL '15' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 12, SYSTIMESTAMP - INTERVAL '15' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (33, 11, SYSTIMESTAMP - INTERVAL '15' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 13, SYSTIMESTAMP - INTERVAL '16' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 12, SYSTIMESTAMP - INTERVAL '16' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (34, 11, SYSTIMESTAMP - INTERVAL '16' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 13, SYSTIMESTAMP - INTERVAL '17' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 12, SYSTIMESTAMP - INTERVAL '17' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (35, 11, SYSTIMESTAMP - INTERVAL '17' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 13, SYSTIMESTAMP - INTERVAL '18' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 12, SYSTIMESTAMP - INTERVAL '18' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (36, 11, SYSTIMESTAMP - INTERVAL '18' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 13, SYSTIMESTAMP - INTERVAL '19' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 12, SYSTIMESTAMP - INTERVAL '19' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (37, 11, SYSTIMESTAMP - INTERVAL '19' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 13, SYSTIMESTAMP - INTERVAL '20' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 12, SYSTIMESTAMP - INTERVAL '20' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (38, 11, SYSTIMESTAMP - INTERVAL '20' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 13, SYSTIMESTAMP - INTERVAL '21' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 12, SYSTIMESTAMP - INTERVAL '21' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (39, 11, SYSTIMESTAMP - INTERVAL '21' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 13, SYSTIMESTAMP - INTERVAL '22' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 12, SYSTIMESTAMP - INTERVAL '22' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (40, 11, SYSTIMESTAMP - INTERVAL '22' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 13, SYSTIMESTAMP - INTERVAL '23' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 12, SYSTIMESTAMP - INTERVAL '23' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (41, 11, SYSTIMESTAMP - INTERVAL '23' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 13, SYSTIMESTAMP - INTERVAL '24' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 12, SYSTIMESTAMP - INTERVAL '24' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (42, 11, SYSTIMESTAMP - INTERVAL '24' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 13, SYSTIMESTAMP - INTERVAL '25' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 12, SYSTIMESTAMP - INTERVAL '25' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (43, 11, SYSTIMESTAMP - INTERVAL '25' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 13, SYSTIMESTAMP - INTERVAL '26' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 12, SYSTIMESTAMP - INTERVAL '26' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (44, 11, SYSTIMESTAMP - INTERVAL '26' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 13, SYSTIMESTAMP - INTERVAL '27' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 12, SYSTIMESTAMP - INTERVAL '27' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (45, 11, SYSTIMESTAMP - INTERVAL '27' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 13, SYSTIMESTAMP - INTERVAL '28' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 12, SYSTIMESTAMP - INTERVAL '28' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (46, 11, SYSTIMESTAMP - INTERVAL '28' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 13, SYSTIMESTAMP - INTERVAL '29' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 12, SYSTIMESTAMP - INTERVAL '29' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (47, 11, SYSTIMESTAMP - INTERVAL '29' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 13, SYSTIMESTAMP - INTERVAL '30' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 12, SYSTIMESTAMP - INTERVAL '30' DAY);
-INSERT INTO post_hashtags (post_id, hashtag_id, created_at) VALUES (48, 11, SYSTIMESTAMP - INTERVAL '30' DAY);
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 1, hashtag_id, SYSTIMESTAMP - INTERVAL '10' MINUTE
+FROM hashtags
+WHERE tag_name = '개발';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 1, hashtag_id, SYSTIMESTAMP - INTERVAL '10' MINUTE
+FROM hashtags
+WHERE tag_name = 'React';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 1, hashtag_id, SYSTIMESTAMP - INTERVAL '10' MINUTE
+FROM hashtags
+WHERE tag_name = '일상';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 2, hashtag_id, SYSTIMESTAMP - INTERVAL '2' HOUR
+FROM hashtags
+WHERE tag_name = '서울';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 2, hashtag_id, SYSTIMESTAMP - INTERVAL '2' HOUR
+FROM hashtags
+WHERE tag_name = '산책';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 2, hashtag_id, SYSTIMESTAMP - INTERVAL '2' HOUR
+FROM hashtags
+WHERE tag_name = '일상';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 3, hashtag_id, SYSTIMESTAMP - INTERVAL '3' HOUR
+FROM hashtags
+WHERE tag_name = '여행';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 3, hashtag_id, SYSTIMESTAMP - INTERVAL '3' HOUR
+FROM hashtags
+WHERE tag_name = '바다';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 3, hashtag_id, SYSTIMESTAMP - INTERVAL '3' HOUR
+FROM hashtags
+WHERE tag_name = '힐링';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 4, hashtag_id, SYSTIMESTAMP - INTERVAL '4' HOUR
+FROM hashtags
+WHERE tag_name = 'Fashion';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 4, hashtag_id, SYSTIMESTAMP - INTERVAL '4' HOUR
+FROM hashtags
+WHERE tag_name = 'Lookbook';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 4, hashtag_id, SYSTIMESTAMP - INTERVAL '4' HOUR
+FROM hashtags
+WHERE tag_name = 'Style';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 5, hashtag_id, SYSTIMESTAMP - INTERVAL '5' HOUR
+FROM hashtags
+WHERE tag_name = '자연';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 5, hashtag_id, SYSTIMESTAMP - INTERVAL '5' HOUR
+FROM hashtags
+WHERE tag_name = '숲';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 5, hashtag_id, SYSTIMESTAMP - INTERVAL '5' HOUR
+FROM hashtags
+WHERE tag_name = '산책';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 6, hashtag_id, SYSTIMESTAMP - INTERVAL '6' HOUR
+FROM hashtags
+WHERE tag_name = 'DevLife';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 6, hashtag_id, SYSTIMESTAMP - INTERVAL '6' HOUR
+FROM hashtags
+WHERE tag_name = 'Work';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 6, hashtag_id, SYSTIMESTAMP - INTERVAL '6' HOUR
+FROM hashtags
+WHERE tag_name = 'Setup';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 7, hashtag_id, SYSTIMESTAMP - INTERVAL '7' HOUR
+FROM hashtags
+WHERE tag_name = 'Art';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 7, hashtag_id, SYSTIMESTAMP - INTERVAL '7' HOUR
+FROM hashtags
+WHERE tag_name = 'Gallery';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 7, hashtag_id, SYSTIMESTAMP - INTERVAL '7' HOUR
+FROM hashtags
+WHERE tag_name = 'Exhibition';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 8, hashtag_id, SYSTIMESTAMP - INTERVAL '8' HOUR
+FROM hashtags
+WHERE tag_name = 'Coffee';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 8, hashtag_id, SYSTIMESTAMP - INTERVAL '8' HOUR
+FROM hashtags
+WHERE tag_name = 'Cafe';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 8, hashtag_id, SYSTIMESTAMP - INTERVAL '8' HOUR
+FROM hashtags
+WHERE tag_name = 'Cozy';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 9, hashtag_id, SYSTIMESTAMP - INTERVAL '9' HOUR
+FROM hashtags
+WHERE tag_name = '맛집';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 9, hashtag_id, SYSTIMESTAMP - INTERVAL '9' HOUR
+FROM hashtags
+WHERE tag_name = '피자';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 9, hashtag_id, SYSTIMESTAMP - INTERVAL '9' HOUR
+FROM hashtags
+WHERE tag_name = '저녁';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 10, hashtag_id, SYSTIMESTAMP - INTERVAL '10' HOUR
+FROM hashtags
+WHERE tag_name = '카페';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 10, hashtag_id, SYSTIMESTAMP - INTERVAL '10' HOUR
+FROM hashtags
+WHERE tag_name = '서울';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 10, hashtag_id, SYSTIMESTAMP - INTERVAL '10' HOUR
+FROM hashtags
+WHERE tag_name = '골목';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 11, hashtag_id, SYSTIMESTAMP - INTERVAL '11' HOUR
+FROM hashtags
+WHERE tag_name = '산책';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 11, hashtag_id, SYSTIMESTAMP - INTERVAL '11' HOUR
+FROM hashtags
+WHERE tag_name = '자연';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 11, hashtag_id, SYSTIMESTAMP - INTERVAL '11' HOUR
+FROM hashtags
+WHERE tag_name = '하늘';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 12, hashtag_id, SYSTIMESTAMP - INTERVAL '12' HOUR
+FROM hashtags
+WHERE tag_name = 'React';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 12, hashtag_id, SYSTIMESTAMP - INTERVAL '12' HOUR
+FROM hashtags
+WHERE tag_name = 'Frontend';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 12, hashtag_id, SYSTIMESTAMP - INTERVAL '12' HOUR
+FROM hashtags
+WHERE tag_name = '작업기록';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 13, hashtag_id, SYSTIMESTAMP - INTERVAL '13' HOUR
+FROM hashtags
+WHERE tag_name = '개발';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 13, hashtag_id, SYSTIMESTAMP - INTERVAL '13' HOUR
+FROM hashtags
+WHERE tag_name = 'React';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 13, hashtag_id, SYSTIMESTAMP - INTERVAL '13' HOUR
+FROM hashtags
+WHERE tag_name = '일상';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 14, hashtag_id, SYSTIMESTAMP - INTERVAL '14' HOUR
+FROM hashtags
+WHERE tag_name = '서울';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 14, hashtag_id, SYSTIMESTAMP - INTERVAL '14' HOUR
+FROM hashtags
+WHERE tag_name = '산책';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 14, hashtag_id, SYSTIMESTAMP - INTERVAL '14' HOUR
+FROM hashtags
+WHERE tag_name = '일상';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 15, hashtag_id, SYSTIMESTAMP - INTERVAL '15' HOUR
+FROM hashtags
+WHERE tag_name = '여행';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 15, hashtag_id, SYSTIMESTAMP - INTERVAL '15' HOUR
+FROM hashtags
+WHERE tag_name = '바다';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 15, hashtag_id, SYSTIMESTAMP - INTERVAL '15' HOUR
+FROM hashtags
+WHERE tag_name = '힐링';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 16, hashtag_id, SYSTIMESTAMP - INTERVAL '16' HOUR
+FROM hashtags
+WHERE tag_name = 'Fashion';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 16, hashtag_id, SYSTIMESTAMP - INTERVAL '16' HOUR
+FROM hashtags
+WHERE tag_name = 'Lookbook';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 16, hashtag_id, SYSTIMESTAMP - INTERVAL '16' HOUR
+FROM hashtags
+WHERE tag_name = 'Style';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 17, hashtag_id, SYSTIMESTAMP - INTERVAL '17' HOUR
+FROM hashtags
+WHERE tag_name = '자연';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 17, hashtag_id, SYSTIMESTAMP - INTERVAL '17' HOUR
+FROM hashtags
+WHERE tag_name = '숲';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 17, hashtag_id, SYSTIMESTAMP - INTERVAL '17' HOUR
+FROM hashtags
+WHERE tag_name = '산책';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 18, hashtag_id, SYSTIMESTAMP - INTERVAL '18' HOUR
+FROM hashtags
+WHERE tag_name = 'DevLife';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 18, hashtag_id, SYSTIMESTAMP - INTERVAL '18' HOUR
+FROM hashtags
+WHERE tag_name = 'Work';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 18, hashtag_id, SYSTIMESTAMP - INTERVAL '18' HOUR
+FROM hashtags
+WHERE tag_name = 'Setup';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 19, hashtag_id, SYSTIMESTAMP - INTERVAL '19' HOUR
+FROM hashtags
+WHERE tag_name = 'Art';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 19, hashtag_id, SYSTIMESTAMP - INTERVAL '19' HOUR
+FROM hashtags
+WHERE tag_name = 'Gallery';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 19, hashtag_id, SYSTIMESTAMP - INTERVAL '19' HOUR
+FROM hashtags
+WHERE tag_name = 'Exhibition';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 20, hashtag_id, SYSTIMESTAMP - INTERVAL '2' DAY
+FROM hashtags
+WHERE tag_name = 'Coffee';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 20, hashtag_id, SYSTIMESTAMP - INTERVAL '2' DAY
+FROM hashtags
+WHERE tag_name = 'Cafe';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 20, hashtag_id, SYSTIMESTAMP - INTERVAL '2' DAY
+FROM hashtags
+WHERE tag_name = 'Cozy';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 21, hashtag_id, SYSTIMESTAMP - INTERVAL '3' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 21, hashtag_id, SYSTIMESTAMP - INTERVAL '3' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 21, hashtag_id, SYSTIMESTAMP - INTERVAL '3' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 22, hashtag_id, SYSTIMESTAMP - INTERVAL '4' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 22, hashtag_id, SYSTIMESTAMP - INTERVAL '4' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 22, hashtag_id, SYSTIMESTAMP - INTERVAL '4' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 23, hashtag_id, SYSTIMESTAMP - INTERVAL '5' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 23, hashtag_id, SYSTIMESTAMP - INTERVAL '5' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 23, hashtag_id, SYSTIMESTAMP - INTERVAL '5' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 24, hashtag_id, SYSTIMESTAMP - INTERVAL '6' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 24, hashtag_id, SYSTIMESTAMP - INTERVAL '6' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 24, hashtag_id, SYSTIMESTAMP - INTERVAL '6' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 25, hashtag_id, SYSTIMESTAMP - INTERVAL '7' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 25, hashtag_id, SYSTIMESTAMP - INTERVAL '7' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 25, hashtag_id, SYSTIMESTAMP - INTERVAL '7' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 26, hashtag_id, SYSTIMESTAMP - INTERVAL '8' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 26, hashtag_id, SYSTIMESTAMP - INTERVAL '8' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 26, hashtag_id, SYSTIMESTAMP - INTERVAL '8' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 27, hashtag_id, SYSTIMESTAMP - INTERVAL '9' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 27, hashtag_id, SYSTIMESTAMP - INTERVAL '9' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 27, hashtag_id, SYSTIMESTAMP - INTERVAL '9' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 28, hashtag_id, SYSTIMESTAMP - INTERVAL '10' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 28, hashtag_id, SYSTIMESTAMP - INTERVAL '10' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 28, hashtag_id, SYSTIMESTAMP - INTERVAL '10' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 29, hashtag_id, SYSTIMESTAMP - INTERVAL '11' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 29, hashtag_id, SYSTIMESTAMP - INTERVAL '11' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 29, hashtag_id, SYSTIMESTAMP - INTERVAL '11' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 30, hashtag_id, SYSTIMESTAMP - INTERVAL '12' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 30, hashtag_id, SYSTIMESTAMP - INTERVAL '12' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 30, hashtag_id, SYSTIMESTAMP - INTERVAL '12' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 31, hashtag_id, SYSTIMESTAMP - INTERVAL '13' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 31, hashtag_id, SYSTIMESTAMP - INTERVAL '13' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 31, hashtag_id, SYSTIMESTAMP - INTERVAL '13' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 32, hashtag_id, SYSTIMESTAMP - INTERVAL '14' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 32, hashtag_id, SYSTIMESTAMP - INTERVAL '14' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 32, hashtag_id, SYSTIMESTAMP - INTERVAL '14' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 33, hashtag_id, SYSTIMESTAMP - INTERVAL '15' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 33, hashtag_id, SYSTIMESTAMP - INTERVAL '15' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 33, hashtag_id, SYSTIMESTAMP - INTERVAL '15' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 34, hashtag_id, SYSTIMESTAMP - INTERVAL '16' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 34, hashtag_id, SYSTIMESTAMP - INTERVAL '16' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 34, hashtag_id, SYSTIMESTAMP - INTERVAL '16' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 35, hashtag_id, SYSTIMESTAMP - INTERVAL '17' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 35, hashtag_id, SYSTIMESTAMP - INTERVAL '17' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 35, hashtag_id, SYSTIMESTAMP - INTERVAL '17' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 36, hashtag_id, SYSTIMESTAMP - INTERVAL '18' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 36, hashtag_id, SYSTIMESTAMP - INTERVAL '18' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 36, hashtag_id, SYSTIMESTAMP - INTERVAL '18' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 37, hashtag_id, SYSTIMESTAMP - INTERVAL '19' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 37, hashtag_id, SYSTIMESTAMP - INTERVAL '19' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 37, hashtag_id, SYSTIMESTAMP - INTERVAL '19' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 38, hashtag_id, SYSTIMESTAMP - INTERVAL '20' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 38, hashtag_id, SYSTIMESTAMP - INTERVAL '20' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 38, hashtag_id, SYSTIMESTAMP - INTERVAL '20' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 39, hashtag_id, SYSTIMESTAMP - INTERVAL '21' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 39, hashtag_id, SYSTIMESTAMP - INTERVAL '21' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 39, hashtag_id, SYSTIMESTAMP - INTERVAL '21' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 40, hashtag_id, SYSTIMESTAMP - INTERVAL '22' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 40, hashtag_id, SYSTIMESTAMP - INTERVAL '22' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 40, hashtag_id, SYSTIMESTAMP - INTERVAL '22' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 41, hashtag_id, SYSTIMESTAMP - INTERVAL '23' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 41, hashtag_id, SYSTIMESTAMP - INTERVAL '23' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 41, hashtag_id, SYSTIMESTAMP - INTERVAL '23' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 42, hashtag_id, SYSTIMESTAMP - INTERVAL '24' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 42, hashtag_id, SYSTIMESTAMP - INTERVAL '24' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 42, hashtag_id, SYSTIMESTAMP - INTERVAL '24' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 43, hashtag_id, SYSTIMESTAMP - INTERVAL '25' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 43, hashtag_id, SYSTIMESTAMP - INTERVAL '25' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 43, hashtag_id, SYSTIMESTAMP - INTERVAL '25' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 44, hashtag_id, SYSTIMESTAMP - INTERVAL '26' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 44, hashtag_id, SYSTIMESTAMP - INTERVAL '26' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 44, hashtag_id, SYSTIMESTAMP - INTERVAL '26' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 45, hashtag_id, SYSTIMESTAMP - INTERVAL '27' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 45, hashtag_id, SYSTIMESTAMP - INTERVAL '27' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 45, hashtag_id, SYSTIMESTAMP - INTERVAL '27' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 46, hashtag_id, SYSTIMESTAMP - INTERVAL '28' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 46, hashtag_id, SYSTIMESTAMP - INTERVAL '28' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 46, hashtag_id, SYSTIMESTAMP - INTERVAL '28' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 47, hashtag_id, SYSTIMESTAMP - INTERVAL '29' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 47, hashtag_id, SYSTIMESTAMP - INTERVAL '29' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 47, hashtag_id, SYSTIMESTAMP - INTERVAL '29' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 48, hashtag_id, SYSTIMESTAMP - INTERVAL '30' DAY
+FROM hashtags
+WHERE tag_name = 'Profile';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 48, hashtag_id, SYSTIMESTAMP - INTERVAL '30' DAY
+FROM hashtags
+WHERE tag_name = 'Pagination';
+INSERT INTO post_hashtags (post_id, hashtag_id, created_at)
+SELECT 48, hashtag_id, SYSTIMESTAMP - INTERVAL '30' DAY
+FROM hashtags
+WHERE tag_name = 'MVP';
 COMMIT;
 
 -- LIKES
@@ -816,3 +1248,17 @@ INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VAL
 INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (24, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000025.jpg', SYSTIMESTAMP - INTERVAL '15' HOUR, SYSTIMESTAMP + INTERVAL '540' MINUTE, NULL);
 INSERT INTO stories (user_id, image_url, created_at, expires_at, deleted_at) VALUES (25, '/uploads/stories/2026/05/30000000-0000-4000-8000-000000000026.jpg', SYSTIMESTAMP - INTERVAL '20' HOUR, SYSTIMESTAMP + INTERVAL '240' MINUTE, NULL);
 COMMIT;
+
+-- IDENTITY HIGH WATER MARK
+-- Seed 데이터 삽입 후 Oracle identity generator를 현재 MAX(id) 이후로 맞춘다.
+ALTER TABLE users MODIFY user_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE follows MODIFY follow_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE follow_requests MODIFY request_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE posts MODIFY post_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE medias MODIFY media_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE hashtags MODIFY hashtag_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE post_hashtags MODIFY post_hashtag_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE likes MODIFY like_id GENERATED ALWAYS AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE saves MODIFY save_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE comments MODIFY comment_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
+ALTER TABLE stories MODIFY story_id GENERATED BY DEFAULT ON NULL AS IDENTITY (START WITH LIMIT VALUE);
