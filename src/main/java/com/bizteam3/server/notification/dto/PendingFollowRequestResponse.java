@@ -10,7 +10,7 @@ public class PendingFollowRequestResponse {
     private final Integer requestId;
     private final Integer requesterId;
     private final Integer targetUserId;
-    private final String username;
+    private final String requesterName;
     private final String mutualText;
-    private final String imageUrl;
+    private final String requesterProfileImg;
 }
