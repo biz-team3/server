@@ -32,4 +32,19 @@
         WHERE post_id = #{postId}
     </delete>
 
+    <select id="selectByPostIds"
+            resultType="com.bizteam3.server.post.dao.row.FeedPostMediaRow">
+        SELECT
+            post_id,
+            media_id,
+            media_type,
+            media_url,
+            sort_order
+        FROM medias
+        WHERE post_id IN
+        <foreach collection="postIds" item="postId" open="(" separator="," close=")">
+            #{postId}
+        </foreach>
+        ORDER BY post_id ASC, sort_order ASC
+    </select>
 </mapper>

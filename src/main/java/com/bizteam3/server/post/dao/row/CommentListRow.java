@@ -10,6 +10,7 @@ public class CommentListRow {
 	private Integer postId;
 	private Integer userId;
 	private String userName;
+	private String profileImageUrl;
 	private String text;
 	private LocalDateTime createdAt;
 }

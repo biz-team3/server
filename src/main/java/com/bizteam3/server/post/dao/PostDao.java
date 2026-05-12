@@ -1,7 +1,9 @@
 package com.bizteam3.server.post.dao;
 
+import com.bizteam3.server.post.dao.row.FeedPostRow;
 import com.bizteam3.server.post.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +18,13 @@ public interface PostDao {
     int deleteMediasByPostId(Integer postId);
     int deletePostHashtagsByPostId(Integer postId);
     int delete(Integer postId);
+
+    //int countFeedPosts(Integer userId);
+    int countFeedPosts(@Param("viewerId") Integer viewerId);
+
+    List<FeedPostRow> selectFeedPosts(
+            @Param("viewerId") Integer viewerId,
+            @Param("offset") int offset,
+            @Param("size") int size
+    );
 }
