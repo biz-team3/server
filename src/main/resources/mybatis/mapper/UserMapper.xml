@@ -81,6 +81,7 @@
     <select id="selectById" resultType="com.bizteam3.server.user.entity.User">
         SELECT
             USER_ID,
+            USERNAME,
             PASSWORD,
             NAME,
             BIO,
