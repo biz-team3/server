@@ -39,8 +39,28 @@ logs/
 *.pid
 
 # files
-uploads/
+uploads/*
+!uploads/profiles/
+uploads/profiles/*
+!uploads/profiles/2026/
+uploads/profiles/2026/*
+!uploads/profiles/2026/05/
+uploads/profiles/2026/05/*
+!uploads/profiles/2026/05/10000000-0000-4000-8000-*.jpg
+!uploads/posts/
+uploads/posts/*
+!uploads/posts/2026/
+uploads/posts/2026/*
+!uploads/posts/2026/05/
+uploads/posts/2026/05/*
+!uploads/posts/2026/05/20000000-0000-4000-8000-*.jpg
+!uploads/stories/
+uploads/stories/*
+!uploads/stories/2026/
+uploads/stories/2026/*
+!uploads/stories/2026/05/
+uploads/stories/2026/05/*
+!uploads/stories/2026/05/30000000-0000-4000-8000-*.jpg
 
 
 .profileconfig.json
-
