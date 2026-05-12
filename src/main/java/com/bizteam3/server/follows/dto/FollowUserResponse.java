@@ -20,5 +20,4 @@ public class FollowUserResponse {
 	private final AccountVisType accountVis;
 	private final LocalDateTime followedAt;
 	private final FollowViewerRelation viewerRelation;
-	private final Boolean isViewer;
 }

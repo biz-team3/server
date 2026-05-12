@@ -22,7 +22,6 @@
             <arg   column="followed_at" javaType="java.time.LocalDateTime"/>
             <arg   column="viewer_relation"
                    javaType="com.bizteam3.server.follows.dto.FollowViewerRelation"/>
-            <arg   column="is_viewer"   javaType="Boolean"/>
         </constructor>
     </resultMap>
 
@@ -119,7 +118,7 @@
             u.account_vis,
             f.created_at AS followed_at,
             CASE
-                WHEN u.user_id = #{viewerUserId} THEN 'NOT_FOLLOWING'
+                WHEN u.user_id = #{viewerUserId} THEN 'SELF'
                 WHEN EXISTS (
                     SELECT 1
                     FROM follows vf
@@ -134,8 +133,7 @@
                       AND fr.status = 'PENDING'
                 ) THEN 'PENDING'
                 ELSE 'NOT_FOLLOWING'
-            END AS viewer_relation,
-            CASE WHEN u.user_id = #{viewerUserId} THEN 1 ELSE 0 END AS is_viewer
+            END AS viewer_relation
         FROM follows f
         JOIN users u
           ON u.user_id   = f.follower_user_id
@@ -159,7 +157,7 @@
             u.account_vis,
             f.created_at AS followed_at,
             CASE
-                WHEN u.user_id = #{viewerUserId} THEN 'NOT_FOLLOWING'
+                WHEN u.user_id = #{viewerUserId} THEN 'SELF'
                 WHEN EXISTS (
                     SELECT 1
                     FROM follows vf
@@ -174,8 +172,7 @@
                       AND fr.status = 'PENDING'
                 ) THEN 'PENDING'
                 ELSE 'NOT_FOLLOWING'
-            END AS viewer_relation,
-            CASE WHEN u.user_id = #{viewerUserId} THEN 1 ELSE 0 END AS is_viewer
+            END AS viewer_relation
         FROM follows f
         JOIN users u
           ON u.user_id   = f.following_user_id
