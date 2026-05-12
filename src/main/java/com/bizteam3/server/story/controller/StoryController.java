@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.story.dto.StoryGroupResponse;
 import com.bizteam3.server.story.dto.UserStoryResponse;
 import com.bizteam3.server.story.service.StoryService;
 
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/stories")
@@ -27,11 +29,12 @@ public class StoryController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@AccessTokenCheck
 	public void createStory(
-		@RequestPart("file") MultipartFile file
+		@RequestPart("file") MultipartFile file,
+		HttpServletRequest httpServletRequest
 	){
-		//TODO: JWT
-		Integer userId = 1;
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
 		service.create(userId, file);
 	}
 
@@ -43,19 +46,22 @@ public class StoryController {
 	}
 
 	@GetMapping("/feed")
-	public StoryGroupResponse getGroupStory() {
-		//TODO: JWT
-		Integer userId = 1;
+	@AccessTokenCheck
+	public StoryGroupResponse getGroupStory(
+		HttpServletRequest httpServletRequest
+	) {
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
 		return service.getFeeds(userId);
 	}
 
 	@DeleteMapping("/{storyId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@AccessTokenCheck
 	public void deleteStory(
-		@PathVariable Integer storyId
+		@PathVariable Integer storyId,
+		HttpServletRequest httpServletRequest
 	) {
-		//TODO: JWT
-		Integer userId = 1;
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
 		service.delete(userId, storyId);
 	}
 }

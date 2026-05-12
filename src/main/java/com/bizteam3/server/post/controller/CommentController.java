@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
+import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.post.dto.CommentCreateRequest;
 import com.bizteam3.server.post.dto.CommentResponse;
 import com.bizteam3.server.post.dto.CommentUpdateRequest;
 import com.bizteam3.server.post.service.CommentService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -27,23 +29,25 @@ public class CommentController {
 	private final CommentService service;
 
 	@GetMapping("/{postId}/comments")
+	@AccessTokenCheck
 	public PageResponse<CommentResponse> getComments(
 		@PathVariable Integer postId,
-		PageRequest request
+		PageRequest request,
+		HttpServletRequest httpServletRequest
 	){
-		//TODO: JWT
-		Integer userId = 1;
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
 		return service.findComments(postId, userId, request);
 	}
 
 
 	@PostMapping("/{postId}/comments")
+	@AccessTokenCheck
 	public void createComment(
 		@PathVariable Integer postId,
-		@Valid @RequestBody CommentCreateRequest request
+		@Valid @RequestBody CommentCreateRequest request,
+		HttpServletRequest httpServletRequest
 	) {
-		// TODO: JWT
-		Integer userId = 1;
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
 		service.create(postId, userId, request);
 	}
 
