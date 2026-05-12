@@ -9,11 +9,15 @@
                type="com.bizteam3.server.notification.dto.NotificationResponse">
         <constructor>
             <idArg column="notification_id" javaType="Integer"/>
+            <arg column="actor_user_id" javaType="Integer"/>
+            <arg column="actor_username" javaType="String"/>
             <arg column="type" javaType="String"/>
             <arg column="actor_name" javaType="String"/>
             <arg column="actor_image_url" javaType="String"/>
             <arg column="actor_count" javaType="Integer"/>
             <arg column="target_image_url" javaType="String"/>
+            <arg column="viewer_relation"
+                 javaType="com.bizteam3.server.follows.dto.FollowViewerRelation"/>
             <arg column="is_read_bool" javaType="Boolean"/>
             <arg column="created_at" javaType="java.time.LocalDateTime"/>
         </constructor>
@@ -50,6 +54,8 @@
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
         SELECT
             n.notification_id,
+            n.actor_user_id,
+            u.username AS actor_username,
             n.notification_type AS type,
             COALESCE(u.username, 'system') AS actor_name,
             u.profile_img AS actor_image_url,
@@ -70,6 +76,24 @@
                 )
                 ELSE n.image_url
             END AS target_image_url,
+            CASE
+                WHEN n.actor_user_id IS NULL THEN 'NOT_FOLLOWING'
+                WHEN n.actor_user_id = #{receiverUserId} THEN 'SELF'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follows f
+                    WHERE f.follower_user_id = #{receiverUserId}
+                      AND f.following_user_id = n.actor_user_id
+                ) THEN 'FOLLOWING'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follow_requests fr
+                    WHERE fr.requester_user_id = #{receiverUserId}
+                      AND fr.receiver_user_id = n.actor_user_id
+                      AND fr.status = 'PENDING'
+                ) THEN 'PENDING'
+                ELSE 'NOT_FOLLOWING'
+            END AS viewer_relation,
             CASE
                 WHEN n.is_read = 1 THEN 1
                 ELSE 0

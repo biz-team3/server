@@ -2,6 +2,8 @@ package com.bizteam3.server.notification.dto;
 
 import java.time.LocalDateTime;
 
+import com.bizteam3.server.follows.dto.FollowViewerRelation;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -9,11 +11,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class NotificationResponse {
     private final Integer notificationId;
+    private final Integer actorUserId;
+    private final String actorUsername;
     private final String type;
     private final String actorName;
     private final String actorImageUrl;
     private final Integer actorCount;
     private final String targetImageUrl;
+    private final FollowViewerRelation viewerRelation;
     private final Boolean read;
     private final LocalDateTime createdAt;
 }
