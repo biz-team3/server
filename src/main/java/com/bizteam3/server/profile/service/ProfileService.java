@@ -1,5 +1,7 @@
 package com.bizteam3.server.profile.service;
 
-public interface ProfileService {
+import com.bizteam3.server.profile.dto.ProfileResponse;
 
+public interface ProfileService {
+    ProfileResponse myProfile (Integer userId);
 }

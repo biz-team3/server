@@ -14,6 +14,7 @@ public interface PostDao {
     boolean existsByPostId(Integer postId);
     int updateCaption(Post post);
     int countByPostId(Integer postId);
+    int countByUserId(Integer userId);
 
     int deleteMediasByPostId(Integer postId);
     int deletePostHashtagsByPostId(Integer postId);
