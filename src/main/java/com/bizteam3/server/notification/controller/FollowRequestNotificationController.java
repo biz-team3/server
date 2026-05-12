@@ -30,7 +30,7 @@ public class FollowRequestNotificationController {
     @GetMapping
     public PendingFollowRequestListResponse getFollowRequests() {
         // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 2;
+        Integer loginUserId = 1;
         return followRequestNotificationService.findPendingRequests(loginUserId);
     }
 
@@ -39,7 +39,7 @@ public class FollowRequestNotificationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void acceptFollowRequest(@PathVariable Integer requestId) {
         // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 2;
+        Integer loginUserId = 1;
         followRequestNotificationService.accept(loginUserId, requestId);
     }
 
@@ -48,7 +48,7 @@ public class FollowRequestNotificationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void rejectFollowRequest(@PathVariable Integer requestId) {
         // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
-        Integer loginUserId = 2;
+        Integer loginUserId = 1;
         followRequestNotificationService.reject(loginUserId, requestId);
     }
 }
