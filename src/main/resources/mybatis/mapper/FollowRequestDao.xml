@@ -143,4 +143,11 @@
         ORDER BY fr.created_at DESC
     </select>
 
+    <select id="countPendingByReceiver" resultType="int">
+        SELECT COUNT(1)
+        FROM follow_requests
+        WHERE receiver_user_id = #{receiverUserId}
+          AND status = 'PENDING'
+    </select>
+
 </mapper>

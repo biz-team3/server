@@ -16,12 +16,11 @@ import lombok.RequiredArgsConstructor;
 /**
  * 팔로우 요청 알림 패널용 서비스 구현체
  *
- * 현재 단계에서는 별도 notifications 테이블이 아니라 follow_requests 테이블을 조회하므로
+ * 현재 단계에서는 팔로우 요청 목록만 follow_requests 테이블을 직접 조회하므로
  * FollowRequestDao, FollowDao, FollowService 를 재사용함.
  *
- * TODO: 이후 일반 알림 API 구현 시 NotificationDao, NotificationDao.xml, Notification entity 분리 필요
- * 대상 API: GET /api/notifications, GET /api/notifications/summary,
- * PATCH /api/notifications/read
+ * TODO: mutualText 는 공통 팔로워/맞팔 정책이 정해지면 서버 계산값으로 내려주기
+ * 현재는 정책 미정이라 null 허용
  *
  * @see com.bizteam3.server.notification.controller.FollowRequestNotificationController
  */
