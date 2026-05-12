@@ -169,4 +169,26 @@
         ORDER BY p.created_at DESC
         OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
+
+    <select id="selectFeedPostsByUserId"
+            resultType="com.bizteam3.server.post.entity.Post">
+        SELECT
+        post_id,
+        user_id,
+        caption,
+        translated_caption
+        FROM posts
+        WHERE user_id = #{userId}
+        AND delete_at IS NULL
+        ORDER BY created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <select id="countAllByUserId"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM posts
+        WHERE user_id = #{userId}
+        AND delete_at IS NULL
+    </select>
 </mapper>

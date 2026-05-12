@@ -12,4 +12,6 @@ public interface MediaDao {
     int insert(Media media);
     int deleteByPostId(Integer postId);
     List<FeedPostMediaRow> selectByPostIds(@Param("postIds") List<Integer> postIds);
+    int countAllByPostId(@Param("postId") Integer postId);
+    Media findFirstByPostId(@Param("postId") Integer postId);
 }
