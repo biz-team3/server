@@ -37,12 +37,14 @@ public interface FollowDao {
 	int countFollowing(@Param("userId") Integer userId);
 
 	List<FollowUserResponse> selectFollowers(
+		@Param("viewerUserId") Integer viewerUserId,
 		@Param("userId") Integer userId,
 		@Param("offset") int offset,
 		@Param("size") int size
 	);
 
 	List<FollowUserResponse> selectFollowing(
+		@Param("viewerUserId") Integer viewerUserId,
 		@Param("userId") Integer userId,
 		@Param("offset") int offset,
 		@Param("size") int size

@@ -17,13 +17,13 @@ public interface FollowService {
      * targetUserId 의 팔로워 목록
      * PageRequest 로 offset/size 계산 후 PageResponse 로 hasNext 응답
      */
-    PageResponse<FollowUserResponse> findFollowers(Integer userId, PageRequest pageRequest);
+    PageResponse<FollowUserResponse> findFollowers(Integer viewerUserId, Integer userId, PageRequest pageRequest);
 
     /**
      * targetUserId 의 팔로잉 목록
      * User 목록 페이징 구조와 동일하게 공통 DTO 재사용
      */
-    PageResponse<FollowUserResponse> findFollowing(Integer userId, PageRequest pageRequest);
+    PageResponse<FollowUserResponse> findFollowing(Integer viewerUserId, Integer userId, PageRequest pageRequest);
 
     /**
      * 나(receiverUserId)에게 온 PENDING 팔로우 요청 목록 조회

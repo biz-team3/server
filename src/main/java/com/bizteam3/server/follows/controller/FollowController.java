@@ -59,7 +59,9 @@ public class FollowController {
         @PathVariable("userId") Integer userId,
         @Valid PageRequest pageRequest
     ) {
-        return followService.findFollowers(userId, pageRequest);
+        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
+        Integer loginUserId = 1;
+        return followService.findFollowers(loginUserId, userId, pageRequest);
     }
 
     /** GET /api/follows/{userId}/following?page=0&size=20 - 팔로잉 목록 & 페이지네이션 */
@@ -68,7 +70,9 @@ public class FollowController {
         @PathVariable("userId") Integer userId,
         @Valid PageRequest pageRequest
     ) {
-        return followService.findFollowing(userId, pageRequest);
+        // TODO: 인증 기능 연결 후 로그인 사용자 ID로 교체 필요
+        Integer loginUserId = 1;
+        return followService.findFollowing(loginUserId, userId, pageRequest);
     }
 
     /**

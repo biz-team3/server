@@ -14,8 +14,10 @@ import lombok.Data;
 @Builder
 public class FollowUserResponse {
 	private final Integer userId;
+	private final String username;
 	private final String name;
 	private final String profileImg;
 	private final AccountVisType accountVis;
 	private final LocalDateTime followedAt;
+	private final FollowViewerRelation viewerRelation;
 }

@@ -14,11 +14,14 @@
                type="com.bizteam3.server.follows.dto.FollowUserResponse">
         <constructor>
             <idArg column="user_id"     javaType="Integer"/>
+            <arg   column="username"    javaType="String"/>
             <arg   column="name"        javaType="String"/>
             <arg   column="profile_img" javaType="String"/>
             <arg   column="account_vis"
                    javaType="com.bizteam3.server.user.entity.AccountVisType"/>
             <arg   column="followed_at" javaType="java.time.LocalDateTime"/>
+            <arg   column="viewer_relation"
+                   javaType="com.bizteam3.server.follows.dto.FollowViewerRelation"/>
         </constructor>
     </resultMap>
 
@@ -109,10 +112,28 @@
     <select id="selectFollowers" resultMap="followUserResultMap">
         SELECT
             u.user_id,
+            u.username,
             u.name,
             u.profile_img,
             u.account_vis,
-            f.created_at AS followed_at
+            f.created_at AS followed_at,
+            CASE
+                WHEN u.user_id = #{viewerUserId} THEN 'SELF'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follows vf
+                    WHERE vf.follower_user_id = #{viewerUserId}
+                      AND vf.following_user_id = u.user_id
+                ) THEN 'FOLLOWING'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follow_requests fr
+                    WHERE fr.requester_user_id = #{viewerUserId}
+                      AND fr.receiver_user_id = u.user_id
+                      AND fr.status = 'PENDING'
+                ) THEN 'PENDING'
+                ELSE 'NOT_FOLLOWING'
+            END AS viewer_relation
         FROM follows f
         JOIN users u
           ON u.user_id   = f.follower_user_id
@@ -130,10 +151,28 @@
     <select id="selectFollowing" resultMap="followUserResultMap">
         SELECT
             u.user_id,
+            u.username,
             u.name,
             u.profile_img,
             u.account_vis,
-            f.created_at AS followed_at
+            f.created_at AS followed_at,
+            CASE
+                WHEN u.user_id = #{viewerUserId} THEN 'SELF'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follows vf
+                    WHERE vf.follower_user_id = #{viewerUserId}
+                      AND vf.following_user_id = u.user_id
+                ) THEN 'FOLLOWING'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follow_requests fr
+                    WHERE fr.requester_user_id = #{viewerUserId}
+                      AND fr.receiver_user_id = u.user_id
+                      AND fr.status = 'PENDING'
+                ) THEN 'PENDING'
+                ELSE 'NOT_FOLLOWING'
+            END AS viewer_relation
         FROM follows f
         JOIN users u
           ON u.user_id   = f.following_user_id
