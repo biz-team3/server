@@ -1,14 +1,15 @@
 package com.bizteam3.server.post.controller;
 
-import com.bizteam3.server.post.dto.MediaReplaceRequest;
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
+import com.bizteam3.server.post.dto.*;
+
 import java.util.List;
 
-import com.bizteam3.server.post.dto.MediaUploadResponse;
-import com.bizteam3.server.post.dto.PostCreateRequest;
-import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
 import com.bizteam3.server.post.service.LikeService;
 import com.bizteam3.server.post.service.MediaService;
 import com.bizteam3.server.post.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -91,5 +92,13 @@ public class PostController {
         //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
         Integer testPostId = 1;
         likeService.unlikePost(userId, testPostId);
+    }
+
+    @GetMapping("/feed")
+    public PageResponse<FeedPostResponse> getFeedPosts(@Valid PageRequest request
+        ){
+        Integer userId = 1;
+        //TODO: 테스트용 postId, 추후에는 pathVariable로 받아야함.
+        return postService.getFeedPosts(request, userId);
     }
 }

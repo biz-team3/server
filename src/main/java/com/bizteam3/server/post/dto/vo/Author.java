@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class Author {
 	Integer userId;
 	String username;
+	String profileImageUrl;
 }

@@ -24,7 +24,8 @@ public class CommentResponse {
 			.postId(row.getPostId())
 			.author(new Author(
 				row.getUserId(),
-				row.getUserName()
+				row.getUserName(),
+				row.getProfileImageUrl()
 			))
 			.text(row.getText())
 			.createdAt(row.getCreatedAt())

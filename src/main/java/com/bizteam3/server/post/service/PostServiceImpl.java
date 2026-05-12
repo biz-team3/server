@@ -1,5 +1,7 @@
 package com.bizteam3.server.post.service;
 
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.global.exception.BusinessException;
 import com.bizteam3.server.global.exception.ErrorCode;
 import com.bizteam3.server.global.exception.common.BadRequestException;
@@ -8,17 +10,19 @@ import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.post.dao.MediaDao;
 import com.bizteam3.server.post.dao.HashtagDao;
 import com.bizteam3.server.post.dao.PostDao;
-import com.bizteam3.server.post.dto.MediaReplaceRequest;
-import com.bizteam3.server.post.dto.MediaRequest;
-import com.bizteam3.server.post.dto.PostCreateRequest;
-import com.bizteam3.server.post.dto.PostUpdateCaptionRequest;
+import com.bizteam3.server.post.dao.row.FeedPostMediaRow;
+import com.bizteam3.server.post.dao.row.FeedPostRow;
+import com.bizteam3.server.post.dto.*;
 import com.bizteam3.server.post.entity.Media;
 import com.bizteam3.server.post.entity.Post;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 
@@ -60,6 +64,54 @@ public class PostServiceImpl implements PostService {
 				mediaDao.insert(media);
 			}
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public PageResponse<FeedPostResponse> getFeedPosts(PageRequest requset, Integer userId) {
+		List<FeedPostRow> rows = postDao.selectFeedPosts(
+				userId,
+				requset.getOffset(),
+				requset.getSize()
+		);
+
+		int total = postDao.countFeedPosts(userId);
+
+		List<FeedPostResponse> responses = rows.stream()
+				.map(FeedPostResponse::new)
+				.toList();
+
+		if (responses.isEmpty()) {
+			return new PageResponse<>(responses, requset, total);
+		}
+
+		List<Integer> postIds = responses.stream()
+				.map(FeedPostResponse::getPostId)
+				.toList();
+
+		List<FeedPostMediaRow> mediaRows = mediaDao.selectByPostIds(postIds);
+
+		Map<Integer, List<PostMediaResponse>> mediaMap = mediaRows.stream()
+				.collect(Collectors.groupingBy(
+						FeedPostMediaRow::getPostId,
+						Collectors.mapping(
+								row -> new PostMediaResponse(
+										row.getMediaId(),
+										row.getMediaType(),
+										row.getMediaUrl(),
+										row.getSortOrder()
+								),
+								Collectors.toList()
+						)
+				));
+
+		for (FeedPostResponse response : responses) {
+			response.setMedia(
+					mediaMap.getOrDefault(response.getPostId(), List.of())
+			);
+		}
+
+		return new PageResponse<>(responses, requset, total);
 	}
 
 	@Transactional
