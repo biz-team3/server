@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bizteam3.server.follows.dto.FollowRequestResponse;
 import com.bizteam3.server.follows.entity.FollowRequest;
+import com.bizteam3.server.notification.dto.PendingFollowRequestResponse;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -53,4 +54,13 @@ public interface FollowRequestDao {
      * @param receiverUserId 수신자(비공개 계정 본인) ID
      */
     List<FollowRequestResponse> selectPendingByReceiver(@Param("receiverUserId") Integer receiverUserId);
+
+    /**
+     * 알림 패널용 PENDING 팔로우 요청 목록 조회
+     *
+     * @param receiverUserId 수신자(비공개 계정 본인) ID
+     */
+    List<PendingFollowRequestResponse> selectPendingNotificationByReceiver(
+        @Param("receiverUserId") Integer receiverUserId
+    );
 }
