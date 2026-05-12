@@ -27,4 +27,14 @@ public interface PostDao {
             @Param("offset") int offset,
             @Param("size") int size
     );
+
+    List<Post> selectFeedPostsByUserId(
+        @Param("userId") Integer userId,
+        @Param("offset") int offset,
+        @Param("size") int size
+    );
+
+    int countAllByUserId(
+        @Param("userId") Integer userId
+    );
 }

@@ -6,23 +6,23 @@
     <insert id="insert"
             parameterType="com.bizteam3.server.post.entity.Media">
         INSERT INTO medias (
-            post_id,
-            media_type,
-            media_url,
-            sort_order,
-            original_file_name,
-            content_type,
-            file_size,
-            created_at
+        post_id,
+        media_type,
+        media_url,
+        sort_order,
+        original_file_name,
+        content_type,
+        file_size,
+        created_at
         ) VALUES (
-            #{postId},
-            #{mediaType},
-            #{mediaUrl},
-            #{sortOrder},
-            #{originalFileName},
-            #{contentType},
-            #{fileSize},
-            SYSTIMESTAMP
+        #{postId},
+        #{mediaType},
+        #{mediaUrl},
+        #{sortOrder},
+        #{originalFileName},
+        #{contentType},
+        #{fileSize},
+        SYSTIMESTAMP
         )
     </insert>
 
@@ -35,16 +35,36 @@
     <select id="selectByPostIds"
             resultType="com.bizteam3.server.post.dao.row.FeedPostMediaRow">
         SELECT
-            post_id,
-            media_id,
-            media_type,
-            media_url,
-            sort_order
+        post_id,
+        media_id,
+        media_type,
+        media_url,
+        sort_order
         FROM medias
         WHERE post_id IN
         <foreach collection="postIds" item="postId" open="(" separator="," close=")">
             #{postId}
         </foreach>
         ORDER BY post_id ASC, sort_order ASC
+    </select>
+
+    <select id="countAllByPostId" resultType="int">
+        SELECT COUNT(*)
+        FROM medias
+        WHERE post_id = #{postId}
+    </select>
+
+    <select id="findFirstByPostId"
+            resultType="com.bizteam3.server.post.entity.Media">
+        SELECT
+        media_id,
+        post_id,
+        media_url,
+        media_type,
+        created_at
+        FROM medias
+        WHERE post_id = #{postId}
+        ORDER BY media_id ASC
+        FETCH FIRST 1 ROWS ONLY
     </select>
 </mapper>
