@@ -10,13 +10,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class NotificationResponse {
-    /** 알림 식별자임. */
+    /** 알림 식별자 */
     private final Integer notificationId;
 
-    /** 알림을 발생시킨 사용자 id임. follow / unfollow 요청 대상 식별에 사용함. */
+    /** 프론트 follow / unfollow 요청 대상 식별에 사용함. */
     private final Integer actorUserId;
 
-    /** 알림을 발생시킨 사용자 username임. 프로필 이동 경로에 사용함. */
+    /** 알림을 발생시킨 사용자 username. 프론트에서 /profile/{username} 이동 경로에 사용함. */
     private final String actorUsername;
 
     /** 알림 타입임. 예: LIKE, FOLLOW */
@@ -34,7 +34,7 @@ public class NotificationResponse {
     /** 게시글 썸네일 등 알림 우측에 표시할 대상 이미지 경로임. */
     private final String targetImageUrl;
 
-    /** 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 나타내는 값임. */
+    /** 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 나타내는 값임. 알림 패널 버튼 상태에 사용함. */
     private final FollowViewerRelation viewerRelation;
 
     /** 읽음 여부임. */

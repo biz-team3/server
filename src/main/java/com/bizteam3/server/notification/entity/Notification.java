@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 public class Notification {
     private Integer notificationId;
     private Integer receiverUserId;
+
+    /** 알림을 발생시킨 사용자 id. 예: 나를 팔로우하거나 좋아요를 누른 사용자 */
     private Integer actorUserId;
+
     private NotificationType notificationType;
     private String targetType;
     private Integer targetId;

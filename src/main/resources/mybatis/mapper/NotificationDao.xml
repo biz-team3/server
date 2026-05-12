@@ -54,6 +54,7 @@
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
         SELECT
             n.notification_id,
+            <!-- actor: 알림을 발생시킨 사용자 -->
             n.actor_user_id,
             u.username AS actor_username,
             n.notification_type AS type,
@@ -76,6 +77,7 @@
                 )
                 ELSE n.image_url
             END AS target_image_url,
+            <!-- viewer_relation: 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 계산 -->
             CASE
                 WHEN n.actor_user_id IS NULL THEN 'NOT_FOLLOWING'
                 WHEN n.actor_user_id = #{receiverUserId} THEN 'SELF'
