@@ -31,7 +31,8 @@
             <arg   column="requester_id"      javaType="Integer"/>
             <arg   column="target_user_id"    javaType="Integer"/>
             <arg   column="requester_name"    javaType="String"/>
-            <arg   column="mutual_text"       javaType="String"/>
+            <arg   column="mutual_follower_name"  javaType="String"/>
+            <arg   column="mutual_follower_count" javaType="Integer"/>
             <arg   column="requester_profile_img" javaType="String"/>
         </constructor>
     </resultMap>
@@ -124,16 +125,39 @@
     <!-- ================================================================
          SELECT: 알림 패널용 PENDING 팔로우 요청 목록
          - docs/http/notifications/get-follow-requests.http 응답 구조에 맞춤
-         - mutual_text 는 맞팔/공통 팔로워 정책 확정 후 계산 로직 추가 예정
+         - mutual follower 는 "내가 이미 팔로우 중인 사람들 중 요청자도 팔로우하는 사람" 기준으로 계산
          ================================================================ -->
     <select id="selectPendingNotificationByReceiver" resultMap="pendingFollowRequestResponseMap">
         SELECT
             fr.request_id,
             fr.requester_user_id AS requester_id,
             fr.receiver_user_id  AS target_user_id,
-            u.username    AS requester_name,
-            NULL          AS mutual_text,
-            u.profile_img AS requester_profile_img
+            u.username           AS requester_name,
+            (
+                SELECT mu.username
+                FROM follows vf
+                JOIN follows mf
+                  ON mf.follower_user_id  = vf.following_user_id
+                 AND mf.following_user_id = fr.requester_user_id
+                JOIN users mu
+                  ON mu.user_id = vf.following_user_id
+                 AND mu.delete_at IS NULL
+                WHERE vf.follower_user_id = fr.receiver_user_id
+                ORDER BY mu.username ASC
+                FETCH FIRST 1 ROWS ONLY
+            ) AS mutual_follower_name,
+            (
+                SELECT COUNT(1)
+                FROM follows vf
+                JOIN follows mf
+                  ON mf.follower_user_id  = vf.following_user_id
+                 AND mf.following_user_id = fr.requester_user_id
+                JOIN users mu
+                  ON mu.user_id = vf.following_user_id
+                 AND mu.delete_at IS NULL
+                WHERE vf.follower_user_id = fr.receiver_user_id
+            ) AS mutual_follower_count,
+            u.profile_img        AS requester_profile_img
         FROM follow_requests fr
         JOIN users u
           ON u.user_id   = fr.requester_user_id

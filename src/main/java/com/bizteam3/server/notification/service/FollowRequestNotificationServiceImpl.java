@@ -19,8 +19,8 @@ import lombok.RequiredArgsConstructor;
  * 현재 단계에서는 팔로우 요청 목록만 follow_requests 테이블을 직접 조회하므로
  * FollowRequestDao, FollowDao, FollowService 를 재사용함.
  *
- * TODO: mutualText 는 공통 팔로워/맞팔 정책이 정해지면 서버 계산값으로 내려주기
- * 현재는 정책 미정이라 null 허용
+ * 공통 팔로워 문구는 서버에서 mutualFollowerName, mutualFollowerCount 로 계산하고
+ * 실제 문장 조합은 프론트에서 담당함.
  *
  * @see com.bizteam3.server.notification.controller.FollowRequestNotificationController
  */
