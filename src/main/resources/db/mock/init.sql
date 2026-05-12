@@ -707,6 +707,17 @@ INSERT INTO likes (user_id, post_id, created_at) VALUES (50, 48, SYSTIMESTAMP - 
 INSERT INTO likes (user_id, post_id, created_at) VALUES (57, 48, SYSTIMESTAMP - INTERVAL '105' MINUTE);
 COMMIT;
 
+-- NOTIFICATIONS
+INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, message, image_url, is_read, created_at)
+VALUES (1, 2, 'LIKE', 'POST', 48, '님 외 1명이 회원님의 게시물을 좋아합니다.', NULL, 0, SYSTIMESTAMP - INTERVAL '2' HOUR);
+INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, message, image_url, is_read, created_at)
+VALUES (1, 3, 'FOLLOW', 'USER', 3, '님이 회원님을 팔로우하기 시작했습니다.', NULL, 0, SYSTIMESTAMP - INTERVAL '2' DAY);
+INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, message, image_url, is_read, created_at)
+VALUES (1, 4, 'FOLLOW', 'USER', 4, '님이 회원님을 팔로우하기 시작했습니다.', NULL, 1, SYSTIMESTAMP - INTERVAL '4' DAY);
+INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, message, image_url, is_read, created_at)
+VALUES (2, 1, 'FOLLOW', 'USER', 1, '님이 회원님을 팔로우하기 시작했습니다.', NULL, 0, SYSTIMESTAMP - INTERVAL '3' HOUR);
+COMMIT;
+
 -- SAVES
 INSERT INTO saves (user_id, post_id, created_at) VALUES (1, 5, SYSTIMESTAMP - INTERVAL '6' MINUTE);
 INSERT INTO saves (user_id, post_id, created_at) VALUES (2, 5, SYSTIMESTAMP - INTERVAL '7' MINUTE);
