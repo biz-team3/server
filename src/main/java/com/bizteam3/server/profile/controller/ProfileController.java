@@ -30,12 +30,19 @@ public class ProfileController {
     }
 
 	@GetMapping("/{userId}")
-	public PageResponse<ProfileResponse> getProfilesByUserId(
+	public ProfileResponse getProfilesByUserId(
 			@PathVariable("userId") Integer userId,
 			HttpServletRequest request){
 		Integer viewerId = (Integer) request.getAttribute("userId");
 		return profileService.getProfileByUserId(userId, viewerId);
+	}
 
+	@GetMapping("/by-username/{username}")
+	public ProfileResponse getProfilesByUsername(
+			@PathVariable String username,
+			HttpServletRequest request){
+		Integer viewerId = (Integer) request.getAttribute("userId");
+		return profileService.getProfileByUsername(username, viewerId);
 	}
 
 	@GetMapping("/users/{userId}/posts")

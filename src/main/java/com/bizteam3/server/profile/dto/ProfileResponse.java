@@ -23,29 +23,6 @@ public class ProfileResponse {
     Boolean canViewContent;
     Boolean isOwner;
 
-    public static ProfileResponse fromMe(
-            User user,
-            Integer followerCount,
-            Integer followingCount,
-            Integer postCount
-    ) {
-        return ProfileResponse.builder()
-                .userId(user.getUserId())
-                .username(user.getUsername())
-                .name(user.getName())
-                .bio(user.getBio())
-                .website(user.getWebsite())
-                .profileImageUrl(user.getProfileImg())
-                .followerCount(followerCount)
-                .followingCount(followingCount)
-                .postCount(postCount)
-                .accountVisibility(user.getAccountVis())
-                .viewerRelation(FollowViewerRelation.SELF)
-                .canViewContent(true)
-                .isOwner(true)
-                .build();
-    }
-
     public static ProfileResponse fromUser(
             User user,
             Integer followerCount,
@@ -69,6 +46,22 @@ public class ProfileResponse {
                 .canViewContent(canViewContent)
                 .isOwner(viewerRelation == FollowViewerRelation.SELF)
                 .build();
+    }
+
+    public static ProfileResponse fromMe(
+            User user,
+            Integer followerCount,
+            Integer followingCount,
+            Integer postCount
+    ) {
+        return fromUser(
+                user,
+                followerCount,
+                followingCount,
+                postCount,
+                FollowViewerRelation.SELF,
+                true
+        );
     }
 
 }

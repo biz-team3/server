@@ -38,47 +38,34 @@ public class ProfileServiceImpl implements ProfileService {
 	private final FollowRequestDao followRequestDao;
 
 	@Override
-    @Transactional
+    @Transactional(readOnly = true)
 	public ProfileResponse myProfile (Integer userId){
-        User user = userDao.selectById(userId);
-
-        if(user == null || user.getDeleteAt() != null){//?
-            throw NotFoundException.of("User", userId);
-        }
-
-		int followerCount = followDao.countFollowers(userId);
-		int followingCount = followDao.countFollowing(userId);
-		int postCount = postDao.countAllByUserId(userId);
-
-		return ProfileResponse.fromMe(
-				user,
-				followerCount,
-				followingCount,
-				postCount
-		);
+        User user = getActiveUser(userId);
+		return buildProfileResponse(user, FollowViewerRelation.SELF, true);
     }
+
 	@Override
 	@Transactional(readOnly = true)
 	public ProfileResponse getProfileByUserId(Integer userId, Integer viewerId) {
 		User user = getActiveUser(userId);
-
-		int followerCount = followDao.countFollowers(userId);
-		int followingCount = followDao.countFollowing(userId);
-		int postCount = postDao.countAllByUserId(userId);
-
 		FollowViewerRelation viewerRelation = resolveViewerRelation(userId, viewerId);
-		boolean canViewContent = user.getAccountVis() == AccountVisType.PUBLIC
-				|| viewerRelation == FollowViewerRelation.SELF
-				|| viewerRelation == FollowViewerRelation.FOLLOWING;
+		boolean canViewContent = canViewContent(user, viewerRelation);
 
-		return ProfileResponse.fromUser(
-				user,
-				followerCount,
-				followingCount,
-				postCount,
-				viewerRelation,
-				canViewContent
-		);
+		return buildProfileResponse(user, viewerRelation, canViewContent);
+	}
+	@Override
+	@Transactional(readOnly = true)
+	ProfileResponse getProfileByUsername(String username, Integer viewerId){
+		User user = userDao.findByUsername(username);
+
+		if(user == null || user.getDeleteAt() != null){
+			throw NotFoundException.of("User", username);
+		}
+
+		FollowViewerRelation viewerRelation = resolveViewerRelation(user.getUserId(), viewerId);
+		boolean canViewContent = canViewContent(user, viewerRelation);
+
+		return buildProfileResponse(user, viewerRelation, canViewContent);
 	}
 
 	@Override
@@ -96,6 +83,27 @@ public class ProfileServiceImpl implements ProfileService {
 		List<ContentResponse> list = getList(posts);
 
 		return new PageResponse<>(list, request, total);
+	}
+
+	private ProfileResponse buildProfileResponse(
+			User user,
+			FollowViewerRelation viewerRelation,
+			boolean canViewContent
+	) {
+		Integer userId = user.getUserId();
+
+		int followerCount = followDao.countFollowers(userId);
+		int followingCount = followDao.countFollowing(userId);
+		int postCount = postDao.countAllByUserId(userId);
+
+		return ProfileResponse.fromUser(
+				user,
+				followerCount,
+				followingCount,
+				postCount,
+				viewerRelation,
+				canViewContent
+		);
 	}
 
 	private User getActiveUser(Integer userId){
@@ -120,6 +128,12 @@ public class ProfileServiceImpl implements ProfileService {
 		}
 
 		return FollowViewerRelation.NOT_FOLLOWING;
+	}
+
+	private boolean canViewContent(User user, FollowViewerRelation viewerRelation) {
+		return user.getAccountVis() == AccountVisType.PUBLIC
+				|| viewerRelation == FollowViewerRelation.SELF
+				|| viewerRelation == FollowViewerRelation.FOLLOWING;
 	}
 
 	private @NonNull List<ContentResponse> getList(List<Post> posts) {
