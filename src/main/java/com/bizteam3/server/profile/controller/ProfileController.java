@@ -1,5 +1,6 @@
 package com.bizteam3.server.profile.controller;
 
+import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.profile.dto.ProfileRequest;
 import com.bizteam3.server.profile.dto.ProfileResponse;
 import com.bizteam3.server.profile.service.ProfileService;
@@ -21,12 +22,14 @@ public class ProfileController {
 	private final ProfileService profileService;
 
     @GetMapping("/me")
+	@AccessTokenCheck
     public ProfileResponse myProfile(HttpServletRequest request){
         Integer userId = (Integer) request.getAttribute("userId");
         return profileService.myProfile(userId);
     }
 
 	@GetMapping("/{userId}")
+	@AccessTokenCheck
 	public ProfileResponse getProfilesByUserId(
 			@PathVariable("userId") Integer userId,
 			HttpServletRequest request){
@@ -35,6 +38,7 @@ public class ProfileController {
 	}
 
 	@GetMapping("/by-username/{username}")
+	@AccessTokenCheck
 	public ProfileResponse getProfilesByUsername(
 			@PathVariable String username,
 			HttpServletRequest request){
@@ -42,7 +46,8 @@ public class ProfileController {
 		return profileService.getProfileByUsername(username, viewerId);
 	}
 
-	@PatchMapping("users/{userId}")
+	@PatchMapping("/users/{userId}")
+	@AccessTokenCheck
 	public ProfileResponse updateProfile(
 			@PathVariable Integer userId,
 			@RequestBody ProfileRequest request,
@@ -53,6 +58,7 @@ public class ProfileController {
 	}
 
 	@GetMapping("/users/{userId}/posts")
+	@AccessTokenCheck
 	public PageResponse<ContentResponse> getProfilePosts(
 		@PathVariable Integer userId,
 		@Valid PageRequest pageRequest
