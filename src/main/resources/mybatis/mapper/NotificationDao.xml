@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.notification.dao.NotificationDao">
+
+    <resultMap id="notificationResponseMap"
+               type="com.bizteam3.server.notification.dto.NotificationResponse">
+        <constructor>
+            <idArg column="notification_id" javaType="Integer"/>
+            <arg column="actor_user_id" javaType="Integer"/>
+            <arg column="actor_username" javaType="String"/>
+            <arg column="type" javaType="String"/>
+            <arg column="actor_name" javaType="String"/>
+            <arg column="actor_image_url" javaType="String"/>
+            <arg column="actor_count" javaType="Integer"/>
+            <arg column="target_image_url" javaType="String"/>
+            <arg column="viewer_relation"
+                 javaType="com.bizteam3.server.follows.dto.FollowViewerRelation"/>
+            <arg column="is_read_bool" javaType="Boolean"/>
+            <arg column="created_at" javaType="java.time.LocalDateTime"/>
+        </constructor>
+    </resultMap>
+
+    <insert id="insert"
+            parameterType="com.bizteam3.server.notification.entity.Notification"
+            useGeneratedKeys="true"
+            keyProperty="notificationId"
+            keyColumn="notification_id">
+        INSERT INTO notifications (
+            receiver_user_id,
+            actor_user_id,
+            notification_type,
+            target_type,
+            target_id,
+            message,
+            image_url,
+            is_read,
+            created_at
+        ) VALUES (
+            #{receiverUserId},
+            #{actorUserId},
+            #{notificationType},
+            #{targetType},
+            #{targetId},
+            #{message},
+            #{imageUrl},
+            #{isRead},
+            SYSTIMESTAMP
+        )
+    </insert>
+
+    <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
+        SELECT
+            n.notification_id,
+            <!-- actor: 알림을 발생시킨 사용자 -->
+            n.actor_user_id,
+            u.username AS actor_username,
+            n.notification_type AS type,
+            COALESCE(u.username, 'system') AS actor_name,
+            u.profile_img AS actor_image_url,
+            CASE
+                WHEN n.notification_type = 'LIKE' THEN 1
+                ELSE 0
+            END AS actor_count,
+            CASE
+                WHEN n.target_type = 'POST' THEN COALESCE(
+                    (
+                        SELECT m.media_url
+                        FROM medias m
+                        WHERE m.post_id = n.target_id
+                        ORDER BY m.sort_order ASC, m.media_id ASC
+                        FETCH FIRST 1 ROWS ONLY
+                    ),
+                    n.image_url
+                )
+                ELSE n.image_url
+            END AS target_image_url,
+            <!-- viewer_relation: 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 계산 -->
+            CASE
+                WHEN n.actor_user_id IS NULL THEN 'NOT_FOLLOWING'
+                WHEN n.actor_user_id = #{receiverUserId} THEN 'SELF'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follows f
+                    WHERE f.follower_user_id = #{receiverUserId}
+                      AND f.following_user_id = n.actor_user_id
+                ) THEN 'FOLLOWING'
+                WHEN EXISTS (
+                    SELECT 1
+                    FROM follow_requests fr
+                    WHERE fr.requester_user_id = #{receiverUserId}
+                      AND fr.receiver_user_id = n.actor_user_id
+                      AND fr.status = 'PENDING'
+                ) THEN 'PENDING'
+                ELSE 'NOT_FOLLOWING'
+            END AS viewer_relation,
+            CASE
+                WHEN n.is_read = 1 THEN 1
+                ELSE 0
+            END AS is_read_bool,
+            n.created_at
+        FROM notifications n
+        LEFT JOIN users u
+          ON u.user_id = n.actor_user_id
+         AND u.delete_at IS NULL
+        WHERE n.receiver_user_id = #{receiverUserId}
+        ORDER BY n.created_at DESC, n.notification_id DESC
+    </select>
+
+    <select id="countUnreadByReceiverUserId" resultType="int">
+        SELECT COUNT(1)
+        FROM notifications
+        WHERE receiver_user_id = #{receiverUserId}
+          AND is_read = 0
+    </select>
+
+    <update id="markAllReadByReceiverUserId">
+        UPDATE notifications
+        SET is_read = 1
+        WHERE receiver_user_id = #{receiverUserId}
+          AND is_read = 0
+    </update>
+
+    <update id="markSelectedReadByReceiverUserId">
+        UPDATE notifications
+        SET is_read = 1
+        WHERE receiver_user_id = #{receiverUserId}
+          AND is_read = 0
+          AND notification_id IN
+        <foreach collection="notificationIds" item="notificationId" open="(" separator="," close=")">
+            #{notificationId}
+        </foreach>
+    </update>
+
+</mapper>

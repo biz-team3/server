@@ -63,4 +63,7 @@ public interface FollowRequestDao {
     List<PendingFollowRequestResponse> selectPendingNotificationByReceiver(
         @Param("receiverUserId") Integer receiverUserId
     );
+
+    /** 특정 사용자가 받은 PENDING 요청 개수 */
+    int countPendingByReceiver(@Param("receiverUserId") Integer receiverUserId);
 }
