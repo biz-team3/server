@@ -14,7 +14,7 @@ CREATE TABLE notifications (
         PRIMARY KEY (notification_id),
 
     CONSTRAINT ck_notifications_type
-        CHECK (notification_type IN ('LIKE', 'FOLLOW')),
+        CHECK (notification_type IN ('LIKE', 'COMMENT', 'FOLLOW')),
 
     CONSTRAINT ck_notifications_read
         CHECK (is_read IN (0, 1)),
