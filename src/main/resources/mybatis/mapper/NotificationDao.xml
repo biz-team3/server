@@ -15,6 +15,8 @@
             <arg column="actor_name" javaType="String"/>
             <arg column="actor_image_url" javaType="String"/>
             <arg column="actor_count" javaType="Integer"/>
+            <arg column="target_type" javaType="String"/>
+            <arg column="target_id" javaType="Integer"/>
             <arg column="target_image_url" javaType="String"/>
             <arg column="viewer_relation"
                  javaType="com.bizteam3.server.follows.dto.FollowViewerRelation"/>
@@ -64,6 +66,8 @@
                 WHEN n.notification_type = 'LIKE' THEN 1
                 ELSE 0
             END AS actor_count,
+            n.target_type,
+            n.target_id,
             CASE
                 WHEN n.target_type = 'POST' THEN COALESCE(
                     (

@@ -100,7 +100,14 @@
             USER_ID,
             USERNAME,
             PASSWORD,
-            NAME
+            NAME,
+            BIO,
+            WEBSITE,
+            PROFILE_IMG,
+            ACCOUNT_VIS,
+            CREATED_AT,
+            UPDATE_AT,
+            DELETE_AT
         FROM users
         WHERE username = #{username}
           AND delete_at IS NULL
