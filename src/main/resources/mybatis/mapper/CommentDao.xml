@@ -55,8 +55,12 @@
         C.TEXT,
         C.CREATED_AT
         FROM COMMENTS C
+        JOIN POSTS P
+        ON P.POST_ID = C.POST_ID
+        AND P.DELETE_AT IS NULL
         JOIN USERS U
         ON C.USER_ID = U.USER_ID
+        AND U.DELETE_AT IS NULL
         WHERE C.POST_ID = #{postId}
         AND C.DELETED_AT IS NULL
         ORDER BY C.CREATED_AT, C.COMMENT_ID

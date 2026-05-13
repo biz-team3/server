@@ -23,16 +23,22 @@
 
     <select id="countAllByPostId" resultType="int">
         SELECT COUNT(*)
-        FROM likes
-        WHERE post_id = #{postId}
+        FROM likes l
+        JOIN posts p
+        ON p.post_id = l.post_id
+        AND p.delete_at IS NULL
+        WHERE l.post_id = #{postId}
     </select>
 
     <select id="isLiked"
             resultType="int">
         SELECT COUNT(*)
-        FROM likes
-        WHERE user_id = #{userId}
-        AND post_id = #{postId}
+        FROM likes l
+        JOIN posts p
+        ON p.post_id = l.post_id
+        AND p.delete_at IS NULL
+        WHERE l.user_id = #{userId}
+        AND l.post_id = #{postId}
     </select>
 
     <delete id="delete">
@@ -40,13 +46,5 @@
         WHERE user_id = #{userId}
         AND post_id = #{postId}
     </delete>
-
-    <select id="countByPostId"
-            parameterType="int"
-            resultType="int">
-        SELECT COUNT(*)
-        FROM likes
-        WHERE post_id = #{postId}
-    </select>
 
 </mapper>

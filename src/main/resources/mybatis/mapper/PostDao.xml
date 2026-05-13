@@ -67,10 +67,14 @@
         WHERE post_id = #{postId}
     </delete>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM posts
+    <update id="softDelete" parameterType="int">
+        UPDATE posts
+        SET
+        delete_at = SYSTIMESTAMP,
+        update_at = SYSTIMESTAMP
         WHERE post_id = #{postId}
-    </delete>
+        AND delete_at IS NULL
+    </update>
 
     <select id="countByPostId" parameterType="int" resultType="int">
         SELECT COUNT(*)
@@ -193,7 +197,7 @@
     </select>
 
     <select id="selectDetailByPostId"
-            resultType="com.bizteam3.server.post.dto.PostDetailRow">
+            resultType="com.bizteam3.server.post.dao.row.PostDetailRow">
         SELECT
         p.post_id,
         p.user_id AS author_user_id,

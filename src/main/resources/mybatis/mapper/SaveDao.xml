@@ -11,24 +11,27 @@
             keyProperty="saveId"
             keyColumn="save_id">
         INSERT INTO saves (
-            user_id,
-            post_id,
-            created_at
+        user_id,
+        post_id,
+        created_at
         ) VALUES (
-            #{userId},
-            #{postId},
-            SYSTIMESTAMP
+        #{userId},
+        #{postId},
+        SYSTIMESTAMP
         )
     </insert>
 
     <select id="existsByUserIdAndPostId" resultType="boolean">
         SELECT CASE
-            WHEN COUNT(*) > 0 THEN 1
-            ELSE 0
+        WHEN COUNT(*) > 0 THEN 1
+        ELSE 0
         END
-        FROM saves
-        WHERE user_id = #{userId}
-        AND post_id = #{postId}
+        FROM saves s
+        JOIN posts p
+        ON p.post_id = s.post_id
+        AND p.delete_at IS NULL
+        WHERE s.user_id = #{userId}
+        AND s.post_id = #{postId}
     </select>
 
     <delete id="deleteByUserIdAndPostId">
@@ -40,9 +43,12 @@
     <select id="isSaved"
             resultType="int">
         SELECT COUNT(*)
-        FROM saves
-        WHERE user_id = #{userId}
-        AND post_id = #{postId}
+        FROM saves s
+        JOIN posts p
+        ON p.post_id = s.post_id
+        AND p.delete_at IS NULL
+        WHERE s.user_id = #{userId}
+        AND s.post_id = #{postId}
     </select>
 
 </mapper>
