@@ -7,5 +7,6 @@ import com.bizteam3.server.profile.dto.ContentResponse;
 
 public interface ProfileService {
     ProfileResponse myProfile (Integer userId);
+    ProfileResponse getProfileByUserId(Integer userId, Integer viewerId);
 	PageResponse<ContentResponse> getPosts(Integer userId, PageRequest pageRequest);
 }

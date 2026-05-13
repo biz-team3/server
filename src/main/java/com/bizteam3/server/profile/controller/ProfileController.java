@@ -29,6 +29,15 @@ public class ProfileController {
         return profileService.myProfile(userId);
     }
 
+	@GetMapping("/{userId}")
+	public PageResponse<ProfileResponse> getProfilesByUserId(
+			@PathVariable("userId") Integer userId,
+			HttpServletRequest request){
+		Integer viewerId = (Integer) request.getAttribute("userId");
+		return profileService.getProfileByUserId(userId, viewerId);
+
+	}
+
 	@GetMapping("/users/{userId}/posts")
 	public PageResponse<ContentResponse> getProfilePosts(
 		@PathVariable Integer userId,

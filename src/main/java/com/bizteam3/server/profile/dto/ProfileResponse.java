@@ -1,5 +1,6 @@
 package com.bizteam3.server.profile.dto;
 
+import com.bizteam3.server.follows.dto.FollowViewerRelation;
 import com.bizteam3.server.user.entity.AccountVisType;
 import com.bizteam3.server.user.entity.User;
 import lombok.Builder;
@@ -18,7 +19,7 @@ public class ProfileResponse {
     Integer followingCount;
     Integer postCount;
     AccountVisType accountVisibility;
-    String viewerRelation; //enum으로 만들어 관리하는 것도 좋을 듯
+    FollowViewerRelation viewerRelation;
     Boolean canViewContent;
     Boolean isOwner;
 
@@ -39,9 +40,35 @@ public class ProfileResponse {
                 .followingCount(followingCount)
                 .postCount(postCount)
                 .accountVisibility(user.getAccountVis())
-                .viewerRelation("SELF")
+                .viewerRelation(FollowViewerRelation.SELF)
                 .canViewContent(true)
                 .isOwner(true)
                 .build();
     }
+
+    public static ProfileResponse fromUser(
+            User user,
+            Integer followerCount,
+            Integer followingCount,
+            Integer postCount,
+            FollowViewerRelation viewerRelation,
+            Boolean canViewContent
+    ) {
+        return ProfileResponse.builder()
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .name(user.getName())
+                .bio(user.getBio())
+                .website(user.getWebsite())
+                .profileImageUrl(user.getProfileImg())
+                .followerCount(followerCount)
+                .followingCount(followingCount)
+                .postCount(postCount)
+                .accountVisibility(user.getAccountVis())
+                .viewerRelation(viewerRelation)
+                .canViewContent(canViewContent)
+                .isOwner(viewerRelation == FollowViewerRelation.SELF)
+                .build();
+    }
+
 }

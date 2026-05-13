@@ -1,10 +1,13 @@
 package com.bizteam3.server.profile.service;
 
 import com.bizteam3.server.follows.dao.FollowDao;
+import com.bizteam3.server.follows.dao.FollowRequestDao;
+import com.bizteam3.server.follows.dto.FollowViewerRelation;
 import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.profile.dto.ProfileResponse;
 import com.bizteam3.server.user.dao.UserDao;
+import com.bizteam3.server.user.entity.AccountVisType;
 import com.bizteam3.server.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
@@ -32,6 +35,7 @@ public class ProfileServiceImpl implements ProfileService {
 	private final MediaDao mediaDao;
 	private final UserDao userDao;
 	private final FollowDao followDao;
+	private final FollowRequestDao followRequestDao;
 
 	@Override
     @Transactional
@@ -53,6 +57,29 @@ public class ProfileServiceImpl implements ProfileService {
 				postCount
 		);
     }
+	@Override
+	@Transactional(readOnly = true)
+	public ProfileResponse getProfileByUserId(Integer userId, Integer viewerId) {
+		User user = getActiveUser(userId);
+
+		int followerCount = followDao.countFollowers(userId);
+		int followingCount = followDao.countFollowing(userId);
+		int postCount = postDao.countAllByUserId(userId);
+
+		FollowViewerRelation viewerRelation = resolveViewerRelation(userId, viewerId);
+		boolean canViewContent = user.getAccountVis() == AccountVisType.PUBLIC
+				|| viewerRelation == FollowViewerRelation.SELF
+				|| viewerRelation == FollowViewerRelation.FOLLOWING;
+
+		return ProfileResponse.fromUser(
+				user,
+				followerCount,
+				followingCount,
+				postCount,
+				viewerRelation,
+				canViewContent
+		);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -69,6 +96,30 @@ public class ProfileServiceImpl implements ProfileService {
 		List<ContentResponse> list = getList(posts);
 
 		return new PageResponse<>(list, request, total);
+	}
+
+	private User getActiveUser(Integer userId){
+		User user = userDao.selectById(userId);
+		if(user == null || user.getDeleteAt() != null){
+			throw NotFoundException.of("User", userId);
+		}
+		return user;
+	}
+
+	private FollowViewerRelation resolveViewerRelation(Integer userId, Integer viewerId){
+		if(userId.equals(viewerId)){
+			return FollowViewerRelation.SELF;
+		}
+
+		if(followDao.countByUsers(viewerId, userId) > 0){
+			return FollowViewerRelation.FOLLOWING;
+		}
+
+		if(followRequestDao.countPending(userId, userId) > 0){
+			return FollowViewerRelation.PENDING;
+		}
+
+		return FollowViewerRelation.NOT_FOLLOWING;
 	}
 
 	private @NonNull List<ContentResponse> getList(List<Post> posts) {
