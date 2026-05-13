@@ -1,5 +1,12 @@
 package com.bizteam3.server.profile.service;
 
+import com.bizteam3.server.follows.dao.FollowDao;
+import com.bizteam3.server.global.exception.common.NotFoundException;
+import com.bizteam3.server.post.dao.PostDao;
+import com.bizteam3.server.profile.dto.ProfileResponse;
+import com.bizteam3.server.user.dao.UserDao;
+import com.bizteam3.server.user.entity.User;
+import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.jspecify.annotations.NonNull;
@@ -17,32 +24,48 @@ import com.bizteam3.server.post.entity.Post;
 import com.bizteam3.server.profile.dto.ContentResponse;
 
 @Service
+@RequiredArgsConstructor
 public class ProfileServiceImpl implements ProfileService {
 	private final PostDao postDao;
 	private final LikeDao likeDao;
 	private final CommentDao commentDao;
 	private final MediaDao mediaDao;
+	private final UserDao userDao;
+	private final FollowDao followDao;
 
-	public ProfileServiceImpl(PostDao postDao, LikeDao likeDao, CommentDao commentDao, MediaDao mediaDao) {
-		this.postDao = postDao;
-		this.likeDao = likeDao;
-		this.commentDao = commentDao;
-		this.mediaDao = mediaDao;
-	}
+	@Override
+    @Transactional
+	public ProfileResponse myProfile (Integer userId){
+        User user = userDao.selectById(userId);
+
+        if(user == null || user.getDeleteAt() != null){//?
+            throw NotFoundException.of("User", userId);
+        }
+
+		int followerCount = followDao.countFollowers(userId);
+		int followingCount = followDao.countFollowing(userId);
+		int postCount = postDao.countAllByUserId(userId);
+
+		return ProfileResponse.fromMe(
+				user,
+				followerCount,
+				followingCount,
+				postCount
+		);
+    }
 
 	@Override
 	@Transactional(readOnly = true)
 	public PageResponse<ContentResponse> getPosts(
-		Integer userId,
-		PageRequest request
+			Integer userId,
+			PageRequest request
 	) {
 		List<Post> posts = postDao.selectFeedPostsByUserId(
-			userId,
-			request.getOffset(),
-			request.getSize());
+				userId,
+				request.getOffset(),
+				request.getSize());
 
 		int total = postDao.countAllByUserId(userId);
-
 		List<ContentResponse> list = getList(posts);
 
 		return new PageResponse<>(list, request, total);

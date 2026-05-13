@@ -19,7 +19,6 @@ public interface PostDao {
     int deletePostHashtagsByPostId(Integer postId);
     int delete(Integer postId);
 
-    //int countFeedPosts(Integer userId);
     int countFeedPosts(@Param("viewerId") Integer viewerId);
 
     List<FeedPostRow> selectFeedPosts(
