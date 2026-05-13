@@ -24,4 +24,5 @@ public interface CommentDao {
 	);
 
 	int countAllByPostId(@Param("postId") Integer postId);
+
 }

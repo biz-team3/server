@@ -37,4 +37,12 @@
         AND post_id = #{postId}
     </delete>
 
+    <select id="isSaved"
+            resultType="int">
+        SELECT COUNT(*)
+        FROM saves
+        WHERE user_id = #{userId}
+        AND post_id = #{postId}
+    </select>
+
 </mapper>

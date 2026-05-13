@@ -1,6 +1,7 @@
 package com.bizteam3.server.post.dao;
 
 import com.bizteam3.server.post.dao.row.FeedPostRow;
+import com.bizteam3.server.post.dto.PostDetailRow;
 import com.bizteam3.server.post.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -36,4 +37,6 @@ public interface PostDao {
     int countAllByUserId(
         @Param("userId") Integer userId
     );
+
+    PostDetailRow selectDetailByPostId(@Param("postId") Integer postId);
 }

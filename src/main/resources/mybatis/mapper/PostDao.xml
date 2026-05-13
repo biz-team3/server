@@ -191,4 +191,25 @@
         WHERE user_id = #{userId}
         AND delete_at IS NULL
     </select>
+
+    <select id="selectDetailByPostId"
+            resultType="com.bizteam3.server.post.dto.PostDetailRow">
+        SELECT
+        p.post_id,
+        p.user_id AS author_user_id,
+        u.username AS author_username,
+        u.profile_img AS author_profile_image_url,
+        u.account_vis AS author_account_vis,
+        p.caption,
+        p.translated_caption,
+        p.created_at
+        FROM posts p
+        JOIN users u
+        ON p.user_id = u.user_id
+        WHERE p.post_id = #{postId}
+        AND p.delete_at IS NULL
+        AND u.delete_at IS NULL
+    </select>
+
+
 </mapper>

@@ -18,4 +18,9 @@ public interface SaveDao {
         @Param("postId") Integer postId
     );
 
+    int isSaved(
+            @Param("userId") Integer userId,
+            @Param("postId") Integer postId
+    );
+
 }

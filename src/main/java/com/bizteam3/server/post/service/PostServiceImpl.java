@@ -2,20 +2,22 @@ package com.bizteam3.server.post.service;
 
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
+import com.bizteam3.server.follows.dao.FollowDao;
 import com.bizteam3.server.global.exception.BusinessException;
 import com.bizteam3.server.global.exception.ErrorCode;
 import com.bizteam3.server.global.exception.common.BadRequestException;
 import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.global.exception.common.NotFoundException;
-import com.bizteam3.server.post.dao.MediaDao;
-import com.bizteam3.server.post.dao.HashtagDao;
-import com.bizteam3.server.post.dao.PostDao;
+import com.bizteam3.server.post.dao.*;
 import com.bizteam3.server.post.dao.row.FeedPostMediaRow;
 import com.bizteam3.server.post.dao.row.FeedPostRow;
 import com.bizteam3.server.post.dto.*;
 import com.bizteam3.server.post.entity.Media;
 import com.bizteam3.server.post.entity.Post;
 
+import com.bizteam3.server.save.dao.SaveDao;
+import com.bizteam3.server.user.dao.UserDao;
+import com.bizteam3.server.user.entity.AccountVisType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,10 @@ public class PostServiceImpl implements PostService {
 	private final PostDao postDao;
 	private final MediaDao mediaDao;
 	private final HashtagDao hashtagDao;
+	private final LikeDao likeDao;;
+	private final CommentDao commentDao;
+	private final SaveDao saveDao;;
+	private final FollowDao followDao;
 
 	@Transactional
 	public void createPost(PostCreateRequest request, Integer userId) {
@@ -173,6 +179,53 @@ public class PostServiceImpl implements PostService {
 		int rows = postDao.delete(postId);
 		if(rows == 1) return true;
 		else return false;
+	}
+
+	public PostDetailResponse getPostDetail(Integer postId, Integer userId) {
+		PostDetailRow response = postDao.selectDetailByPostId(postId);
+
+		if (response == null) {
+			throw new NotFoundException(ErrorCode.NOT_FOUND, "게시물을 찾을 수 없습니다.");
+		}
+
+		List<FeedPostMediaRow> mediaRows = mediaDao.selectByPostIds(List.of(postId));
+		List<PostMediaResponse> media = mediaRows.stream()
+				.map(row -> new PostMediaResponse(
+						row.getMediaId(),
+						row.getMediaType(),
+						row.getMediaUrl(),
+						row.getSortOrder()
+				))
+				.toList();
+
+
+		boolean likedByMe = likeDao.isLiked(userId, postId) > 0;
+		boolean savedByMe = saveDao.isSaved(userId, postId) > 0;
+		boolean isOwner = userId.equals(response.getAuthorUserId());
+		boolean isFollowing = followDao.countByUsers(userId, response.getAuthorUserId()) > 0;
+		boolean isPrivate = response.getAuthorAccountVis() == AccountVisType.PRIVATE;
+
+		if (isPrivate && !isOwner && !isFollowing) {
+			throw new ForbiddenException(ErrorCode.FORBIDDEN, "게시물을 볼 수 없습니다.");
+		}
+
+        return new PostDetailResponse(
+                response.getPostId(),
+                new PostAuthorResponse(
+                        response.getAuthorUserId(),
+                        response.getAuthorUsername(),
+                        response.getAuthorProfileImageUrl()
+                ),
+                media,
+                response.getCaption(),
+                response.getTranslatedCaption(),
+                response.getCreatedAt(),
+                likeDao.countByPostId(postId),
+                commentDao.countAllByPostId(postId),
+                likedByMe,
+                savedByMe,
+                isOwner
+        );
 	}
 
 }
