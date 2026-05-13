@@ -8,7 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.global.exception.common.DatabaseException;
+import com.bizteam3.server.notification.dao.NotificationDao;
+import com.bizteam3.server.notification.entity.Notification;
+import com.bizteam3.server.notification.entity.NotificationType;
 import com.bizteam3.server.post.dao.CommentDao;
+import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.post.dao.row.CommentListRow;
 import com.bizteam3.server.post.dto.CommentCreateRequest;
 import com.bizteam3.server.post.dto.CommentResponse;
@@ -23,13 +27,33 @@ import lombok.RequiredArgsConstructor;
 public class CommentServiceImpl implements CommentService {
 
 	private final CommentDao commentDao;
+	private final PostDao postDao;
+	private final NotificationDao notificationDao;
 	private final UserDao userDao;
 
 	@Override
+	@Transactional
 	public void create(Integer postId, Integer userId, CommentCreateRequest request) {
-		int insert = commentDao.insert(CommentCreateRequest.toEntity(postId, userId, request));
+		Comment comment = CommentCreateRequest.toEntity(postId, userId, request);
+		int insert = commentDao.insert(comment);
 		if (insert != 1)
 			throw new DatabaseException("댓글 저장에 실패했습니다.");
+
+		Integer postOwnerId = postDao.selectUserId(postId);
+		if (!userId.equals(postOwnerId)) {
+			notificationDao.insert(new Notification(
+				null,
+				postOwnerId,
+				userId,
+				NotificationType.COMMENT,
+				"POST",
+				postId,
+				"게시물에 댓글을 남겼습니다.",
+				null,
+				0,
+				null
+			));
+		}
 	}
 
 	@Override
