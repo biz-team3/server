@@ -50,6 +50,7 @@ public class NotificationServiceImpl implements NotificationService {
     public void markRead(Integer receiverUserId, List<Integer> notificationIds) {
         validateActiveUser(receiverUserId);
 
+        // id 목록이 없으면 전체 읽음, 있으면 전달된 알림만 읽음 처리함
         if (notificationIds == null || notificationIds.isEmpty()) {
             notificationDao.markAllReadByReceiverUserId(receiverUserId);
             return;
