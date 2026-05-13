@@ -3,8 +3,12 @@ package com.bizteam3.server.profile.service;
 import com.bizteam3.server.follows.dao.FollowDao;
 import com.bizteam3.server.follows.dao.FollowRequestDao;
 import com.bizteam3.server.follows.dto.FollowViewerRelation;
+import com.bizteam3.server.global.exception.common.ConflictException;
+import com.bizteam3.server.global.exception.common.DatabaseException;
+import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.post.dao.PostDao;
+import com.bizteam3.server.profile.dto.ProfileRequest;
 import com.bizteam3.server.profile.dto.ProfileResponse;
 import com.bizteam3.server.user.dao.UserDao;
 import com.bizteam3.server.user.entity.AccountVisType;
@@ -53,9 +57,10 @@ public class ProfileServiceImpl implements ProfileService {
 
 		return buildProfileResponse(user, viewerRelation, canViewContent);
 	}
+
 	@Override
 	@Transactional(readOnly = true)
-	ProfileResponse getProfileByUsername(String username, Integer viewerId){
+	public ProfileResponse getProfileByUsername(String username, Integer viewerId){
 		User user = userDao.findByUsername(username);
 
 		if(user == null || user.getDeleteAt() != null){
@@ -66,6 +71,39 @@ public class ProfileServiceImpl implements ProfileService {
 		boolean canViewContent = canViewContent(user, viewerRelation);
 
 		return buildProfileResponse(user, viewerRelation, canViewContent);
+	}
+
+	@Override
+	@Transactional
+	public ProfileResponse updateProfile(
+			Integer userId,
+			Integer viewerId,
+			ProfileRequest request
+	){
+		if (!userId.equals(viewerId)) {
+			throw new ForbiddenException("본인 프로필만 수정할 수 있습니다.");
+		}
+
+		User currentUser = getActiveUser(userId);
+		if (request.getUsername() != null
+				&& !request.getUsername().isBlank()
+				&& !request.getUsername().equals(currentUser.getUsername())) {
+			User duplicatedUser = userDao.findByUsername(request.getUsername());
+
+			if (duplicatedUser != null) {
+				throw new ConflictException("이미 사용 중인 username입니다.");
+			}
+		}
+
+		User user = request.toEntity(userId);
+
+		int rows = userDao.update(user);
+
+		if (rows != 1) {
+			throw new DatabaseException("프로필 수정에 실패했습니다.");
+		}
+
+		return myProfile(userId);
 	}
 
 	@Override
@@ -123,7 +161,7 @@ public class ProfileServiceImpl implements ProfileService {
 			return FollowViewerRelation.FOLLOWING;
 		}
 
-		if(followRequestDao.countPending(userId, userId) > 0){
+		if(followRequestDao.countPending(viewerId, userId) > 0){
 			return FollowViewerRelation.PENDING;
 		}
 
