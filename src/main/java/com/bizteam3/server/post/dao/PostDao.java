@@ -14,18 +14,26 @@ public interface PostDao {
     boolean existsByPostId(Integer postId);
     int updateCaption(Post post);
     int countByPostId(Integer postId);
-    int countByUserId(Integer userId);
 
     int deleteMediasByPostId(Integer postId);
     int deletePostHashtagsByPostId(Integer postId);
     int delete(Integer postId);
 
-    //int countFeedPosts(Integer userId);
     int countFeedPosts(@Param("viewerId") Integer viewerId);
 
     List<FeedPostRow> selectFeedPosts(
             @Param("viewerId") Integer viewerId,
             @Param("offset") int offset,
             @Param("size") int size
+    );
+
+    List<Post> selectFeedPostsByUserId(
+        @Param("userId") Integer userId,
+        @Param("offset") int offset,
+        @Param("size") int size
+    );
+
+    int countAllByUserId(
+        @Param("userId") Integer userId
     );
 }
