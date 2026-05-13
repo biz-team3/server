@@ -34,6 +34,7 @@
             <arg   column="mutual_follower_name"  javaType="String"/>
             <arg   column="mutual_follower_count" javaType="Integer"/>
             <arg   column="requester_profile_img" javaType="String"/>
+            <arg   column="created_at"            javaType="java.time.LocalDateTime"/>
         </constructor>
     </resultMap>
 
@@ -157,7 +158,8 @@
                  AND mu.delete_at IS NULL
                 WHERE vf.follower_user_id = fr.receiver_user_id
             ) AS mutual_follower_count,
-            u.profile_img        AS requester_profile_img
+            u.profile_img        AS requester_profile_img,
+            fr.created_at
         FROM follow_requests fr
         JOIN users u
           ON u.user_id   = fr.requester_user_id
