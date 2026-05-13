@@ -29,6 +29,10 @@ public class NotificationResponse {
 
     private final Integer actorCount;
 
+    /** 알림 대상 타입/식별자. 게시물 알림 클릭 시 상세 모달을 여는 데 사용함. */
+    private final String targetType;
+    private final Integer targetId;
+
     private final String targetImageUrl;
 
     /** 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 나타내는 값. */
