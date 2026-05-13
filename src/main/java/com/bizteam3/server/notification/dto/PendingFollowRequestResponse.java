@@ -1,5 +1,7 @@
 package com.bizteam3.server.notification.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -16,4 +18,5 @@ public class PendingFollowRequestResponse {
     /** 요청자와 연결되는 공통 팔로워 수임. */
     private final Integer mutualFollowerCount;
     private final String requesterProfileImg;
+    private final LocalDateTime createdAt;
 }
