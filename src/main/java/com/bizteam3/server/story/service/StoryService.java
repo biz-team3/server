@@ -2,7 +2,8 @@ package com.bizteam3.server.story.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bizteam3.server.story.dto.StoryGroupResponse;
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.story.dto.UserStoryResponse;
 
 public interface StoryService {
@@ -10,7 +11,7 @@ public interface StoryService {
 
 	void delete(Integer userId, Integer storyId);
 
-	UserStoryResponse getFeed(Integer userId);
+	UserStoryResponse getFeed(Integer userId, Integer viewerId);
 
-	StoryGroupResponse getFeeds(Integer userId);
+	PageResponse<UserStoryResponse> getFeeds(Integer userId, PageRequest request);
 }

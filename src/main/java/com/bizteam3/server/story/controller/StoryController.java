@@ -11,20 +11,25 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
-import com.bizteam3.server.story.dto.StoryGroupResponse;
 import com.bizteam3.server.story.dto.UserStoryResponse;
 import com.bizteam3.server.story.service.StoryService;
+import com.bizteam3.server.story.service.StoryViewService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/stories")
 public class StoryController {
-	private final StoryService service;
+	private final StoryService storyService;
+	private final StoryViewService viewService;
 
-	public StoryController(StoryService service) {
-		this.service = service;
+	public StoryController(StoryService storyService, StoryViewService viewService) {
+		this.storyService = storyService;
+		this.viewService = viewService;
 	}
 
 	@PostMapping
@@ -35,23 +40,27 @@ public class StoryController {
 		HttpServletRequest httpServletRequest
 	){
 		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
-		service.create(userId, file);
+		storyService.create(userId, file);
 	}
 
 	@GetMapping("/{userId}")
+	@AccessTokenCheck
 	public UserStoryResponse getUserStory(
-		@PathVariable Integer userId
+		@PathVariable Integer userId,
+		HttpServletRequest httpServletRequest
 	) {
-		return service.getFeed(userId);
+		Integer myId = (Integer) httpServletRequest.getAttribute("userId");
+		return storyService.getFeed(userId, myId);
 	}
 
 	@GetMapping("/feed")
 	@AccessTokenCheck
-	public StoryGroupResponse getGroupStory(
+	public PageResponse<UserStoryResponse> getGroupStory(
+		@Valid PageRequest pageRequest,
 		HttpServletRequest httpServletRequest
 	) {
 		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
-		return service.getFeeds(userId);
+		return storyService.getFeeds(userId, pageRequest);
 	}
 
 	@DeleteMapping("/{storyId}")
@@ -62,6 +71,17 @@ public class StoryController {
 		HttpServletRequest httpServletRequest
 	) {
 		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
-		service.delete(userId, storyId);
+		storyService.delete(userId, storyId);
+	}
+
+	@PostMapping("/view/{storyId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@AccessTokenCheck
+	public void seeStory(
+		@PathVariable Integer storyId,
+		HttpServletRequest httpServletRequest
+	){
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+		viewService.see(userId, storyId);
 	}
 }

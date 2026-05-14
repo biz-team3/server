@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bizteam3.server.story.dao.StoryViewDao">
+
+    <insert id="insert">
+        INSERT INTO story_views (
+        user_id,
+        story_id,
+        created_at
+        )
+        SELECT
+        #{userId},
+        #{storyId},
+        SYSTIMESTAMP
+        FROM dual
+        WHERE NOT EXISTS (
+        SELECT 1
+        FROM story_views
+        WHERE user_id = #{userId}
+        AND story_id = #{storyId}
+        )
+    </insert>
+
+
+</mapper>
