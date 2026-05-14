@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.global.exception.common.DatabaseException;
+import com.bizteam3.server.global.exception.common.ForbiddenException;
+import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.notification.dao.NotificationDao;
 import com.bizteam3.server.notification.entity.Notification;
 import com.bizteam3.server.notification.entity.NotificationType;
@@ -53,23 +55,37 @@ public class CommentServiceImpl implements CommentService {
 		}
 
 	@Override
-	public void update(Integer commentId, CommentUpdateRequest request) {
+	public void update(Integer commentId, Integer userId, CommentUpdateRequest request) {
+		Comment comment = getActiveComment(commentId);
+		validateCommentOwner(comment, userId);
+
 		int update = commentDao.update(CommentUpdateRequest.toEntity(commentId, request));
 		if (update != 1)
 			throw new DatabaseException("존재하지 않는 commentId입니다. [삭제 실패]");
 	}
 
 	@Override
-	public void delete(Integer commentId) {
-		Comment comment = commentDao.selectById(commentId);
-		if (comment == null || comment.getDeletedAt() != null)
-			throw new DatabaseException("존재하지 않는 commentId입니다 [삭제 실패].");
+	public void delete(Integer commentId, Integer userId) {
+		Comment comment = getActiveComment(commentId);
+		validateCommentOwner(comment, userId);
 
 		int delete = commentDao.delete(commentId);
 		if (delete != 1)
 			throw new DatabaseException("존재하지 않는 commentId입니다 [삭제 실패].");
 
 		notificationDao.deleteBySource("COMMENT", commentId);
+	}
+
+	private Comment getActiveComment(Integer commentId) {
+		Comment comment = commentDao.selectById(commentId);
+		if (comment == null || comment.getDeletedAt() != null)
+			throw NotFoundException.of("Comment", commentId);
+		return comment;
+	}
+
+	private void validateCommentOwner(Comment comment, Integer userId) {
+		if (!comment.getUserId().equals(userId))
+			throw new ForbiddenException("댓글 작성자만 수정하거나 삭제할 수 있습니다.");
 	}
 
 	@Override

@@ -11,9 +11,9 @@ public interface CommentService {
 
 	void create(Integer postId, Integer userId, CommentCreateRequest request);
 
-	void update(Integer commentId, CommentUpdateRequest request);
+	void update(Integer commentId, Integer userId, CommentUpdateRequest request);
 
-	void delete(Integer commentId);
+	void delete(Integer commentId, Integer userId);
 
 	PageResponse<CommentResponse> findComments(Integer postId, Integer userId, PageRequest request);
 }
