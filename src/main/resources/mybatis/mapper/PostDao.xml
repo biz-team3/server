@@ -224,5 +224,14 @@
         AND u.delete_at IS NULL
     </select>
 
+    <insert id="insertReadLog">
+        MERGE INTO post_read_logs l
+        USING dual
+        ON (l.user_id = #{viewerId} AND l.post_id = #{postId})
+
+        WHEN NOT MATCHED THEN
+        INSERT (user_id, post_id, read_at)
+        VALUES (#{viewerId}, #{postId}, SYSTIMESTAMP)
+    </insert>
 
 </mapper>

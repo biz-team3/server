@@ -203,6 +203,10 @@ public class PostServiceImpl implements PostService {
 			throw new ForbiddenException(ErrorCode.FORBIDDEN, "게시물을 볼 수 없습니다.");
 		}
 
+		if (userId != null) {
+			postDao.insertReadLog(userId, postId);
+		}
+
         return new PostDetailResponse(
                 response.getPostId(),
                 new PostAuthorResponse(

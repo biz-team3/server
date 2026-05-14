@@ -39,4 +39,6 @@ public interface PostDao {
     );
 
     PostDetailRow selectDetailByPostId(@Param("postId") Integer postId);
+
+    void insertReadLog(@Param("viewerId") Integer viewerId, @Param("postId") Integer postId);
 }
