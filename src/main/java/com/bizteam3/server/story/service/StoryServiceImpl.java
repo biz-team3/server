@@ -1,18 +1,19 @@
 package com.bizteam3.server.story.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bizteam3.server.common.dto.PageRequest;
+import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.common.file.FileStorageService;
 import com.bizteam3.server.common.file.StoredFile;
-import com.bizteam3.server.follows.dao.FollowDao;
-import com.bizteam3.server.follows.dto.FollowUserResponse;
 import com.bizteam3.server.global.exception.common.DatabaseException;
 import com.bizteam3.server.story.dao.StoryDao;
-import com.bizteam3.server.story.dto.StoryGroupResponse;
+import com.bizteam3.server.story.dao.row.StoryRow;
 import com.bizteam3.server.story.dto.StoryResponse;
 import com.bizteam3.server.story.dto.UserStoryResponse;
 import com.bizteam3.server.story.entity.Story;
@@ -20,16 +21,14 @@ import com.bizteam3.server.user.dao.UserDao;
 import com.bizteam3.server.user.entity.User;
 
 @Service
-public class StoryImpl implements StoryService {
+public class StoryServiceImpl implements StoryService {
 	private final FileStorageService storageService;
 	private final StoryDao storyDao;
-	private final FollowDao followDao;
 	private final UserDao userDao;
 
-	public StoryImpl(FileStorageService storageService, StoryDao storyDao, FollowDao followDao, UserDao userDao) {
+	public StoryServiceImpl(FileStorageService storageService, StoryDao storyDao, UserDao userDao) {
 		this.storageService = storageService;
 		this.storyDao = storyDao;
-		this.followDao = followDao;
 		this.userDao = userDao;
 	}
 
@@ -61,28 +60,35 @@ public class StoryImpl implements StoryService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public UserStoryResponse getFeed(Integer userId) {
+	public UserStoryResponse getFeed(Integer userId, Integer viewerId) {
+		boolean isOwner = Objects.equals(userId, viewerId);
 		User user = userDao.selectById(userId);
-		return getUserStoryResponse(user, true);
+
+		return getUserStoryResponse(user, isOwner, viewerId);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public StoryGroupResponse getFeeds(Integer userId) {
-		//TODO: 페이징 형태로 변경 고민 - Feeds
-		List<FollowUserResponse> followUserResponses = followDao.selectFollowing(userId, userId, 0, 20);
-
-		return StoryGroupResponse.toDto(
-			followUserResponses.stream()
-				.map(response -> {
-					User user = userDao.selectById(response.getUserId());
-					return getUserStoryResponse(user, false);
-				}).toList()
+	public PageResponse<UserStoryResponse> getFeeds(Integer userId, PageRequest request) {
+		List<User> users = storyDao.selectFeedStoryUsersByViewerId(
+			userId,
+			request.getOffset(),
+			request.getSize()
 		);
+
+		List<UserStoryResponse> list = users.stream()
+			.map(user ->
+				getUserStoryResponse(user, false, userId))
+			.toList();
+
+		int total = storyDao.countFeedStoryUsersByViewerId(userId);
+
+		return new PageResponse<>(list, request, total);
 	}
 
-	private UserStoryResponse getUserStoryResponse(User user, boolean isOwner) {
-		List<Story> stories = storyDao.selectByUserId(user.getUserId());
+	private UserStoryResponse getUserStoryResponse(User user, boolean isOwner, Integer viewerId) {
+		List<StoryRow> stories = storyDao.selectStoriesByUserId(user.getUserId(), viewerId);
+
 		return UserStoryResponse.toDto(
 			user.getUserId(),
 			user.getUsername(),

@@ -27,29 +27,92 @@
 
     <select id="selectByUserIdAndStoryId" resultType="com.bizteam3.server.story.entity.Story">
         SELECT
-            STORY_ID,
-            USER_ID,
-            IMAGE_URL,
-            CREATED_AT,
-            EXPIRES_AT,
-            DELETED_AT
+        STORY_ID,
+        USER_ID,
+        IMAGE_URL,
+        CREATED_AT,
+        EXPIRES_AT,
+        DELETED_AT
         FROM STORIES
         WHERE USER_ID = #{userId}
-            AND STORY_ID = #{storyId}
-            AND DELETED_AT IS NULL
-            AND EXPIRES_AT > SYSTIMESTAMP
+        AND STORY_ID = #{storyId}
+        AND DELETED_AT IS NULL
+        AND EXPIRES_AT > SYSTIMESTAMP
     </select>
 
-    <select id="selectByUserId" resultType="com.bizteam3.server.story.entity.Story">
+    <select id="countFeedStoryUsersByViewerId" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT s.user_id)
+        FROM stories s
+        JOIN follows f
+        ON f.following_user_id = s.user_id
+        AND f.follower_user_id = #{userId}
+        JOIN users u
+        ON u.user_id = s.user_id
+        AND u.delete_at IS NULL
+        WHERE s.deleted_at IS NULL
+        AND s.expires_at > SYSTIMESTAMP
+    </select>
+
+    <select id="selectStoriesByUserId" resultType="com.bizteam3.server.story.dao.row.StoryRow">
         SELECT
-        story_id AS storyId,
-        user_id AS userId,
-        image_url AS imageUrl,
-        created_at AS createdAt
-        FROM STORIES
-        WHERE user_id = #{userId}
-        AND DELETED_AT IS NULL
-        ORDER BY created_at DESC
+        s.story_id AS storyId,
+        s.user_id AS userId,
+        s.image_url AS imageUrl,
+        CASE
+        WHEN sv.view_id IS NULL THEN 0
+        ELSE 1
+        END AS isRead,
+        s.created_at AS createdAt,
+        s.expires_at AS expiresAt,
+        s.deleted_at AS deletedAt
+        FROM stories s
+        LEFT JOIN story_views sv
+        ON sv.story_id = s.story_id
+        AND sv.user_id = #{viewerId}
+        WHERE s.user_id = #{userId}
+        AND s.deleted_at IS NULL
+        AND s.expires_at > SYSTIMESTAMP
+        ORDER BY s.created_at ASC
+    </select>
+
+    <select id="selectFeedStoryUsersByViewerId"
+            resultType="com.bizteam3.server.user.entity.User">
+        SELECT
+        u.user_id AS userId,
+        u.username AS username,
+        u.profile_img AS profileImg
+        FROM users u
+        JOIN (
+        SELECT
+        s.user_id,
+        MIN(CASE WHEN sv.view_id IS NULL THEN 0 ELSE 1 END) AS group_read_order,
+        MAX(s.created_at) AS latest_story_created_at,
+        MAX(sv.created_at) AS latest_viewed_at
+        FROM stories s
+        JOIN follows f
+        ON f.following_user_id = s.user_id
+        AND f.follower_user_id = #{viewerId}
+        LEFT JOIN story_views sv
+        ON sv.story_id = s.story_id
+        AND sv.user_id = #{viewerId}
+        WHERE s.deleted_at IS NULL
+        AND s.expires_at > SYSTIMESTAMP
+        GROUP BY s.user_id
+        ) story_group
+        ON story_group.user_id = u.user_id
+        WHERE u.delete_at IS NULL
+        ORDER BY
+        story_group.group_read_order ASC,
+        CASE
+        WHEN story_group.group_read_order = 0
+        THEN story_group.latest_story_created_at
+        END DESC,
+        CASE
+        WHEN story_group.group_read_order = 1
+        THEN story_group.latest_viewed_at
+        END DESC,
+        u.user_id ASC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
 
     <update id="delete">
