@@ -38,6 +38,10 @@ public class LikeServiceImpl implements LikeService {
 
         Integer postOwnerId = postDao.selectUserId(postId);
         if (!userId.equals(postOwnerId)) {
+            if (notificationDao.countByEvent(postOwnerId, userId, NotificationType.LIKE, "POST", postId) > 0) {
+                return;
+            }
+
             notificationDao.insert(new Notification(
                     postOwnerId,
                     userId,
