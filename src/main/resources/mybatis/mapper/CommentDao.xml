@@ -45,6 +45,18 @@
         AND deleted_at IS NULL
     </update>
 
+    <select id="selectById" resultType="com.bizteam3.server.post.entity.Comment">
+        SELECT
+        comment_id,
+        post_id,
+        user_id,
+        text,
+        created_at,
+        updated_at,
+        deleted_at
+        FROM comments
+        WHERE comment_id = #{commentId}
+    </select>
 
     <select id="selectPage" resultType="com.bizteam3.server.post.dao.row.CommentListRow">
         SELECT

@@ -36,6 +36,8 @@
             notification_type,
             target_type,
             target_id,
+            source_type,
+            source_id,
             message,
             image_url,
             is_read,
@@ -46,6 +48,8 @@
             #{notificationType},
             #{targetType},
             #{targetId},
+            #{sourceType, jdbcType=VARCHAR},
+            #{sourceId, jdbcType=NUMERIC},
             #{message},
             #{imageUrl, jdbcType=VARCHAR},
             #{isRead},
@@ -70,6 +74,12 @@
           AND notification_type = #{notificationType}
           AND target_type = #{targetType}
           AND target_id = #{targetId}
+    </delete>
+
+    <delete id="deleteBySource">
+        DELETE FROM notifications
+        WHERE source_type = #{sourceType}
+          AND source_id = #{sourceId}
     </delete>
 
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">

@@ -30,6 +30,11 @@ public interface NotificationDao {
         @Param("targetId") Integer targetId
     );
 
+    int deleteBySource(
+        @Param("sourceType") String sourceType,
+        @Param("sourceId") Integer sourceId
+    );
+
     List<NotificationResponse> selectByReceiverUserId(@Param("receiverUserId") Integer receiverUserId);
 
     int countUnreadByReceiverUserId(@Param("receiverUserId") Integer receiverUserId);

@@ -39,18 +39,18 @@ public class CommentServiceImpl implements CommentService {
 		if (insert != 1)
 			throw new DatabaseException("댓글 저장에 실패했습니다.");
 
-		Integer postOwnerId = postDao.selectUserId(postId);
-		if (!userId.equals(postOwnerId)) {
-			notificationDao.insert(new Notification(
-				postOwnerId,
-				userId,
+			Integer postOwnerId = postDao.selectUserId(postId);
+			if (!userId.equals(postOwnerId)) {
+				notificationDao.insert(new Notification(
+					postOwnerId,
+					userId,
 				NotificationType.COMMENT,
-				"POST",
-				postId,
-				"게시물에 댓글을 남겼습니다."
-			));
+					"POST",
+					postId,
+					"게시물에 댓글을 남겼습니다."
+				).withSource("COMMENT", comment.getCommentId()));
+			}
 		}
-	}
 
 	@Override
 	public void update(Integer commentId, CommentUpdateRequest request) {
@@ -61,9 +61,15 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public void delete(Integer commentId) {
+		Comment comment = commentDao.selectById(commentId);
+		if (comment == null || comment.getDeletedAt() != null)
+			throw new DatabaseException("존재하지 않는 commentId입니다 [삭제 실패].");
+
 		int delete = commentDao.delete(commentId);
 		if (delete != 1)
 			throw new DatabaseException("존재하지 않는 commentId입니다 [삭제 실패].");
+
+		notificationDao.deleteBySource("COMMENT", commentId);
 	}
 
 	@Override
