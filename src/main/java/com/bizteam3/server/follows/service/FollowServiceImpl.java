@@ -90,7 +90,17 @@ public class FollowServiceImpl implements FollowService {
     public void unfollow(Integer followerUserId, Integer targetUserId) {
         validateDifferentUser(followerUserId, targetUserId);
         validateActiveUser(targetUserId);
-        followDao.deleteByUsers(followerUserId, targetUserId);
+
+        if (followDao.countByUsers(followerUserId, targetUserId) > 0) {
+            followDao.deleteByUsers(followerUserId, targetUserId);
+            return;
+        }
+
+        followRequestDao.updatePendingStatusByUsers(
+            followerUserId,
+            targetUserId,
+            RequestStatus.REJECTED.name()
+        );
     }
 
     /** 팔로워 목록: UserService.findUsers 와 같은 PageResponse 구조 재사용 */

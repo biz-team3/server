@@ -30,6 +30,12 @@ public interface FollowRequestDao {
         @Param("status")    String  status
     );
 
+    int updatePendingStatusByUsers(
+        @Param("requesterUserId") Integer requesterUserId,
+        @Param("receiverUserId") Integer receiverUserId,
+        @Param("status") String status
+    );
+
     /**
      * 두 사용자 간 PENDING 요청 존재 여부 확인 (중복 요청 방지)
      *

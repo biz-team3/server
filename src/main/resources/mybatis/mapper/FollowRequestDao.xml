@@ -74,6 +74,16 @@
           AND status     = 'PENDING'
     </update>
 
+    <update id="updatePendingStatusByUsers">
+        UPDATE follow_requests
+        SET
+            status     = #{status},
+            updated_at = SYSTIMESTAMP
+        WHERE requester_user_id = #{requesterUserId}
+          AND receiver_user_id  = #{receiverUserId}
+          AND status            = 'PENDING'
+    </update>
+
     <!-- ================================================================
          SELECT COUNT: 두 사용자 간 PENDING 요청 존재 여부 (중복 방지)
          ================================================================ -->
