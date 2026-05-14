@@ -16,6 +16,9 @@ import com.bizteam3.server.global.exception.common.ConflictException;
 import com.bizteam3.server.global.exception.common.DatabaseException;
 import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.global.exception.common.NotFoundException;
+import com.bizteam3.server.notification.dao.NotificationDao;
+import com.bizteam3.server.notification.entity.Notification;
+import com.bizteam3.server.notification.entity.NotificationType;
 import com.bizteam3.server.user.dao.UserDao;
 import com.bizteam3.server.user.entity.AccountVisType;
 import com.bizteam3.server.user.entity.User;
@@ -41,6 +44,7 @@ public class FollowServiceImpl implements FollowService {
     private final FollowDao        followDao;
     private final FollowRequestDao followRequestDao;
     private final UserDao          userDao;
+    private final NotificationDao  notificationDao;
 
     @Transactional
     @Override
@@ -134,6 +138,14 @@ public class FollowServiceImpl implements FollowService {
 
         // follows 테이블에 실제 관계 생성 (requester → receiver 방향)
         followDirectly(req.getRequesterUserId(), req.getReceiverUserId());
+        notificationDao.insert(new Notification(
+            req.getReceiverUserId(),
+            req.getRequesterUserId(),
+            NotificationType.FOLLOW,
+            "USER",
+            req.getRequesterUserId(),
+            "팔로우하기 시작했습니다."
+        ));
     }
 
     @Transactional
