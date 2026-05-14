@@ -1,7 +1,7 @@
 package com.bizteam3.server.post.dao;
 
 import com.bizteam3.server.post.dao.row.FeedPostRow;
-import com.bizteam3.server.post.dto.PostDetailRow;
+import com.bizteam3.server.post.dao.row.PostDetailRow;
 import com.bizteam3.server.post.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +18,7 @@ public interface PostDao {
 
     int deleteMediasByPostId(Integer postId);
     int deletePostHashtagsByPostId(Integer postId);
-    int delete(Integer postId);
+    int softDelete(Integer postId);
 
     int countFeedPosts(@Param("viewerId") Integer viewerId);
 
@@ -39,4 +39,6 @@ public interface PostDao {
     );
 
     PostDetailRow selectDetailByPostId(@Param("postId") Integer postId);
+
+    void insertReadLog(@Param("viewerId") Integer viewerId, @Param("postId") Integer postId);
 }

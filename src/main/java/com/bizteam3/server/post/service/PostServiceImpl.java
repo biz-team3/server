@@ -3,7 +3,6 @@ package com.bizteam3.server.post.service;
 import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.follows.dao.FollowDao;
-import com.bizteam3.server.global.exception.BusinessException;
 import com.bizteam3.server.global.exception.ErrorCode;
 import com.bizteam3.server.global.exception.common.BadRequestException;
 import com.bizteam3.server.global.exception.common.ForbiddenException;
@@ -11,12 +10,12 @@ import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.post.dao.*;
 import com.bizteam3.server.post.dao.row.FeedPostMediaRow;
 import com.bizteam3.server.post.dao.row.FeedPostRow;
+import com.bizteam3.server.post.dao.row.PostDetailRow;
 import com.bizteam3.server.post.dto.*;
 import com.bizteam3.server.post.entity.Media;
 import com.bizteam3.server.post.entity.Post;
 
 import com.bizteam3.server.save.dao.SaveDao;
-import com.bizteam3.server.user.dao.UserDao;
 import com.bizteam3.server.user.entity.AccountVisType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -173,12 +172,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public boolean deletePost(Integer postId) {
-		postDao.deleteMediasByPostId(postId);
-		postDao.deletePostHashtagsByPostId(postId);
-
-		int rows = postDao.delete(postId);
-		if(rows == 1) return true;
-		else return false;
+		return postDao.softDelete(postId) == 1;
 	}
 
 	public PostDetailResponse getPostDetail(Integer postId, Integer userId) {
@@ -209,6 +203,10 @@ public class PostServiceImpl implements PostService {
 			throw new ForbiddenException(ErrorCode.FORBIDDEN, "게시물을 볼 수 없습니다.");
 		}
 
+		if (userId != null) {
+			postDao.insertReadLog(userId, postId);
+		}
+
         return new PostDetailResponse(
                 response.getPostId(),
                 new PostAuthorResponse(
@@ -220,7 +218,7 @@ public class PostServiceImpl implements PostService {
                 response.getCaption(),
                 response.getTranslatedCaption(),
                 response.getCreatedAt(),
-                likeDao.countByPostId(postId),
+                likeDao.countAllByPostId(postId),
                 commentDao.countAllByPostId(postId),
                 likedByMe,
                 savedByMe,

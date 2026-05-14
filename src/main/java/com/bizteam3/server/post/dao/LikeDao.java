@@ -12,7 +12,6 @@ public interface LikeDao {
             @Param("postId") Integer postId
     );
     int delete(Like like);
-    int countByPostId(@Param("postId") Integer postId);
 
     int countAllByPostId(@Param("postId") Integer postId);
 }

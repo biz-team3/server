@@ -9,17 +9,17 @@
             keyProperty="postId"
             keyColumn="post_id">
         INSERT INTO posts (
-            user_id,
-            caption,
-            translated_caption,
-            created_at,
-            update_at
+        user_id,
+        caption,
+        translated_caption,
+        created_at,
+        update_at
         ) VALUES (
-            #{userId},
-            #{caption, jdbcType=CLOB},
-            #{translatedCaption, jdbcType=CLOB},
-            SYSTIMESTAMP,
-            SYSTIMESTAMP
+        #{userId},
+        #{caption, jdbcType=CLOB},
+        #{translatedCaption, jdbcType=CLOB},
+        SYSTIMESTAMP,
+        SYSTIMESTAMP
         )
     </insert>
 
@@ -67,10 +67,14 @@
         WHERE post_id = #{postId}
     </delete>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM posts
+    <update id="softDelete" parameterType="int">
+        UPDATE posts
+        SET
+        delete_at = SYSTIMESTAMP,
+        update_at = SYSTIMESTAMP
         WHERE post_id = #{postId}
-    </delete>
+        AND delete_at IS NULL
+    </update>
 
     <select id="countByPostId" parameterType="int" resultType="int">
         SELECT COUNT(*)
@@ -89,64 +93,64 @@
 
         WHERE p.delete_at IS NULL
         AND (
-                u.account_vis = 'PUBLIC'
-                OR p.user_id = #{viewerId}
-                OR EXISTS (
-                    SELECT 1
-                    FROM follows f
-                    WHERE f.follower_user_id = #{viewerId}
-                    AND f.following_user_id = p.user_id
-            )
+        u.account_vis = 'PUBLIC'
+        OR p.user_id = #{viewerId}
+        OR EXISTS (
+        SELECT 1
+        FROM follows f
+        WHERE f.follower_user_id = #{viewerId}
+        AND f.following_user_id = p.user_id
+        )
         )
     </select>
 
     <select id="selectFeedPosts"
             resultType="com.bizteam3.server.post.dao.row.FeedPostRow">
         SELECT
-            p.post_id,
-            u.user_id,
-            u.username,
-            u.profile_img AS profile_image_url,
-            p.caption,
-            p.translated_caption,
-            p.created_at,
+        p.post_id,
+        u.user_id,
+        u.username,
+        u.profile_img AS profile_image_url,
+        p.caption,
+        p.translated_caption,
+        p.created_at,
 
-            (
-                SELECT COUNT(*)
-                FROM likes l
-                WHERE l.post_id = p.post_id
-            ) AS like_count,
+        (
+        SELECT COUNT(*)
+        FROM likes l
+        WHERE l.post_id = p.post_id
+        ) AS like_count,
 
-            (
-                SELECT COUNT(*)
-                FROM comments c
-                WHERE c.post_id = p.post_id
-                AND c.deleted_at IS NULL
-            ) AS comment_count,
+        (
+        SELECT COUNT(*)
+        FROM comments c
+        WHERE c.post_id = p.post_id
+        AND c.deleted_at IS NULL
+        ) AS comment_count,
 
         CASE
-            WHEN EXISTS (
-                SELECT 1
-                FROM likes l
-                WHERE l.post_id = p.post_id
-                AND l.user_id = #{viewerId}
-            ) THEN 1
-            ELSE 0
+        WHEN EXISTS (
+        SELECT 1
+        FROM likes l
+        WHERE l.post_id = p.post_id
+        AND l.user_id = #{viewerId}
+        ) THEN 1
+        ELSE 0
         END AS liked_byme,
 
         CASE
-            WHEN EXISTS (
-                SELECT 1
-                FROM saves s
-                WHERE s.post_id = p.post_id
-                AND s.user_id = #{viewerId}
-            ) THEN 1
-            ELSE 0
+        WHEN EXISTS (
+        SELECT 1
+        FROM saves s
+        WHERE s.post_id = p.post_id
+        AND s.user_id = #{viewerId}
+        ) THEN 1
+        ELSE 0
         END AS saved_byme,
 
         CASE
-            WHEN p.user_id = #{viewerId} THEN 1
-            ELSE 0
+        WHEN p.user_id = #{viewerId} THEN 1
+        ELSE 0
         END AS is_owner
 
         FROM posts p
@@ -154,19 +158,28 @@
         ON u.user_id = p.user_id
         AND u.delete_at IS NULL
 
+        LEFT JOIN post_read_logs rl
+        ON p.post_id = rl.post_id
+        AND rl.user_id = #{viewerId}
+
         WHERE p.delete_at IS NULL
         AND (
-                u.account_vis = 'PUBLIC'
-                OR p.user_id = #{viewerId}
-                OR EXISTS (
-                    SELECT 1
-                    FROM follows f
-                    WHERE f.follower_user_id = #{viewerId}
-                    AND f.following_user_id = p.user_id
-            )
+        u.account_vis = 'PUBLIC'
+        OR p.user_id = #{viewerId}
+        OR EXISTS (
+        SELECT 1
+        FROM follows f
+        WHERE f.follower_user_id = #{viewerId}
+        AND f.following_user_id = p.user_id
+        )
         )
 
-        ORDER BY p.created_at DESC
+        ORDER BY
+        CASE
+        WHEN rl.log_id IS NULL THEN 0
+        ELSE 1
+        END ASC,
+        p.created_at DESC
         OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
     </select>
 
@@ -193,7 +206,7 @@
     </select>
 
     <select id="selectDetailByPostId"
-            resultType="com.bizteam3.server.post.dto.PostDetailRow">
+            resultType="com.bizteam3.server.post.dao.row.PostDetailRow">
         SELECT
         p.post_id,
         p.user_id AS author_user_id,
@@ -211,5 +224,14 @@
         AND u.delete_at IS NULL
     </select>
 
+    <insert id="insertReadLog">
+        MERGE INTO post_read_logs l
+        USING dual
+        ON (l.user_id = #{viewerId} AND l.post_id = #{postId})
+
+        WHEN NOT MATCHED THEN
+        INSERT (user_id, post_id, read_at)
+        VALUES (#{viewerId}, #{postId}, SYSTIMESTAMP)
+    </insert>
 
 </mapper>

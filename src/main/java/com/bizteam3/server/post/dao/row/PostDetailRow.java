@@ -1,4 +1,4 @@
-package com.bizteam3.server.post.dto;
+package com.bizteam3.server.post.dao.row;
 
 import com.bizteam3.server.user.entity.AccountVisType;
 import lombok.AllArgsConstructor;
