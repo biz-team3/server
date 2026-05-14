@@ -153,7 +153,7 @@ public class FollowServiceImpl implements FollowService {
             req.getRequesterUserId(),
             NotificationType.FOLLOW,
             "USER",
-            req.getRequesterUserId(),
+            req.getReceiverUserId(),
             "팔로우하기 시작했습니다."
         ));
     }
