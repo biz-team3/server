@@ -23,4 +23,21 @@ public class Notification {
     private String imageUrl;
     private Integer isRead;
     private LocalDateTime createdAt;
+
+    public Notification(
+        Integer receiverUserId,
+        Integer actorUserId,
+        NotificationType notificationType,
+        String targetType,
+        Integer targetId,
+        String message
+    ) {
+        this.receiverUserId = receiverUserId;
+        this.actorUserId = actorUserId;
+        this.notificationType = notificationType;
+        this.targetType = targetType;
+        this.targetId = targetId;
+        this.message = message;
+        this.isRead = 0;
+    }
 }

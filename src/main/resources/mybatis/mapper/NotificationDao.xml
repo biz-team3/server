@@ -47,7 +47,7 @@
             #{targetType},
             #{targetId},
             #{message},
-            #{imageUrl},
+            #{imageUrl, jdbcType=VARCHAR},
             #{isRead},
             SYSTIMESTAMP
         )
