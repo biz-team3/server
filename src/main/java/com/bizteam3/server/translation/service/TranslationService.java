@@ -31,6 +31,7 @@ public class TranslationService {
 	private static final URI DEEPL_API_URI = URI.create("https://api-free.deepl.com/v2/translate");
 	private static final Pattern DETECTED_SOURCE_LANG_PATTERN = Pattern.compile("\"detected_source_language\"\\s*:\\s*\"([^\"]+)\"");
 	private static final Pattern TRANSLATED_TEXT_PATTERN = Pattern.compile("\"text\"\\s*:\\s*\"((?:\\\\.|[^\"])*)\"");
+	private static final Pattern HASHTAG_PATTERN = Pattern.compile("(?<!\\S)#[\\p{L}\\p{N}_]+");
 
 	private final PostDao postDao;
 	private final HttpClient httpClient = HttpClient.newHttpClient();
@@ -44,25 +45,36 @@ public class TranslationService {
 			throw new BadRequestException(ErrorCode.BAD_REQUEST, "게시물 캡션 번역만 지원합니다.");
 		}
 
-		String cachedCaption = postDao.selectTranslatedCaptionByPostId(request.getTargetId());
-		if (hasText(cachedCaption)) {
-			return new TranslationResponse(cachedCaption, null, normalizeTargetLang(request.getTargetLang()), true);
-		}
-
 		String caption = postDao.selectCaptionByPostId(request.getTargetId());
 		if (!hasText(caption)) {
 			throw new NotFoundException(ErrorCode.NOT_FOUND, "번역할 게시물 캡션을 찾을 수 없습니다.");
+		}
+
+		CaptionParts captionParts = splitCaption(caption);
+		String cachedCaption = postDao.selectTranslatedCaptionByPostId(request.getTargetId());
+		if (hasText(cachedCaption)) {
+			String repairedCaption = appendMissingHashtags(cachedCaption, captionParts.hashtags());
+			if (!repairedCaption.equals(cachedCaption)) {
+				postDao.updateTranslatedCaption(request.getTargetId(), repairedCaption);
+			}
+			return new TranslationResponse(repairedCaption, null, normalizeTargetLang(request.getTargetLang()), true);
+		}
+
+		if (!hasText(captionParts.text())) {
+			postDao.updateTranslatedCaption(request.getTargetId(), captionParts.hashtags());
+			return new TranslationResponse(captionParts.hashtags(), null, normalizeTargetLang(request.getTargetLang()), false);
 		}
 
 		if (!hasText(deeplApiKey)) {
 			throw new BadRequestException(ErrorCode.BAD_REQUEST, "DeepL API 키가 설정되지 않았습니다.");
 		}
 
-		DeepLResult result = translateWithAutoDirection(caption, request.getTargetLang());
-		postDao.updateTranslatedCaption(request.getTargetId(), result.text());
+		DeepLResult result = translateWithAutoDirection(captionParts.text(), request.getTargetLang());
+		String translatedCaption = combineCaption(result.text(), captionParts.hashtags());
+		postDao.updateTranslatedCaption(request.getTargetId(), translatedCaption);
 
 		return new TranslationResponse(
-				result.text(),
+				translatedCaption,
 				result.sourceLang(),
 				resolveResponseTargetLang(result.sourceLang(), request.getTargetLang()),
 				false
@@ -70,6 +82,10 @@ public class TranslationService {
 	}
 
 	private DeepLResult translateWithAutoDirection(String text, String targetLang) {
+		if (!hasText(text)) {
+			return new DeepLResult(null, "");
+		}
+
 		String normalizedTargetLang = normalizeTargetLang(targetLang);
 		DeepLResult firstResult = callDeepL(text, normalizedTargetLang);
 
@@ -78,6 +94,53 @@ public class TranslationService {
 		}
 
 		return firstResult;
+	}
+
+	private CaptionParts splitCaption(String caption) {
+		Matcher matcher = HASHTAG_PATTERN.matcher(caption);
+		StringBuilder hashtags = new StringBuilder();
+
+		while (matcher.find()) {
+			if (!hashtags.isEmpty()) {
+				hashtags.append(" ");
+			}
+			hashtags.append(matcher.group());
+		}
+
+		String text = matcher.replaceAll(" ")
+				.replaceAll("\\s+", " ")
+				.trim();
+
+		return new CaptionParts(text, hashtags.toString());
+	}
+
+	private String combineCaption(String translatedText, String hashtags) {
+		if (!hasText(hashtags)) {
+			return translatedText;
+		}
+
+		if (!hasText(translatedText)) {
+			return hashtags;
+		}
+
+		return translatedText.stripTrailing() + " " + hashtags;
+	}
+
+	private String appendMissingHashtags(String translatedCaption, String hashtags) {
+		if (!hasText(hashtags)) {
+			return translatedCaption;
+		}
+
+		String repairedCaption = translatedCaption;
+		Matcher hashtagMatcher = HASHTAG_PATTERN.matcher(hashtags);
+		while (hashtagMatcher.find()) {
+			String hashtag = hashtagMatcher.group();
+			if (!repairedCaption.contains(hashtag)) {
+				repairedCaption = combineCaption(repairedCaption, hashtag);
+			}
+		}
+
+		return repairedCaption;
 	}
 
 	private DeepLResult callDeepL(String text, String targetLang) {
@@ -120,10 +183,29 @@ public class TranslationService {
 	}
 
 	private String unescapeJsonString(String value) {
-		return value
-				.replace("\\n", "\n")
-				.replace("\\\"", "\"")
-				.replace("\\\\", "\\");
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 0; i < value.length(); i++) {
+			char current = value.charAt(i);
+			if (current != '\\' || i + 1 >= value.length()) {
+				result.append(current);
+				continue;
+			}
+
+			char escaped = value.charAt(++i);
+			if (escaped == 'n') {
+				result.append('\n');
+			} else if (escaped == '"' || escaped == '\\') {
+				result.append(escaped);
+			} else if (escaped == 'u' && i + 4 < value.length()) {
+				result.append((char) Integer.parseInt(value.substring(i + 1, i + 5), 16));
+				i += 4;
+			} else {
+				result.append(escaped);
+			}
+		}
+
+		return result.toString();
 	}
 
 	private String encode(String value) {
@@ -151,5 +233,8 @@ public class TranslationService {
 	}
 
 	private record DeepLResult(String sourceLang, String text) {
+	}
+
+	private record CaptionParts(String text, String hashtags) {
 	}
 }
