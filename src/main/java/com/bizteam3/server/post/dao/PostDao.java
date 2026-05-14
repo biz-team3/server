@@ -14,6 +14,12 @@ public interface PostDao {
     int selectUserId(Integer postId);
     boolean existsByPostId(Integer postId);
     int updateCaption(Post post);
+    String selectCaptionByPostId(@Param("postId") Integer postId);
+    String selectTranslatedCaptionByPostId(@Param("postId") Integer postId);
+    int updateTranslatedCaption(
+            @Param("postId") Integer postId,
+            @Param("translatedCaption") String translatedCaption
+    );
     int countByPostId(Integer postId);
 
     int deleteMediasByPostId(Integer postId);

@@ -49,10 +49,34 @@
             parameterType="com.bizteam3.server.post.entity.Post">
         UPDATE posts
         SET caption = #{caption, jdbcType=CLOB},
-        translated_caption = #{translatedCaption, jdbcType=CLOB},
+        translated_caption = NULL,
         update_at = SYSTIMESTAMP
         WHERE post_id = #{postId}
         AND user_id = #{userId}
+        AND delete_at IS NULL
+    </update>
+
+    <select id="selectCaptionByPostId"
+            resultType="string">
+        SELECT caption
+        FROM posts
+        WHERE post_id = #{postId}
+        AND delete_at IS NULL
+    </select>
+
+    <select id="selectTranslatedCaptionByPostId"
+            resultType="string">
+        SELECT translated_caption
+        FROM posts
+        WHERE post_id = #{postId}
+        AND delete_at IS NULL
+    </select>
+
+    <update id="updateTranslatedCaption">
+        UPDATE posts
+        SET translated_caption = #{translatedCaption, jdbcType=CLOB},
+        update_at = SYSTIMESTAMP
+        WHERE post_id = #{postId}
         AND delete_at IS NULL
     </update>
 
