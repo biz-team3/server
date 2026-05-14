@@ -11,20 +11,20 @@
             keyProperty="saveId"
             keyColumn="save_id">
         INSERT INTO saves (
-            user_id,
-            post_id,
-            created_at
+        user_id,
+        post_id,
+        created_at
         ) VALUES (
-            #{userId},
-            #{postId},
-            SYSTIMESTAMP
+        #{userId},
+        #{postId},
+        SYSTIMESTAMP
         )
     </insert>
 
     <select id="existsByUserIdAndPostId" resultType="boolean">
         SELECT CASE
-            WHEN COUNT(*) > 0 THEN 1
-            ELSE 0
+        WHEN COUNT(*) > 0 THEN 1
+        ELSE 0
         END
         FROM saves
         WHERE user_id = #{userId}
@@ -43,6 +43,33 @@
         FROM saves
         WHERE user_id = #{userId}
         AND post_id = #{postId}
+    </select>
+
+    <select id="selectFeedPostsByUserId" resultType="com.bizteam3.server.post.entity.Post">
+        SELECT
+        p.post_id,
+        p.user_id,
+        p.caption,
+        p.translated_caption,
+        p.created_at,
+        p.update_at,
+        p.delete_at
+        FROM saves s
+        JOIN posts p
+        ON p.post_id = s.post_id
+        WHERE s.user_id = #{userId}
+        AND p.delete_at IS NULL
+        ORDER BY s.created_at DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{size} ROWS ONLY
+    </select>
+
+    <select id="countAllByUserId" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM saves s
+        JOIN posts p
+        ON p.post_id = s.post_id
+        WHERE s.user_id = #{userId}
+        AND p.delete_at IS NULL
     </select>
 
 </mapper>
