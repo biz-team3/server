@@ -53,6 +53,16 @@
         )
     </insert>
 
+    <select id="countByEvent" resultType="int">
+        SELECT COUNT(1)
+        FROM notifications
+        WHERE receiver_user_id = #{receiverUserId}
+          AND actor_user_id = #{actorUserId}
+          AND notification_type = #{notificationType}
+          AND target_type = #{targetType}
+          AND target_id = #{targetId}
+    </select>
+
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
         SELECT
             n.notification_id,
@@ -105,19 +115,67 @@
                 ELSE 0
             END AS is_read_bool,
             n.created_at
-        FROM notifications n
+        FROM (
+            SELECT
+                base.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY
+                        CASE
+                            WHEN base.notification_type = 'LIKE'
+                                THEN base.receiver_user_id || ':' || base.actor_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
+                            ELSE TO_CHAR(base.notification_id)
+                        END
+                    ORDER BY base.created_at DESC, base.notification_id DESC
+                ) AS event_rank
+            FROM notifications base
+        ) n
         LEFT JOIN users u
           ON u.user_id = n.actor_user_id
          AND u.delete_at IS NULL
         WHERE n.receiver_user_id = #{receiverUserId}
+          AND n.event_rank = 1
+          AND (
+              n.target_type IS NULL
+              OR n.target_type != 'POST'
+              OR EXISTS (
+                  SELECT 1
+                  FROM posts p
+                  WHERE p.post_id = n.target_id
+                    AND p.delete_at IS NULL
+              )
+          )
         ORDER BY n.created_at DESC, n.notification_id DESC
     </select>
 
     <select id="countUnreadByReceiverUserId" resultType="int">
         SELECT COUNT(1)
-        FROM notifications
-        WHERE receiver_user_id = #{receiverUserId}
-          AND is_read = 0
+        FROM (
+            SELECT
+                base.*,
+                ROW_NUMBER() OVER (
+                    PARTITION BY
+                        CASE
+                            WHEN base.notification_type = 'LIKE'
+                                THEN base.receiver_user_id || ':' || base.actor_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
+                            ELSE TO_CHAR(base.notification_id)
+                        END
+                    ORDER BY base.created_at DESC, base.notification_id DESC
+                ) AS event_rank
+            FROM notifications base
+        ) n
+        WHERE n.receiver_user_id = #{receiverUserId}
+          AND n.event_rank = 1
+          AND n.is_read = 0
+          AND (
+              n.target_type IS NULL
+              OR n.target_type != 'POST'
+              OR EXISTS (
+                  SELECT 1
+                  FROM posts p
+                  WHERE p.post_id = n.target_id
+                    AND p.delete_at IS NULL
+              )
+          )
     </select>
 
     <update id="markAllReadByReceiverUserId">
