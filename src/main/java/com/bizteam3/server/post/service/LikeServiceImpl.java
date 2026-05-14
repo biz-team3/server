@@ -69,5 +69,10 @@ public class LikeServiceImpl implements LikeService {
         }
 
         likeDao.delete(like);
+
+        Integer postOwnerId = postDao.selectUserId(postId);
+        if (!userId.equals(postOwnerId)) {
+            notificationDao.deleteByEvent(postOwnerId, userId, NotificationType.LIKE, "POST", postId);
+        }
     }
 }

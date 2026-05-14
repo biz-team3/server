@@ -63,6 +63,15 @@
           AND target_id = #{targetId}
     </select>
 
+    <delete id="deleteByEvent">
+        DELETE FROM notifications
+        WHERE receiver_user_id = #{receiverUserId}
+          AND actor_user_id = #{actorUserId}
+          AND notification_type = #{notificationType}
+          AND target_type = #{targetType}
+          AND target_id = #{targetId}
+    </delete>
+
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
         SELECT
             n.notification_id,
