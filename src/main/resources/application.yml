@@ -27,3 +27,6 @@ file:
   upload:
     root-dir: ./uploads
     url-prefix: /uploads
+
+deepl:
+  api-key: ${DEEPL_API_KEY:}
