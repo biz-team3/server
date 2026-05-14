@@ -39,16 +39,12 @@ public class LikeServiceImpl implements LikeService {
         Integer postOwnerId = postDao.selectUserId(postId);
         if (!userId.equals(postOwnerId)) {
             notificationDao.insert(new Notification(
-                    null,
                     postOwnerId,
                     userId,
                     NotificationType.LIKE,
                     "POST",
                     postId,
-                    "게시물에 좋아요를 눌렀습니다.",
-                    null,
-                    0,
-                    null
+                    "게시물에 좋아요를 눌렀습니다."
             ));
         }
     }

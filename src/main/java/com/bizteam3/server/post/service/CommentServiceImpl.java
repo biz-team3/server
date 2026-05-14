@@ -42,16 +42,12 @@ public class CommentServiceImpl implements CommentService {
 		Integer postOwnerId = postDao.selectUserId(postId);
 		if (!userId.equals(postOwnerId)) {
 			notificationDao.insert(new Notification(
-				null,
 				postOwnerId,
 				userId,
 				NotificationType.COMMENT,
 				"POST",
 				postId,
-				"게시물에 댓글을 남겼습니다.",
-				null,
-				0,
-				null
+				"게시물에 댓글을 남겼습니다."
 			));
 		}
 	}

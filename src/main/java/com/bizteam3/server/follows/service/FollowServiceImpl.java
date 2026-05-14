@@ -139,16 +139,12 @@ public class FollowServiceImpl implements FollowService {
         // follows 테이블에 실제 관계 생성 (requester → receiver 방향)
         followDirectly(req.getRequesterUserId(), req.getReceiverUserId());
         notificationDao.insert(new Notification(
-            null,
             req.getReceiverUserId(),
             req.getRequesterUserId(),
             NotificationType.FOLLOW,
             "USER",
             req.getRequesterUserId(),
-            "팔로우하기 시작했습니다.",
-            null,
-            0,
-            null
+            "팔로우하기 시작했습니다."
         ));
     }
 
