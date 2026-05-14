@@ -11,6 +11,6 @@ public interface PostService {
 
     void updateCaption(Integer postId, PostUpdateCaptionRequest request, Integer userId);
     void replaceMedia(Integer postId, MediaReplaceRequest request, Integer userId);
-    boolean deletePost(Integer postId);
+    boolean deletePost(Integer postId, Integer userId);
     PostDetailResponse getPostDetail(Integer postId, Integer userId);
 }

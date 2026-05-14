@@ -82,6 +82,12 @@
           AND source_id = #{sourceId}
     </delete>
 
+    <delete id="deleteByTarget">
+        DELETE FROM notifications
+        WHERE target_type = #{targetType}
+          AND target_id = #{targetId}
+    </delete>
+
     <select id="selectByReceiverUserId" resultMap="notificationResponseMap">
         SELECT
             n.notification_id,
