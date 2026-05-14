@@ -3,6 +3,7 @@ package com.bizteam3.server.profile.controller;
 import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
 import com.bizteam3.server.profile.dto.ProfileRequest;
 import com.bizteam3.server.profile.dto.ProfileResponse;
+import com.bizteam3.server.profile.dto.vo.ProfileContentType;
 import com.bizteam3.server.profile.service.ProfileService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -61,8 +62,11 @@ public class ProfileController {
 	@AccessTokenCheck
 	public PageResponse<ContentResponse> getProfilePosts(
 		@PathVariable Integer userId,
-		@Valid PageRequest pageRequest
+		@RequestParam(defaultValue = "POSTS") ProfileContentType type,
+		@Valid PageRequest pageRequest,
+		HttpServletRequest httpRequest
 	){
-		return profileService.getPosts(userId, pageRequest);
+		Integer viewerId = (Integer) httpRequest.getAttribute("userId");
+		return profileService.getPosts(userId, viewerId, type, pageRequest);
 	}
 }

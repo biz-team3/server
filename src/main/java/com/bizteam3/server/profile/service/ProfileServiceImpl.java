@@ -7,14 +7,20 @@ import com.bizteam3.server.global.exception.common.ConflictException;
 import com.bizteam3.server.global.exception.common.DatabaseException;
 import com.bizteam3.server.global.exception.common.ForbiddenException;
 import com.bizteam3.server.global.exception.common.NotFoundException;
+import com.bizteam3.server.global.exception.common.UnauthorizedException;
 import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.profile.dto.ProfileRequest;
 import com.bizteam3.server.profile.dto.ProfileResponse;
+import com.bizteam3.server.profile.dto.vo.ProfileContentType;
+import com.bizteam3.server.save.dao.SaveDao;
 import com.bizteam3.server.user.dao.UserDao;
 import com.bizteam3.server.user.entity.AccountVisType;
 import com.bizteam3.server.user.entity.User;
+
 import lombok.RequiredArgsConstructor;
+
 import java.util.List;
+import java.util.Objects;
 
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
@@ -40,13 +46,14 @@ public class ProfileServiceImpl implements ProfileService {
 	private final UserDao userDao;
 	private final FollowDao followDao;
 	private final FollowRequestDao followRequestDao;
+	private final SaveDao saveDao;
 
 	@Override
-    @Transactional(readOnly = true)
-	public ProfileResponse myProfile (Integer userId){
-        User user = getActiveUser(userId);
+	@Transactional(readOnly = true)
+	public ProfileResponse myProfile(Integer userId) {
+		User user = getActiveUser(userId);
 		return buildProfileResponse(user, FollowViewerRelation.SELF, true);
-    }
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -60,10 +67,10 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public ProfileResponse getProfileByUsername(String username, Integer viewerId){
+	public ProfileResponse getProfileByUsername(String username, Integer viewerId) {
 		User user = userDao.findByUsername(username);
 
-		if(user == null || user.getDeleteAt() != null){
+		if (user == null || user.getDeleteAt() != null) {
 			throw NotFoundException.of("User", username);
 		}
 
@@ -76,18 +83,18 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	@Transactional
 	public ProfileResponse updateProfile(
-			Integer userId,
-			Integer viewerId,
-			ProfileRequest request
-	){
+		Integer userId,
+		Integer viewerId,
+		ProfileRequest request
+	) {
 		if (!userId.equals(viewerId)) {
 			throw new ForbiddenException("본인 프로필만 수정할 수 있습니다.");
 		}
 
 		User currentUser = getActiveUser(userId);
 		if (request.getUsername() != null
-				&& !request.getUsername().isBlank()
-				&& !request.getUsername().equals(currentUser.getUsername())) {
+			&& !request.getUsername().isBlank()
+			&& !request.getUsername().equals(currentUser.getUsername())) {
 			User duplicatedUser = userDao.findByUsername(request.getUsername());
 
 			if (duplicatedUser != null) {
@@ -109,24 +116,42 @@ public class ProfileServiceImpl implements ProfileService {
 	@Override
 	@Transactional(readOnly = true)
 	public PageResponse<ContentResponse> getPosts(
-			Integer userId,
-			PageRequest request
+		Integer userId,
+		Integer viewerId,
+		ProfileContentType type,
+		PageRequest request
 	) {
-		List<Post> posts = postDao.selectFeedPostsByUserId(
+		if(type == ProfileContentType.SAVED && !Objects.equals(userId, viewerId))
+			throw new UnauthorizedException("유효하지 않은 사용자입니다");
+
+		List<Post> posts;
+		int total;
+
+		if (type == ProfileContentType.SAVED) {
+			posts = saveDao.selectFeedPostsByUserId(
 				userId,
 				request.getOffset(),
-				request.getSize());
+				request.getSize()
+			);
+			total = saveDao.countAllByUserId(userId);
+		} else {
+			posts = postDao.selectFeedPostsByUserId(
+				userId,
+				request.getOffset(),
+				request.getSize()
+			);
+			total = postDao.countAllByUserId(userId);
+		}
 
-		int total = postDao.countAllByUserId(userId);
 		List<ContentResponse> list = getList(posts);
 
 		return new PageResponse<>(list, request, total);
 	}
 
 	private ProfileResponse buildProfileResponse(
-			User user,
-			FollowViewerRelation viewerRelation,
-			boolean canViewContent
+		User user,
+		FollowViewerRelation viewerRelation,
+		boolean canViewContent
 	) {
 		Integer userId = user.getUserId();
 
@@ -135,33 +160,33 @@ public class ProfileServiceImpl implements ProfileService {
 		int postCount = postDao.countAllByUserId(userId);
 
 		return ProfileResponse.fromUser(
-				user,
-				followerCount,
-				followingCount,
-				postCount,
-				viewerRelation,
-				canViewContent
+			user,
+			followerCount,
+			followingCount,
+			postCount,
+			viewerRelation,
+			canViewContent
 		);
 	}
 
-	private User getActiveUser(Integer userId){
+	private User getActiveUser(Integer userId) {
 		User user = userDao.selectById(userId);
-		if(user == null || user.getDeleteAt() != null){
+		if (user == null || user.getDeleteAt() != null) {
 			throw NotFoundException.of("User", userId);
 		}
 		return user;
 	}
 
-	private FollowViewerRelation resolveViewerRelation(Integer userId, Integer viewerId){
-		if(userId.equals(viewerId)){
+	private FollowViewerRelation resolveViewerRelation(Integer userId, Integer viewerId) {
+		if (userId.equals(viewerId)) {
 			return FollowViewerRelation.SELF;
 		}
 
-		if(followDao.countByUsers(viewerId, userId) > 0){
+		if (followDao.countByUsers(viewerId, userId) > 0) {
 			return FollowViewerRelation.FOLLOWING;
 		}
 
-		if(followRequestDao.countPending(viewerId, userId) > 0){
+		if (followRequestDao.countPending(viewerId, userId) > 0) {
 			return FollowViewerRelation.PENDING;
 		}
 
@@ -170,8 +195,8 @@ public class ProfileServiceImpl implements ProfileService {
 
 	private boolean canViewContent(User user, FollowViewerRelation viewerRelation) {
 		return user.getAccountVis() == AccountVisType.PUBLIC
-				|| viewerRelation == FollowViewerRelation.SELF
-				|| viewerRelation == FollowViewerRelation.FOLLOWING;
+			|| viewerRelation == FollowViewerRelation.SELF
+			|| viewerRelation == FollowViewerRelation.FOLLOWING;
 	}
 
 	private @NonNull List<ContentResponse> getList(List<Post> posts) {
