@@ -52,6 +52,7 @@
         C.POST_ID,
         C.USER_ID,
         U.USERNAME USER_NAME,
+        U.PROFILE_IMG AS PROFILE_IMAGE_URL,
         C.TEXT,
         C.CREATED_AT
         FROM COMMENTS C
