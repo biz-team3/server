@@ -52,17 +52,23 @@ public class CommentController {
 	}
 
 	@PatchMapping("/comments/{commentId}")
+	@AccessTokenCheck
 	public void updateComment(
 		@PathVariable Integer commentId,
-		@Valid @RequestBody CommentUpdateRequest request
+		@Valid @RequestBody CommentUpdateRequest request,
+		HttpServletRequest httpServletRequest
 	){
-		service.update(commentId, request);
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+		service.update(commentId, userId, request);
 	}
 
 	@DeleteMapping("/comments/{commentId}")
+	@AccessTokenCheck
 	public void deleteComment(
-		@PathVariable Integer commentId
+		@PathVariable Integer commentId,
+		HttpServletRequest httpServletRequest
 	){
-		service.delete(commentId);
+		Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+		service.delete(commentId, userId);
 	}
 }

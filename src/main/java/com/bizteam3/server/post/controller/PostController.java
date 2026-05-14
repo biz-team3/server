@@ -75,8 +75,13 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}")
-    public String deletePost(@PathVariable Integer postId) {
-        boolean result = postService.deletePost(postId);
+    @AccessTokenCheck
+    public String deletePost(
+            @PathVariable Integer postId,
+            HttpServletRequest httpServletRequest
+    ) {
+        Integer userId = (Integer) httpServletRequest.getAttribute("userId");
+        boolean result = postService.deletePost(postId, userId);
         if (result) {
             return "삭제 성공";
         } else {

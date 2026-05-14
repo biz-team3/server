@@ -19,6 +19,8 @@ public class Notification {
     private NotificationType notificationType;
     private String targetType;
     private Integer targetId;
+    private String sourceType;
+    private Integer sourceId;
     private String message;
     private String imageUrl;
     private Integer isRead;
@@ -39,5 +41,11 @@ public class Notification {
         this.targetId = targetId;
         this.message = message;
         this.isRead = 0;
+    }
+
+    public Notification withSource(String sourceType, Integer sourceId) {
+        this.sourceType = sourceType;
+        this.sourceId = sourceId;
+        return this;
     }
 }

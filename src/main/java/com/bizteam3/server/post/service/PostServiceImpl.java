@@ -17,6 +17,7 @@ import com.bizteam3.server.post.entity.Post;
 
 import com.bizteam3.server.save.dao.SaveDao;
 import com.bizteam3.server.user.entity.AccountVisType;
+import com.bizteam3.server.notification.service.NotificationInvalidationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class PostServiceImpl implements PostService {
 	private final CommentDao commentDao;
 	private final SaveDao saveDao;;
 	private final FollowDao followDao;
+	private final NotificationInvalidationService notificationInvalidationService;
 
 	@Transactional
 	public void createPost(PostCreateRequest request, Integer userId) {
@@ -171,8 +173,22 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public boolean deletePost(Integer postId) {
-		return postDao.softDelete(postId) == 1;
+	@Transactional
+	public boolean deletePost(Integer postId, Integer userId) {
+		if (!postDao.existsByPostId(postId)) {
+			throw new NotFoundException(ErrorCode.NOT_FOUND, "게시물을 찾을 수 없습니다.");
+		}
+
+		Integer ownerId = postDao.selectUserId(postId);
+		if (!ownerId.equals(userId)) {
+			throw new ForbiddenException(ErrorCode.FORBIDDEN, "게시물 작성자만 삭제할 수 있습니다.");
+		}
+
+		boolean deleted = postDao.softDelete(postId) == 1;
+		if (deleted) {
+			notificationInvalidationService.deleteTarget("POST", postId);
+		}
+		return deleted;
 	}
 
 	public PostDetailResponse getPostDetail(Integer postId, Integer userId) {
@@ -227,4 +243,3 @@ public class PostServiceImpl implements PostService {
 	}
 
 }
-

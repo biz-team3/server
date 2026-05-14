@@ -17,6 +17,8 @@ public interface CommentDao {
 
 	int delete(@Param("commentId") Integer commentId);
 
+	Comment selectById(@Param("commentId") Integer commentId);
+
 	List<CommentListRow> selectPage(
 		@Param("postId") Integer postId,
 		@Param("offset") int offset,
