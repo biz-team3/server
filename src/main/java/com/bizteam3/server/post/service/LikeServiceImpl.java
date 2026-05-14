@@ -5,6 +5,7 @@ import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.notification.dao.NotificationDao;
 import com.bizteam3.server.notification.entity.Notification;
 import com.bizteam3.server.notification.entity.NotificationType;
+import com.bizteam3.server.notification.service.NotificationInvalidationService;
 import com.bizteam3.server.post.dao.LikeDao;
 import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.post.entity.Like;
@@ -18,6 +19,7 @@ public class LikeServiceImpl implements LikeService {
     private final LikeDao likeDao;
     private final PostDao postDao;
     private final NotificationDao notificationDao;
+    private final NotificationInvalidationService notificationInvalidationService;
 
     @Transactional
     public void likePost(Integer userId, Integer postId) {
@@ -72,7 +74,7 @@ public class LikeServiceImpl implements LikeService {
 
         Integer postOwnerId = postDao.selectUserId(postId);
         if (!userId.equals(postOwnerId)) {
-            notificationDao.deleteByEvent(postOwnerId, userId, NotificationType.LIKE, "POST", postId);
+            notificationInvalidationService.deleteEvent(postOwnerId, userId, NotificationType.LIKE, "POST", postId);
         }
     }
 }

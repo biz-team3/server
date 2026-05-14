@@ -17,7 +17,7 @@ import com.bizteam3.server.post.entity.Post;
 
 import com.bizteam3.server.save.dao.SaveDao;
 import com.bizteam3.server.user.entity.AccountVisType;
-import com.bizteam3.server.notification.dao.NotificationDao;
+import com.bizteam3.server.notification.service.NotificationInvalidationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +38,7 @@ public class PostServiceImpl implements PostService {
 	private final CommentDao commentDao;
 	private final SaveDao saveDao;;
 	private final FollowDao followDao;
-	private final NotificationDao notificationDao;
+	private final NotificationInvalidationService notificationInvalidationService;
 
 	@Transactional
 	public void createPost(PostCreateRequest request, Integer userId) {
@@ -186,7 +186,7 @@ public class PostServiceImpl implements PostService {
 
 		boolean deleted = postDao.softDelete(postId) == 1;
 		if (deleted) {
-			notificationDao.deleteByTarget("POST", postId);
+			notificationInvalidationService.deleteTarget("POST", postId);
 		}
 		return deleted;
 	}

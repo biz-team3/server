@@ -13,6 +13,7 @@ import com.bizteam3.server.global.exception.common.NotFoundException;
 import com.bizteam3.server.notification.dao.NotificationDao;
 import com.bizteam3.server.notification.entity.Notification;
 import com.bizteam3.server.notification.entity.NotificationType;
+import com.bizteam3.server.notification.service.NotificationInvalidationService;
 import com.bizteam3.server.post.dao.CommentDao;
 import com.bizteam3.server.post.dao.PostDao;
 import com.bizteam3.server.post.dao.row.CommentListRow;
@@ -31,6 +32,7 @@ public class CommentServiceImpl implements CommentService {
 	private final CommentDao commentDao;
 	private final PostDao postDao;
 	private final NotificationDao notificationDao;
+	private final NotificationInvalidationService notificationInvalidationService;
 	private final UserDao userDao;
 
 	@Override
@@ -73,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
 		if (delete != 1)
 			throw new DatabaseException("존재하지 않는 commentId입니다 [삭제 실패].");
 
-		notificationDao.deleteBySource("COMMENT", commentId);
+		notificationInvalidationService.deleteSource("COMMENT", commentId);
 	}
 
 	private Comment getActiveComment(Integer commentId) {
