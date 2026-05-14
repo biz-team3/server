@@ -213,8 +213,8 @@ public class ProfileServiceImpl implements ProfileService {
 					post.getPostId(),
 					firstByPostId.getMediaUrl(),
 					mediaCount,
-					commentCount,
-					likeCount
+					likeCount,
+					commentCount
 				);
 			})
 			.toList();
