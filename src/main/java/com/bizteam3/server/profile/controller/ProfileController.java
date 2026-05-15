@@ -1,6 +1,7 @@
 package com.bizteam3.server.profile.controller;
 
 import com.bizteam3.server.global.auth.annotation.AccessTokenCheck;
+import com.bizteam3.server.global.exception.common.InvalidParameterException;
 import com.bizteam3.server.profile.dto.ProfileRequest;
 import com.bizteam3.server.profile.dto.ProfileResponse;
 import com.bizteam3.server.profile.dto.vo.ProfileContentType;
@@ -13,6 +14,8 @@ import com.bizteam3.server.common.dto.PageRequest;
 import com.bizteam3.server.common.dto.PageResponse;
 import com.bizteam3.server.profile.dto.ContentResponse;
 import com.bizteam3.server.profile.service.ProfileService;
+import com.bizteam3.server.user.dao.UserDao;
+import com.bizteam3.server.user.entity.User;
 
 import jakarta.validation.Valid;
 
@@ -21,6 +24,7 @@ import jakarta.validation.Valid;
 @RequiredArgsConstructor
 public class ProfileController {
 	private final ProfileService profileService;
+	private final UserDao userDao;
 
     @GetMapping("/me")
 	@AccessTokenCheck
@@ -54,6 +58,10 @@ public class ProfileController {
 			@RequestBody ProfileRequest request,
 			HttpServletRequest httpRequest
 	){
+		User byUsername = userDao.findByUsername(request.getUsername());
+		if(byUsername != null)
+			throw new InvalidParameterException("이미 존재하는 UserName입니다. 다시 입력해주세요.");
+
 		Integer viewerId = (Integer) httpRequest.getAttribute("userId");
 		return profileService.updateProfile(userId, viewerId, request);
 	}
