@@ -5,9 +5,9 @@ spring:
 
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: ${DB_URL_LOCAL}
+    username: ${DB_USERNAME_LOCAL}
+    password: ${DB_PASSWORD_LOCAL}
     hikari:
       pool-name: BizTeam3HikariPool
       maximum-pool-size: 10
