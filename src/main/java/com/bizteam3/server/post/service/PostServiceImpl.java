@@ -191,6 +191,8 @@ public class PostServiceImpl implements PostService {
 		return deleted;
 	}
 
+	@Override
+	@Transactional
 	public PostDetailResponse getPostDetail(Integer postId, Integer userId) {
 		PostDetailRow response = postDao.selectDetailByPostId(postId);
 

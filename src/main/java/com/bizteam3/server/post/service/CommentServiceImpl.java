@@ -38,6 +38,10 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	@Transactional
 	public void create(Integer postId, Integer userId, CommentCreateRequest request) {
+		if (!postDao.existsByPostId(postId)) {
+			throw NotFoundException.of("Post", postId);
+		}
+
 		Comment comment = CommentCreateRequest.toEntity(postId, userId, request);
 		int insert = commentDao.insert(comment);
 		if (insert != 1)
