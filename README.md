@@ -13,15 +13,19 @@ biz-team3 백엔드 서버 기본 베이스입니다.
 
 ## Environment
 
-로컬 실행은 별도 `.env` 없이 `application-local.yml` 기본값을 사용합니다.
+DB 접속값은 각자 로컬 `.env`에 설정합니다. 실제 `.env`는 git에 올리지 않습니다.
 
-```yaml
-url: jdbc:oracle:thin:@localhost:1521/XEPDB1
-username: biz_team3
-password: biz_team3
+```bash
+cp .env.example .env
 ```
 
-`.env`는 운영 또는 개인별 override가 필요할 때만 사용합니다. 실제 `.env`는 git에 올리지 않습니다.
+```properties
+DB_URL=jdbc:oracle:thin:@//<HOST>:1521/<SERVICE_NAME>
+DB_USERNAME=<USERNAME>
+DB_PASSWORD=<PASSWORD>
+```
+
+팀 Oracle DB 접속 정보는 저장소에 커밋하지 않고 별도 채널로 공유합니다.
 
 ## Docker
 
@@ -42,6 +46,8 @@ JDBC URL : jdbc:oracle:thin:@localhost:1521/XEPDB1
 Username : biz_team3
 Password : biz_team3
 ```
+
+로컬 컨테이너를 사용할 때도 위 값을 `.env`에 넣어 실행합니다.
 
 ## DB 초기화
 
