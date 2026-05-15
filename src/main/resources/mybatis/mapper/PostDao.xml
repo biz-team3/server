@@ -116,9 +116,9 @@
         AND u.delete_at IS NULL
 
         WHERE p.delete_at IS NULL
+        AND p.user_id != #{viewerId}
         AND (
         u.account_vis = 'PUBLIC'
-        OR p.user_id = #{viewerId}
         OR EXISTS (
         SELECT 1
         FROM follows f
@@ -187,9 +187,9 @@
         AND rl.user_id = #{viewerId}
 
         WHERE p.delete_at IS NULL
+        AND p.user_id != #{viewerId}
         AND (
         u.account_vis = 'PUBLIC'
-        OR p.user_id = #{viewerId}
         OR EXISTS (
         SELECT 1
         FROM follows f
