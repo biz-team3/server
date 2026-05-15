@@ -20057,13 +20057,13 @@ VALUES (15, 40, 'LIKE', 'POST', 3, 'POST', 3, '님 외 여러 명이 회원님�
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
 VALUES (15, 18, 'COMMENT', 'POST', 3, 'POST', 3, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, SYSTIMESTAMP - INTERVAL '25' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 217, 'LIKE', 'POST', 4, 'POST', 4, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 1, SYSTIMESTAMP - INTERVAL '29' MINUTE);
+VALUES (1, 217, 'LIKE', 'POST', 4, 'POST', 4, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 1, SYSTIMESTAMP - INTERVAL '2' DAY - INTERVAL '3' HOUR);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 53, 'COMMENT', 'POST', 4, 'POST', 4, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 0, SYSTIMESTAMP - INTERVAL '33' MINUTE);
+VALUES (1, 53, 'COMMENT', 'POST', 4, 'POST', 4, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 0, SYSTIMESTAMP - INTERVAL '4' DAY - INTERVAL '7' HOUR);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 214, 'FOLLOW', 'USER', 214, 'USER', 214, '님이 회원님을 팔로우하기 시작했습니다.', '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000093.jpg', 0, SYSTIMESTAMP - INTERVAL '37' MINUTE);
+VALUES (1, 214, 'FOLLOW', 'USER', 214, 'USER', 214, '님이 회원님을 팔로우하기 시작했습니다.', '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000093.jpg', 0, SYSTIMESTAMP - INTERVAL '6' DAY - INTERVAL '2' HOUR);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 31, 'FOLLOW', 'USER', 31, 'USER', 31, '님이 회원님을 팔로우하기 시작했습니다.', '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000031.jpg', 0, SYSTIMESTAMP - INTERVAL '41' MINUTE);
+VALUES (1, 31, 'FOLLOW', 'USER', 31, 'USER', 31, '님이 회원님을 팔로우하기 시작했습니다.', '/uploads/profiles/2026/05/10000000-0000-4000-8000-000000000031.jpg', 0, SYSTIMESTAMP - INTERVAL '13' DAY - INTERVAL '5' HOUR);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
 VALUES (2, 63, 'LIKE', 'POST', 13, 'POST', 13, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000016.jpg', 0, SYSTIMESTAMP - INTERVAL '45' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
