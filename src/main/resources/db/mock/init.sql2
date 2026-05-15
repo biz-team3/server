@@ -20053,9 +20053,9 @@ VALUES (1, 142, 'LIKE', 'POST', 2, 'POST', 2, '님 외 여러 명이 회원님�
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
 VALUES (1, 135, 'COMMENT', 'POST', 2, 'POST', 2, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000003.jpg', 0, SYSTIMESTAMP - INTERVAL '17' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 40, 'LIKE', 'POST', 3, 'POST', 3, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, SYSTIMESTAMP - INTERVAL '21' MINUTE);
+VALUES (15, 40, 'LIKE', 'POST', 3, 'POST', 3, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, SYSTIMESTAMP - INTERVAL '21' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
-VALUES (1, 15, 'COMMENT', 'POST', 3, 'POST', 3, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, SYSTIMESTAMP - INTERVAL '25' MINUTE);
+VALUES (15, 18, 'COMMENT', 'POST', 3, 'POST', 3, '님이 회원님의 게시물에 댓글을 남겼습니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000004.jpg', 0, SYSTIMESTAMP - INTERVAL '25' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
 VALUES (1, 217, 'LIKE', 'POST', 4, 'POST', 4, '님 외 여러 명이 회원님의 게시물을 좋아합니다.', '/uploads/posts/2026/05/20000000-0000-4000-8000-000000000006.jpg', 1, SYSTIMESTAMP - INTERVAL '29' MINUTE);
 INSERT INTO notifications (receiver_user_id, actor_user_id, notification_type, target_type, target_id, source_type, source_id, message, image_url, is_read, created_at)
