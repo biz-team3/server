@@ -98,7 +98,12 @@
             COALESCE(u.username, 'system') AS actor_name,
             u.profile_img AS actor_image_url,
             CASE
-                WHEN n.notification_type = 'LIKE' THEN 1
+                WHEN n.notification_type = 'LIKE' THEN GREATEST((
+                    SELECT COUNT(*)
+                    FROM likes l
+                    WHERE l.post_id = n.target_id
+                      AND l.user_id != n.actor_user_id
+                ), 0)
                 ELSE 0
             END AS actor_count,
             n.target_type,
@@ -114,7 +119,7 @@
                     ),
                     n.image_url
                 )
-                ELSE n.image_url
+                ELSE NULL
             END AS target_image_url,
             <!-- viewer_relation: 현재 로그인 사용자가 actor를 어떤 상태로 보고 있는지 계산 -->
             CASE
@@ -147,7 +152,7 @@
                     PARTITION BY
                         CASE
                             WHEN base.notification_type = 'LIKE'
-                                THEN base.receiver_user_id || ':' || base.actor_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
+                                THEN base.receiver_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
                             ELSE TO_CHAR(base.notification_id)
                         END
                     ORDER BY base.created_at DESC, base.notification_id DESC
@@ -181,7 +186,7 @@
                     PARTITION BY
                         CASE
                             WHEN base.notification_type = 'LIKE'
-                                THEN base.receiver_user_id || ':' || base.actor_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
+                                THEN base.receiver_user_id || ':' || base.notification_type || ':' || base.target_type || ':' || base.target_id
                             ELSE TO_CHAR(base.notification_id)
                         END
                     ORDER BY base.created_at DESC, base.notification_id DESC
